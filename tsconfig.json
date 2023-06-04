@@ -10,7 +10,8 @@
 		"lib": ["esnext", "DOM"],
 		"outDir": "dist",
 		"rootDirs": ["."],
-		"declaration": true
+		"declaration": true,
+		"stripInternal": true
 	},
 	"include": [
 		"src/**/*.js", //
