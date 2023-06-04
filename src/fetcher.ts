@@ -3,10 +3,10 @@ import { decompressFromEncodedURIComponent } from 'lz-string';
 
 type MaybePromise<T> = T | Promise<T>;
 
-type Mode = 'development' | 'production';
+export type Mode = 'development' | 'production';
 
 // TODO: support more api (apotek & pcare)
-type Type = 'vclaim' | 'antrean';
+export type Type = 'vclaim' | 'antrean';
 
 export interface Config {
 	mode: Mode;
@@ -16,8 +16,7 @@ export interface Config {
 	antreanUserKey: string;
 }
 
-export interface SendOption<T extends Type> {
-	type: T;
+export interface SendOption {
 	path: `/${string}`;
 	method?: 'GET' | 'POST';
 	data?: unknown;
@@ -25,7 +24,7 @@ export interface SendOption<T extends Type> {
 	headers?: Record<string, string>;
 }
 
-interface LowerResponse<T> {
+export interface LowerResponse<T> {
 	response: T;
 	metadata: {
 		code: number;
@@ -33,7 +32,7 @@ interface LowerResponse<T> {
 	};
 }
 
-interface CamelResponse<T> {
+export interface CamelResponse<T> {
 	response: T;
 	metaData: {
 		code: string;
@@ -41,7 +40,7 @@ interface CamelResponse<T> {
 	};
 }
 
-type SendResponse<T> = {
+export type SendResponse<T> = {
 	antrean: LowerResponse<T>;
 	vclaim: CamelResponse<T>;
 };
@@ -131,19 +130,28 @@ export class Fetcher {
 		return decompressFromEncodedURIComponent(text);
 	}
 
-	async send<R>(option: SendOption<'vclaim'>): Promise<SendResponse<R | undefined>['vclaim']>;
+	async send<R, T extends Type = 'vclaim'>(
+		type: T,
+		option: SendOption
+	): Promise<SendResponse<R | undefined>[T]>;
 
-	async send<R>(option: SendOption<'antrean'>): Promise<SendResponse<R | undefined>['antrean']>;
+	async send<R, T extends Type = 'antrean'>(
+		type: T,
+		option: SendOption
+	): Promise<SendResponse<R | undefined>[T]>;
 
-	async send<R>(option: SendOption<Type>): Promise<SendResponse<R | undefined>[Type]> {
+	async send<R, T extends Type>(
+		type: T,
+		option: SendOption
+	): Promise<SendResponse<R | undefined>[T]> {
 		await this.applyConfig();
 		if (!option.path.startsWith('/')) throw new Error(`path must be starts with "/"`);
 
 		let response = '';
 		try {
-			const url = new URL(api_base_urls[option.type][this.config.mode] + option.path);
+			const url = new URL(api_base_urls[type][this.config.mode] + option.path);
 			const init: RequestInit = { method: option.method ?? 'GET' };
-			const headers = { ...this.getDefaultHeaders(option.type), ...(option.headers ?? {}) };
+			const headers = { ...this.getDefaultHeaders(type), ...(option.headers ?? {}) };
 
 			init.headers = headers;
 			if (option.data) {
@@ -160,7 +168,7 @@ export class Fetcher {
 			}
 
 			response = await fetch(url, init).then((r) => r.text());
-			const json: SendResponse<R>[Type] = JSON.parse(response);
+			const json: SendResponse<R>[T] = JSON.parse(response);
 
 			if (json.response && !option.skipDecrypt) {
 				const decrypted = this.decrypt(String(json.response), headers['X-timestamp']);
