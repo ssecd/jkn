@@ -9,11 +9,31 @@ export type Mode = 'development' | 'production';
 export type Type = 'vclaim' | 'antrean';
 
 export interface Config {
-	mode: Mode;
 	consId: string;
 	consSecret: string;
 	vclaimUserKey: string;
 	antreanUserKey: string;
+
+	/**
+	 * Berupa mode "development" dan "production". Secara default akan
+	 * membaca nilai environment variable NODE_ENV atau "development"
+	 * jika NODE_ENV tidak terdapat nilai. Mode ini berpengaruh pada
+	 * nilai konfigurasi yang digunakan dan JKN API base url.
+	 *
+	 * @default process.env.NODE_ENV ?? "development"
+	 */
+	mode: Mode;
+
+	/**
+	 * Secara default bernilai 'falsy' sehingga setiap terjadi kesalahan
+	 * saat mengirim permintaan ke server JKN menggunakan method `send()`,
+	 * pesan kesalahan akan dikembalikan sebagai pesan response dan log
+	 * error akan dicetak pada konsol atau terminal. Jika bernilai true,
+	 * maka kesalahan akan di-throw.
+	 *
+	 * @default undefined
+	 */
+	throw?: boolean;
 }
 
 export interface SendOption {
@@ -177,6 +197,7 @@ export class Fetcher {
 
 			return json;
 		} catch (error: unknown) {
+			if (this.config.throw) throw error;
 			let message =
 				error instanceof SyntaxError
 					? 'Received response from the JKN API appears to be in an unexpected format'
