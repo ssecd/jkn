@@ -38,7 +38,7 @@ export interface Config {
 
 export interface SendOption {
 	path: `/${string}`;
-	method?: 'GET' | 'POST';
+	method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
 	data?: unknown;
 	skipDecrypt?: boolean;
 	headers?: Record<string, string>;
