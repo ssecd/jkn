@@ -1,69 +1,5 @@
 import { BaseApi } from './base.js';
 
-interface AntreanDetail {
-	/** kodebooking yang didapat dari servis tambah antrean */
-	kodebooking: string;
-
-	/** tanggal antrean dengan format YYYY-MM-DD */
-	tanggal: string;
-
-	/** kode poli BPJS */
-	kodepoli: string;
-
-	/** kode dokter BPJS */
-	kodedokter: number;
-
-	/** contoh 08:00-17:00 */
-	jampraktek: string;
-
-	/** NIK pasien */
-	nik: string;
-
-	nokapst: string;
-
-	nohp: string;
-
-	norekammedis: string;
-
-	/**
-	 * 1 = Rujukan FKTP
-	 *
-	 * 2 = Rujukan Internal
-	 *
-	 * 3 = Kontrol
-	 *
-	 * 4 = Rujukan Antar RS
-	 */
-	jeniskunjungan: 1 | 2 | 3 | 4;
-
-	/** nomor rujukan / kontrol pasien JKN, diisi kosong jika NON JKN */
-	nomorreferensi: string;
-
-	/** contoh "Mobile JKN" */
-	sumberdata: string;
-
-	/**
-	 * 1 = Ya
-	 *
-	 * 0 = Tidak
-	 */
-	ispeserta: 1 | 0;
-
-	noantrean: string;
-
-	/** waktu dalam timestamp millisecond */
-	estimasidilayani: number;
-
-	/** waktu dalam timestamp millisecond */
-	createdtime: number;
-
-	/** contoh "Selesai dilayani" */
-	status: string;
-}
-
-/**
- * @internal
- */
 export class Antrean extends BaseApi<'antrean'> {
 	protected type = 'antrean' as const;
 
@@ -535,4 +471,65 @@ export class Antrean extends BaseApi<'antrean'> {
 			method: 'GET'
 		});
 	}
+}
+
+interface AntreanDetail {
+	/** kodebooking yang didapat dari servis tambah antrean */
+	kodebooking: string;
+
+	/** tanggal antrean dengan format YYYY-MM-DD */
+	tanggal: string;
+
+	/** kode poli BPJS */
+	kodepoli: string;
+
+	/** kode dokter BPJS */
+	kodedokter: number;
+
+	/** contoh 08:00-17:00 */
+	jampraktek: string;
+
+	/** NIK pasien */
+	nik: string;
+
+	nokapst: string;
+
+	nohp: string;
+
+	norekammedis: string;
+
+	/**
+	 * 1 = Rujukan FKTP
+	 *
+	 * 2 = Rujukan Internal
+	 *
+	 * 3 = Kontrol
+	 *
+	 * 4 = Rujukan Antar RS
+	 */
+	jeniskunjungan: 1 | 2 | 3 | 4;
+
+	/** nomor rujukan / kontrol pasien JKN, diisi kosong jika NON JKN */
+	nomorreferensi: string;
+
+	/** contoh "Mobile JKN" */
+	sumberdata: string;
+
+	/**
+	 * 1 = Ya
+	 *
+	 * 0 = Tidak
+	 */
+	ispeserta: 1 | 0;
+
+	noantrean: string;
+
+	/** waktu dalam timestamp millisecond */
+	estimasidilayani: number;
+
+	/** waktu dalam timestamp millisecond */
+	createdtime: number;
+
+	/** contoh "Selesai dilayani" */
+	status: string;
 }
