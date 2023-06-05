@@ -42,6 +42,16 @@ export interface SendOption {
 	data?: unknown;
 	skipDecrypt?: boolean;
 	headers?: Record<string, string>;
+
+	/**
+	 * Mengatur "Content-Type" pada request header menjadi "application/json; charset=utf-8".
+	 * Secara default "Content-Type" pada request header adalah "application/x-www-form-urlencoded"
+	 * meski pun saat request nilai body dalam format json. Ini tidak standar, namun mengacu pada
+	 * panduan bridging pada halaman dokumentasi di situs TrustMark yang memaksa hal tersebut.
+	 *
+	 * @default undefined
+	 */
+	skipContentTypeHack?: boolean;
 }
 
 export interface LowerResponse<T> {
@@ -167,14 +177,18 @@ export class Fetcher {
 			if (option.data) {
 				if (option.method === 'GET') throw new Error(`can not pass data with "GET" method`);
 				init.body = JSON.stringify(option.data);
-				init.headers = {
-					...init.headers,
-					/**
-					 * The content-type is actually invalid because the body is in json format,
-					 * but it's just follow the JKN doc / TrustMark. What a weird API.
-					 */
-					'Content-Type': 'Application/x-www-form-urlencoded'
-				};
+
+				// default fetch content type in request header is json
+				if (!option.skipContentTypeHack) {
+					init.headers = {
+						...init.headers,
+						/**
+						 * The content-type is actually invalid because the body is in json format,
+						 * but it's just follow the JKN doc / TrustMark. What a weird API.
+						 */
+						'Content-Type': 'Application/x-www-form-urlencoded'
+					};
+				}
 			}
 
 			response = await fetch(url, init).then((r) => r.text());
