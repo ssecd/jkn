@@ -7,8 +7,11 @@ estimasidilayani
 faskes
 FKTP
 getlisttask
+Gruper
 handphone
 HFIS
+Histori
+Inacbg
 Insertdate
 ispeserta
 jadwaldokter
@@ -44,6 +47,7 @@ pasienbaru
 pcare
 Pemanggilan
 racikan
+Raharja
 Silampari
 sisakuotajkn
 sisakuotanonjkn
@@ -53,6 +57,7 @@ tanggalperiksa
 taskid
 taskname
 tgllahir
+Topup
 updatejadwaldokter
 updatewaktu
 vclaim

@@ -2,6 +2,7 @@ import { Antrean } from './antrean.js';
 import { BaseApi } from './base.js';
 import { Fetcher, Type } from './fetcher.js';
 import { LPK } from './vclaim/lpk.js';
+import { Monitoring } from './vclaim/monitoring.js';
 
 export default class JKN extends Fetcher {
 	private readonly cached = new Map<`${Type}${string}`, BaseApi>();
@@ -29,7 +30,8 @@ export default class JKN extends Fetcher {
 
 	get vclaim() {
 		return {
-			lpk: this.getApi('vclaim_lpk', LPK)
+			lpk: this.getApi('vclaim_lpk', LPK),
+			monitoring: this.getApi('vclaim_monitoring', Monitoring)
 		};
 	}
 }
