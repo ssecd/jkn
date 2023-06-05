@@ -10,5 +10,8 @@ module.exports = {
 	env: {
 		es2017: true,
 		node: true
+	},
+	rules: {
+		'@typescript-eslint/no-this-alias': ['warn', { allowedNames: ['root', 'self'] }]
 	}
 };
