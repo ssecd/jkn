@@ -31,11 +31,20 @@ export default class JKN extends Fetcher {
 	}
 
 	get vclaim() {
+		const root = this;
 		return {
-			lpk: this.getApi('vclaim_lpk', LPK),
-			monitoring: this.getApi('vclaim_monitoring', Monitoring),
-			peserta: this.getApi('vclaim_peserta', Peserta),
-			prb: this.getApi('vclaim_prb', PRB)
+			get lpk() {
+				return root.getApi('vclaim_lpk', LPK);
+			},
+			get monitoring() {
+				return root.getApi('vclaim_monitoring', Monitoring);
+			},
+			get peserta() {
+				return root.getApi('vclaim_peserta', Peserta);
+			},
+			get prb() {
+				return root.getApi('vclaim_prb', PRB);
+			}
 		};
 	}
 }
