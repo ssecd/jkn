@@ -4,6 +4,7 @@ import { Fetcher, Type } from './fetcher.js';
 import { LPK } from './vclaim/lpk.js';
 import { Monitoring } from './vclaim/monitoring.js';
 import { Peserta } from './vclaim/peserta.js';
+import { PRB } from './vclaim/prb.js';
 
 export default class JKN extends Fetcher {
 	private readonly cached = new Map<`${Type}${string}`, BaseApi>();
@@ -33,7 +34,8 @@ export default class JKN extends Fetcher {
 		return {
 			lpk: this.getApi('vclaim_lpk', LPK),
 			monitoring: this.getApi('vclaim_monitoring', Monitoring),
-			peserta: this.getApi('vclaim_peserta', Peserta)
+			peserta: this.getApi('vclaim_peserta', Peserta),
+			prb: this.getApi('vclaim_prb', PRB)
 		};
 	}
 }

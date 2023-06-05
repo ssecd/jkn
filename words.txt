@@ -45,12 +45,14 @@ nomorantrean
 nomorkartu
 nomorreferensi
 norekammedis
+nosep
 pasienbaru
 pcare
 Pemanggilan
 prolanis
 racikan
 Raharja
+signa
 Silampari
 sisakuotajkn
 sisakuotanonjkn
