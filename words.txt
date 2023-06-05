@@ -2,6 +2,7 @@ angkaantrean
 BPJS
 createdtime
 daftarfp
+dinsos
 dpjp
 estimasidilayani
 faskes
@@ -39,6 +40,7 @@ nohp
 noidentitas
 noka
 nokapst
+nokartu
 nomorantrean
 nomorkartu
 nomorreferensi
@@ -46,11 +48,13 @@ norekammedis
 pasienbaru
 pcare
 Pemanggilan
+prolanis
 racikan
 Raharja
 Silampari
 sisakuotajkn
 sisakuotanonjkn
+SKTM
 Sriwijaya
 sumberdata
 tanggalperiksa
