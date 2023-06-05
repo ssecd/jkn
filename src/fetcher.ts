@@ -150,17 +150,7 @@ export class Fetcher {
 		return decompressFromEncodedURIComponent(text);
 	}
 
-	async send<R, T extends Type = 'vclaim'>(
-		type: T,
-		option: SendOption
-	): Promise<SendResponse<R | undefined>[T]>;
-
-	async send<R, T extends Type = 'antrean'>(
-		type: T,
-		option: SendOption
-	): Promise<SendResponse<R | undefined>[T]>;
-
-	async send<R, T extends Type>(
+	async send<T extends Type, R>(
 		type: T,
 		option: SendOption
 	): Promise<SendResponse<R | undefined>[T]> {
