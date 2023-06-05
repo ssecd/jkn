@@ -7,7 +7,7 @@ export class LPK extends VClaimBaseApi {
 	 * @param data data LPK
 	 */
 	async insertLpk(data: DataLPK) {
-		return this.send({
+		return this.send<string>({
 			path: '/LPK/insert',
 			method: 'POST',
 			data: { request: { t_lpk: data } }
@@ -20,7 +20,7 @@ export class LPK extends VClaimBaseApi {
 	 * @param data data LPK
 	 */
 	async updateLpk(data: DataLPK) {
-		return this.send({
+		return this.send<string>({
 			path: '/LPK/update',
 			method: 'PUT',
 			data: { request: { t_lpk: data } }
@@ -44,10 +44,78 @@ export class LPK extends VClaimBaseApi {
 	 * Pencarian data peserta berdasarkan NIK Kependudukan
 	 *
 	 * @param tanggal tanggal masuk
-	 * @param jenis jenis pelayanan. (1. Rawat Inap) (2. Rawat Jalan)
+	 * @param jenis jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan)
 	 */
 	async dataLpk(tanggal: string, jenis: 1 | 2) {
-		return this.send({
+		return this.send<{
+			lpk: {
+				list: {
+					DPJP: {
+						dokter: {
+							kode: string;
+							nama: string;
+						};
+					};
+					diagnosa: {
+						list: {
+							level: string;
+							list: {
+								kode: string;
+								nama: string;
+							};
+						}[];
+					};
+					jnsPelayanan: string;
+					noSep: string;
+					perawatan: {
+						caraKeluar: {
+							kode: string;
+							nama: string;
+						};
+						kelasRawat: {
+							kode: string;
+							nama: string;
+						};
+						kondisiPulang: {
+							kode: string;
+							nama: string;
+						};
+						ruangRawat: {
+							kode: string;
+							nama: string;
+						};
+						spesialistik: {
+							kode: string;
+							nama: string;
+						};
+					};
+					peserta: {
+						kelamin: string;
+						nama: string;
+						noKartu: string;
+						noMR: string;
+						tglLahir: string;
+					};
+					poli: {
+						eksekutif: string;
+						poli: {
+							kode: string;
+						};
+					};
+					procedure: {
+						list: {
+							list: {
+								kode: string;
+								nama: string;
+							};
+						}[];
+					};
+					rencanaTL: DataLPK['rencanaTL'] | null;
+					tglKeluar: string;
+					tglMasuk: string;
+				}[];
+			};
+		}>({
 			path: `/LPK/TglMasuk/${tanggal}/JnsPelayanan/${jenis}`,
 			method: 'GET'
 		});
