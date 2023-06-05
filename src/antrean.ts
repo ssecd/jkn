@@ -1,4 +1,4 @@
-import { Fetcher, SendOption } from './fetcher.js';
+import { BaseApi } from './base.js';
 
 interface AntreanDetail {
 	/** kodebooking yang didapat dari servis tambah antrean */
@@ -64,12 +64,8 @@ interface AntreanDetail {
 /**
  * @internal
  */
-export class Antrean {
-	constructor(private readonly fetcher: Fetcher) {}
-
-	private send<T>(option: SendOption) {
-		return this.fetcher.send<T>('antrean', option);
-	}
+export class Antrean extends BaseApi<'antrean'> {
+	protected type = 'antrean' as const;
 
 	/**
 	 * Melihat referensi poli yang ada pada Aplikasi HFIS
