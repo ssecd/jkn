@@ -1,18 +1,19 @@
 import { Antrean } from './antrean.js';
 import { BaseApi } from './base.js';
 import { Fetcher, Type } from './fetcher.js';
+import { LPK } from './vclaim/lpk.js';
 
 export default class JKN extends Fetcher {
-	private readonly cached = new Map<Type, BaseApi>();
+	private readonly cached = new Map<`${Type}${string}`, BaseApi>();
 
-	private getApi<T extends Type, C extends BaseApi<T>>(
-		type: T,
-		ApiClass: new (...args: ConstructorParameters<typeof BaseApi>) => C
+	private getApi<T extends `${Type}${string}`, C extends BaseApi>(
+		key: T,
+		Api: new (...args: ConstructorParameters<typeof BaseApi>) => C
 	): C {
-		let api = this.cached.get(type);
+		let api = this.cached.get(key);
 		if (!api) {
-			api = new ApiClass(this);
-			this.cached.set(type, api);
+			api = new Api(this);
+			this.cached.set(key, api);
 		}
 		return api as C;
 	}
@@ -24,5 +25,11 @@ export default class JKN extends Fetcher {
 
 	get antrean(): Antrean {
 		return this.getApi('antrean', Antrean);
+	}
+
+	get vclaim() {
+		return {
+			lpk: this.getApi('vclaim_lpk', LPK)
+		};
 	}
 }
