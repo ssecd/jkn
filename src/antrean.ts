@@ -327,8 +327,8 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * @param kodeBooking kode booking yang didapat dari servis tambah antrean
 	 */
 	async listTaskId(kodeBooking: string) {
-		return this.send<{
-			list: {
+		return this.send<
+			{
 				/** contoh "16-03-2021 11:32:49 WIB" */
 				wakturs: string;
 
@@ -341,8 +341,8 @@ export class Antrean extends BaseApi<'antrean'> {
 				taskid: number;
 
 				kodebooking: string;
-			}[];
-		}>({
+			}[]
+		>({
 			path: `/antrean/getlisttask`,
 			method: 'POST',
 			data: { kodebooking: kodeBooking }
@@ -363,40 +363,18 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * - Waktu server adalah data waktu (task 1-6) yang dicatat oleh server BPJS Kesehatan
 	 * setelah RS mengirimkan data, sedangkan waktu rs adalah data waktu (task 1-6) yang
 	 * dikirimkan oleh RS
-	 *
-	 * @param tanggal tanggal antrean
-	 * @param jenisWaktu waktu rs atau server
 	 */
-	async dashboardPerTanggal(tanggal: string, jenisWaktu: 'rs' | 'server') {
-		return this.send<{
-			list: {
-				kdppk: string;
-				waktu_task1: number;
-				avg_waktu_task4: number;
-				jumlah_antrean: number;
-				avg_waktu_task3: number;
-				namapoli: string;
-				avg_waktu_task6: number;
-				avg_waktu_task5: number;
-				nmppk: string;
-				avg_waktu_task2: number;
-				avg_waktu_task1: number;
-				kodepoli: string;
-				waktu_task5: number;
-				waktu_task4: number;
-				waktu_task3: number;
+	async dashboardPerTanggal(params: {
+		/** tanggal antrean */
+		tanggal: string;
 
-				/** waktu dalam timestamp millisecond */
-				insertdate: number;
-
-				/** tanggal dengan format YYYY-MM-DD */
-				tanggal: string;
-				waktu_task2: number;
-				waktu_task6: number;
-			}[];
-		}>({
-			path: `/dashboard/waktutunggu/tanggal/${tanggal}/waktu/${jenisWaktu}`,
-			method: 'GET'
+		/** jenis waktu (rs atau server) */
+		waktu: 'rs' | 'server';
+	}) {
+		return this.send<{ list: AntreanDashboard[] }>({
+			path: `/dashboard/waktutunggu/tanggal/${params.tanggal}/waktu/${params.waktu}`,
+			method: 'GET',
+			skipDecrypt: true
 		});
 	}
 
@@ -423,12 +401,14 @@ export class Antrean extends BaseApi<'antrean'> {
 		/** contoh 2023 */
 		tahun: number;
 
-		jenisWaktu: 'rs' | 'server';
+		/** jenis waktu (rs atau server) */
+		waktu: 'rs' | 'server';
 	}) {
 		const bulan = String(params.bulan).padStart(2, '0');
-		return this.send({
-			path: `/dashboard/waktutunggu/bulan/${bulan}/tahun/${params.tahun}/waktu/${params.jenisWaktu}`,
-			method: 'GET'
+		return this.send<{ list: AntreanDashboard[] }>({
+			path: `/dashboard/waktutunggu/bulan/${bulan}/tahun/${params.tahun}/waktu/${params.waktu}`,
+			method: 'GET',
+			skipDecrypt: true
 		});
 	}
 
@@ -438,7 +418,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * @param tanggal tanggal pendaftaran antrean
 	 */
 	async perTanggal(tanggal: string) {
-		return this.send<{ list: AntreanDetail[] }>({
+		return this.send<AntreanDetail[]>({
 			path: `/antrean/pendaftaran/tanggal/${tanggal}`,
 			method: 'GET'
 		});
@@ -450,7 +430,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * @param kodeBooking kode booking yang didapat dari servis tambah antrean
 	 */
 	async perKodeBooking(kodeBooking: string) {
-		return this.send<{ list: AntreanDetail[] }>({
+		return this.send<AntreanDetail[]>({
 			path: `/antrean/pendaftaran/kodebooking/${kodeBooking}`,
 			method: 'GET'
 		});
@@ -460,7 +440,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * Melihat pendaftaran antrean belum dilayani
 	 */
 	async belumDilayani() {
-		return this.send<{ list: AntreanDetail[] }>({
+		return this.send<AntreanDetail[]>({
 			path: `/antrean/pendaftaran/aktif`,
 			method: 'GET'
 		});
@@ -475,7 +455,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		hari: number;
 		jamPraktik: string;
 	}) {
-		return this.send<{ list: AntreanDetail[] }>({
+		return this.send<AntreanDetail[]>({
 			path: `/antrean/pendaftaran/kodepoli/${params.kodePoli}/kodedokter/${params.kodeDokter}/hari/${params.hari}/jampraktek/${params.jamPraktik}`,
 			method: 'GET'
 		});
@@ -541,4 +521,30 @@ interface AntreanDetail {
 
 	/** contoh "Selesai dilayani" */
 	status: string;
+}
+
+interface AntreanDashboard {
+	kdppk: string;
+	waktu_task1: number;
+	avg_waktu_task4: number;
+	jumlah_antrean: number;
+	avg_waktu_task3: number;
+	namapoli: string;
+	avg_waktu_task6: number;
+	avg_waktu_task5: number;
+	nmppk: string;
+	avg_waktu_task2: number;
+	avg_waktu_task1: number;
+	kodepoli: string;
+	waktu_task5: number;
+	waktu_task4: number;
+	waktu_task3: number;
+
+	/** waktu dalam timestamp millisecond */
+	insertdate: number;
+
+	/** tanggal dengan format YYYY-MM-DD */
+	tanggal: string;
+	waktu_task2: number;
+	waktu_task6: number;
 }
