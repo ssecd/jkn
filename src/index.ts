@@ -8,6 +8,7 @@ import { PRB } from './vclaim/prb.js';
 import { Referensi } from './vclaim/referensi.js';
 import { RencanaKontrol } from './vclaim/rencana-kontrol.js';
 import { Rujukan } from './vclaim/rujukan.js';
+import { SEP } from './vclaim/sep.js';
 
 type CacheKey = `${Type}${string}`;
 
@@ -58,6 +59,9 @@ export default class JKN extends Fetcher {
 			},
 			get rujukan() {
 				return root.getApi('vclaim_rujukan', Rujukan);
+			},
+			get sep() {
+				return root.getApi('vclaim_sep', SEP);
 			}
 		};
 	}

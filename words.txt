@@ -74,6 +74,7 @@ SKTM
 SPRI
 Sriwijaya
 sumberdata
+suplesi
 suratkontrol
 tanggalperiksa
 taskid
