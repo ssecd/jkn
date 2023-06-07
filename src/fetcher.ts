@@ -147,8 +147,8 @@ export class Fetcher {
 
 	private decrypt(responseText: string, requestTimestamp: string) {
 		const { consId, consSecret } = this.config;
-		const key_plain = `${consId}${consSecret}${requestTimestamp}`;
-		const key = createHash('sha256').update(key_plain, 'utf8').digest();
+		const keyPlain = `${consId}${consSecret}${requestTimestamp}`;
+		const key = createHash('sha256').update(keyPlain, 'utf8').digest();
 		const iv = Uint8Array.from(key.subarray(0, 16));
 		const decipher = createDecipheriv('aes-256-cbc', key, iv);
 		let dec = decipher.update(responseText, 'base64', 'utf8');
@@ -183,8 +183,8 @@ export class Fetcher {
 					init.headers = {
 						...init.headers,
 						/**
-						 * The content-type is actually invalid because the body is in json format,
-						 * but it's just follow the JKN doc / TrustMark. What a weird API.
+						 * The "Content-Type" is actually invalid because the body is in json format,
+						 * but it simply adheres to the JKN doc or TrustMark. What a weird API.
 						 */
 						'Content-Type': 'Application/x-www-form-urlencoded'
 					};
