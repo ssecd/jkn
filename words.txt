@@ -24,6 +24,7 @@ jampraktek
 jeniskunjungan
 jenispasien
 jenisresep
+kapasitaspasien
 kdpoli
 kdppk
 kdsubspesialis
@@ -36,6 +37,7 @@ Kontroldan
 kuotajkn
 kuotanonjkn
 namadokter
+namahari
 namapoli
 namasubspesialis
 nmpoli

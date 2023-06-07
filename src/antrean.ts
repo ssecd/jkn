@@ -7,14 +7,14 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * Melihat referensi poli yang ada pada Aplikasi HFIS
 	 */
 	async refPoli() {
-		return this.send<{
-			list: {
+		return this.send<
+			{
 				nmpoli: string;
 				nmsubspesialis: string;
 				kdsubspesialis: string;
 				kdpoli: string;
-			}[];
-		}>({
+			}[]
+		>({
 			path: '/ref/poli',
 			method: 'GET'
 		});
@@ -24,12 +24,12 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * Melihat referensi dokter yang ada pada Aplikasi HFIS
 	 */
 	async refDokter() {
-		return this.send<{
-			list: {
+		return this.send<
+			{
 				namadokter: string;
 				kodedokter: number;
-			}[];
-		}>({
+			}[]
+		>({
 			path: '/ref/dokter',
 			method: 'GET'
 		});
@@ -42,12 +42,21 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * @param tanggal tanggal dengan format YYYY-MM-DD
 	 */
 	async refJadwalDokter(kodePoli: string, tanggal: string) {
-		return this.send<{
-			list: {
+		return this.send<
+			{
+				kodesubspesialis: string;
+				hari: number;
+				kapasitaspasien: number;
+				libur: number;
+				namahari: string;
+				jadwal: string;
+				namasubspesialis: string;
 				namadokter: string;
+				kodepoli: string;
+				namapoli: string;
 				kodedokter: number;
-			}[];
-		}>({
+			}[]
+		>({
 			path: `/jadwaldokter/kodepoli/${kodePoli}/tanggal/${tanggal}`,
 			method: 'GET'
 		});
@@ -57,14 +66,14 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * Melihat referensi poli finger print
 	 */
 	async refPoliFp() {
-		return this.send<{
-			list: {
+		return this.send<
+			{
 				kodesubspesialis: string;
 				namasubspesialis: string;
 				kodepoli: string;
 				namapoli: string;
-			}[];
-		}>({
+			}[]
+		>({
 			path: '/ref/poli/fp',
 			method: 'GET'
 		});
@@ -83,7 +92,7 @@ export class Antrean extends BaseApi<'antrean'> {
 			tgllahir: string;
 			daftarfp: number;
 		}>({
-			path: `/ref/pasien/fd/identitas/${jenisIdentitas}/noidentitas/${nomorIdentitas}`,
+			path: `/ref/pasien/fp/identitas/${jenisIdentitas}/noidentitas/${nomorIdentitas}`,
 			method: 'GET'
 		});
 	}
