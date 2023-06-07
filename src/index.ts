@@ -8,19 +8,21 @@ import { PRB } from './vclaim/prb.js';
 import { Referensi } from './vclaim/referensi.js';
 import { RencanaKontrol } from './vclaim/rencana-kontrol.js';
 
-export default class JKN extends Fetcher {
-	private readonly cached = new Map<`${Type}${string}`, BaseApi>();
+type CacheKey = `${Type}${string}`;
 
-	private getApi<T extends `${Type}${string}`, C extends BaseApi>(
-		key: T,
-		Api: new (...args: ConstructorParameters<typeof BaseApi>) => C
-	): C {
+export default class JKN extends Fetcher {
+	private readonly cached = new Map<CacheKey, BaseApi>();
+
+	private getApi<K extends CacheKey, V extends BaseApi>(
+		key: K,
+		Api: new (...args: ConstructorParameters<typeof BaseApi>) => V
+	): V {
 		let api = this.cached.get(key);
 		if (!api) {
 			api = new Api(this);
 			this.cached.set(key, api);
 		}
-		return api as C;
+		return api as V;
 	}
 
 	async invalidateConfig(): Promise<void> {
