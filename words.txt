@@ -4,10 +4,12 @@ carakeluar
 createdtime
 daftarfp
 diagnosaprb
+diagppk
 dinsos
 dpjp
 estimasidilayani
 faskes
+FKRTL
 FKTP
 getlisttask
 Gruper
@@ -38,6 +40,7 @@ namapoli
 namasubspesialis
 nmpoli
 nmppk
+nmpst
 nmsubspesialis
 noantrean
 nohp
@@ -49,6 +52,7 @@ nomorantrean
 nomorkartu
 nomorreferensi
 norekammedis
+norujukan
 nosep
 obatprb
 pacsapulang
@@ -75,6 +79,7 @@ tanggalperiksa
 taskid
 taskname
 tgllahir
+tglrujukan
 Topup
 updatejadwaldokter
 updatewaktu

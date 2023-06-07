@@ -7,6 +7,7 @@ import { Peserta } from './vclaim/peserta.js';
 import { PRB } from './vclaim/prb.js';
 import { Referensi } from './vclaim/referensi.js';
 import { RencanaKontrol } from './vclaim/rencana-kontrol.js';
+import { Rujukan } from './vclaim/rujukan.js';
 
 type CacheKey = `${Type}${string}`;
 
@@ -54,6 +55,9 @@ export default class JKN extends Fetcher {
 			},
 			get rencanaKontrol() {
 				return root.getApi('vclaim_rencanaKontrol', RencanaKontrol);
+			},
+			get rujukan() {
+				return root.getApi('vclaim_rujukan', Rujukan);
 			}
 		};
 	}
