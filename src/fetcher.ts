@@ -20,7 +20,7 @@ export interface Config {
 	 * jika NODE_ENV tidak terdapat nilai. Mode ini berpengaruh pada
 	 * nilai konfigurasi yang digunakan dan JKN API base url.
 	 *
-	 * @default process.env.NODE_ENV ?? "development"
+	 * @default "development"
 	 */
 	mode: Mode;
 
@@ -90,7 +90,7 @@ export class Fetcher {
 	private configured = false;
 
 	private config: Config = {
-		mode: (process.env.NODE_ENV as Mode) ?? 'development',
+		mode: 'development',
 		consId: process.env.JKN_CONS_ID ?? '',
 		consSecret: process.env.JKN_CONS_SECRET ?? '',
 		vclaimUserKey: process.env.JKN_VCLAIM_USER_KEY ?? '',
