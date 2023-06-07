@@ -5,6 +5,7 @@ import { LPK } from './vclaim/lpk.js';
 import { Monitoring } from './vclaim/monitoring.js';
 import { Peserta } from './vclaim/peserta.js';
 import { PRB } from './vclaim/prb.js';
+import { Referensi } from './vclaim/referensi.js';
 
 export default class JKN extends Fetcher {
 	private readonly cached = new Map<`${Type}${string}`, BaseApi>();
@@ -44,6 +45,9 @@ export default class JKN extends Fetcher {
 			},
 			get prb() {
 				return root.getApi('vclaim_prb', PRB);
+			},
+			get referensi() {
+				return root.getApi('vclaim_referensi', Referensi);
 			}
 		};
 	}

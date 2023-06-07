@@ -1,7 +1,9 @@
 angkaantrean
 BPJS
+carakeluar
 createdtime
 daftarfp
+diagnosaprb
 dinsos
 dpjp
 estimasidilayani
@@ -23,6 +25,7 @@ jenisresep
 kdpoli
 kdppk
 kdsubspesialis
+kelasrawat
 kodebooking
 kodedokter
 kodepoli
@@ -46,12 +49,16 @@ nomorkartu
 nomorreferensi
 norekammedis
 nosep
+obatprb
+pacsapulang
 pasienbaru
 pcare
 Pemanggilan
 prolanis
+propinsi
 racikan
 Raharja
+ruangrawat
 signa
 Silampari
 sisakuotajkn
