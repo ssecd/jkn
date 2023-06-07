@@ -30,6 +30,7 @@ kodebooking
 kodedokter
 kodepoli
 kodesubspesialis
+Kontroldan
 kuotajkn
 kuotanonjkn
 namadokter
@@ -54,6 +55,8 @@ pacsapulang
 pasienbaru
 pcare
 Pemanggilan
+Perujuk
+Praktek
 prolanis
 propinsi
 racikan
@@ -64,8 +67,10 @@ Silampari
 sisakuotajkn
 sisakuotanonjkn
 SKTM
+SPRI
 Sriwijaya
 sumberdata
+suratkontrol
 tanggalperiksa
 taskid
 taskname
