@@ -1,5 +1,5 @@
 import { createDecipheriv, createHash, createHmac } from 'crypto';
-import { decompressFromEncodedURIComponent } from 'lz-string';
+import lz from 'lz-string';
 
 type MaybePromise<T> = T | Promise<T>;
 
@@ -157,7 +157,7 @@ export class Fetcher {
 	}
 
 	private decompress(text: string): string {
-		return decompressFromEncodedURIComponent(text);
+		return lz.decompressFromEncodedURIComponent(text);
 	}
 
 	async send<T extends Type, R>(
