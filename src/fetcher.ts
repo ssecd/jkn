@@ -9,9 +9,32 @@ export type Mode = 'development' | 'production';
 export type Type = 'vclaim' | 'antrean';
 
 export interface Config {
+	/**
+	 * Cons ID dari BPJS
+	 * 
+	 * @default process.env.JKN_CONS_ID
+	 */
 	consId: string;
+
+	/**
+	 * Secret key dari BPJS
+	 * 
+	 * @default process.env.JKN_CONS_SECRET
+	 */
 	consSecret: string;
+
+	/**
+	 * User key VClaim dari BPJS
+	 * 
+	 * @default process.env.JKN_VCLAIM_USER_KEY
+	 */
 	vclaimUserKey: string;
+
+	/**
+	 * User key Antrean dari BPJS
+	 * 
+	 * @default process.env.JKN_ANTREAN_USER_KEY
+	 */
 	antreanUserKey: string;
 
 	/**
