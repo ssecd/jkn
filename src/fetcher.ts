@@ -201,12 +201,18 @@ export class Fetcher {
 
 			return json;
 		} catch (error: unknown) {
-			if (this.config.throw) throw error;
+			if (this.config.throw) {
+				if (error instanceof Error) {
+					error.message += `. \nResponse: ${response}`;
+				}
+				throw error;
+			}
 			let message =
 				error instanceof SyntaxError
 					? 'Received response from the JKN API appears to be in an unexpected format'
 					: 'An error occurred while requesting information from the JKN API';
 			if (error instanceof Error) message += `. ` + error.message;
+			message += '. ' + response;
 			const code = '500';
 			console.error(error);
 			return {
