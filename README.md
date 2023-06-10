@@ -90,6 +90,12 @@ console.log(result);
 
 Setiap parameter dan response objek memiliki type TypeScript dan komentar dokumentasi yang dibentuk sesuai dengan dokumentasi API BPJS Kesehatan pada [TrustMark](https://dvlp.bpjs-kesehatan.go.id:8888/trust-mark/main.html) dengan demikian developer dapat membaca langsung dokumentasi cepat dari kode tanpa harus bolak-balik halaman TrustMark yang tentunya akan sangat mempersingkat proses development.
 
+![image](https://github.com/ssec-llg/jkn/assets/25121822/cda03042-949a-446a-aa11-06abd55e3069)
+
+![image](https://github.com/ssec-llg/jkn/assets/25121822/ff5f8aa4-3e23-43f4-81ca-cf7827aff5ba)
+
+![image](https://github.com/ssec-llg/jkn/assets/25121822/9c082475-db87-42c3-9180-58cfb602c983)
+
 ## Konfigurasi
 
 Konfigurasi mengikuti interface berikut:
