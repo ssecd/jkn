@@ -37,11 +37,14 @@ export class Antrean extends BaseApi<'antrean'> {
 
 	/**
 	 * Melihat referensi jadwal dokter yang ada pada Aplikasi HFIS
-	 *
-	 * @param kodePoli kode poli BPJS misalnya MAT untuk poli mata
-	 * @param tanggal tanggal dengan format YYYY-MM-DD
 	 */
-	async refJadwalDokter(kodePoli: string, tanggal: string) {
+	async refJadwalDokter(params: {
+		/** kode poli BPJS misalnya MAT untuk poli mata */
+		poli: string;
+
+		/** tanggal dengan format YYYY-MM-DD */
+		tanggal: string;
+	}) {
 		return this.send<
 			{
 				kodesubspesialis: string;
@@ -57,7 +60,7 @@ export class Antrean extends BaseApi<'antrean'> {
 				kodedokter: number;
 			}[]
 		>({
-			path: `/jadwaldokter/kodepoli/${kodePoli}/tanggal/${tanggal}`,
+			path: `/jadwaldokter/kodepoli/${params.poli}/tanggal/${params.tanggal}`,
 			method: 'GET'
 		});
 	}
@@ -81,18 +84,21 @@ export class Antrean extends BaseApi<'antrean'> {
 
 	/**
 	 * Melihat referensi pasien finger print
-	 *
-	 * @param jenisIdentitas NIK atau Nomor kartu BPJS
-	 * @param nomorIdentitas nomor identitas sesuai jenis
 	 */
-	async refPasienFp(jenisIdentitas: 'nik' | 'noka', nomorIdentitas: string) {
+	async refPasienFp(params: {
+		/** `"nik"` atau `"noka"` (Nomor kartu BPJS) */
+		jenis: 'nik' | 'noka';
+
+		/** nomor identitas sesuai jenis */
+		nomor: string;
+	}) {
 		return this.send<{
 			nomorkartu: string;
 			nik: string;
 			tgllahir: string;
 			daftarfp: number;
 		}>({
-			path: `/ref/pasien/fp/identitas/${jenisIdentitas}/noidentitas/${nomorIdentitas}`,
+			path: `/ref/pasien/fp/identitas/${params.jenis}/noidentitas/${params.nomor}`,
 			method: 'GET'
 		});
 	}
@@ -323,10 +329,11 @@ export class Antrean extends BaseApi<'antrean'> {
 
 	/**
 	 * Melihat waktu task id yang telah dikirim ke BPJS
-	 *
-	 * @param kodeBooking kode booking yang didapat dari servis tambah antrean
 	 */
-	async listTaskId(kodeBooking: string) {
+	async listTaskId(params: {
+		/** kode booking yang didapat dari servis tambah antrean */
+		kodeBooking: string;
+	}) {
 		return this.send<
 			{
 				/** contoh "16-03-2021 11:32:49 WIB" */
@@ -345,7 +352,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		>({
 			path: `/antrean/getlisttask`,
 			method: 'POST',
-			data: { kodebooking: kodeBooking }
+			data: { kodebooking: params.kodeBooking }
 		});
 	}
 
@@ -450,13 +457,20 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * Melihat pendaftaran antrean belum dilayani per poli per dokter per hari per jam praktik
 	 */
 	async belumDilayaniPredikat(params: {
-		kodePoli: string;
-		kodeDokter: string;
+		/** kode poli diambil dari referensi poli */
+		poli: string;
+
+		/** kode dokter diambil dari referensi dokter */
+		dokter: string;
+
+		/** hari mulai dari 1 sampai 12 */
 		hari: number;
-		jamPraktik: string;
+
+		/** jam praktik */
+		jam: string;
 	}) {
 		return this.send<AntreanDetail[]>({
-			path: `/antrean/pendaftaran/kodepoli/${params.kodePoli}/kodedokter/${params.kodeDokter}/hari/${params.hari}/jampraktek/${params.jamPraktik}`,
+			path: `/antrean/pendaftaran/kodepoli/${params.poli}/kodedokter/${params.dokter}/hari/${params.hari}/jampraktek/${params.jam}`,
 			method: 'GET'
 		});
 	}

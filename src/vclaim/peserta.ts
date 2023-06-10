@@ -3,26 +3,32 @@ import { VClaimBaseApi } from './base.js';
 export class Peserta extends VClaimBaseApi {
 	/**
 	 * Pencarian data peserta berdasarkan nomor kartu
-	 *
-	 * @param value nomor kartu JKN atau BPJS
-	 * @param tanggal tanggal pelayanan atau SEP
 	 */
-	async nomorKartu(value: string, tanggal: string) {
+	async nomorKartu(params: {
+		/** nomor kartu JKN atau BPJS */
+		nomor: string;
+
+		/** tanggal pelayanan atau SEP dengan format YYYY-MM-DD */
+		tanggal: string;
+	}) {
 		return this.send<{ peserta: DataPeserta }>({
-			path: `/Peserta/nokartu/${value}/tglSEP/${tanggal}`,
+			path: `/Peserta/nokartu/${params.nomor}/tglSEP/${params.tanggal}`,
 			method: 'GET'
 		});
 	}
 
 	/**
 	 * Pencarian data peserta berdasarkan NIK
-	 *
-	 * @param value NIK
-	 * @param tanggal tanggal pelayanan atau SEP
 	 */
-	async nik(value: string, tanggal: string) {
+	async nomorKependudukan(params: {
+		/** nomor induk kependudukan atau NIK */
+		nomor: string;
+
+		/** tanggal pelayanan atau SEP dengan format YYYY-MM-DD */
+		tanggal: string;
+	}) {
 		return this.send<{ peserta: DataPeserta }>({
-			path: `/Peserta/nik/${value}/tglSEP/${tanggal}`,
+			path: `/Peserta/nik/${params.nomor}/tglSEP/${params.tanggal}`,
 			method: 'GET'
 		});
 	}

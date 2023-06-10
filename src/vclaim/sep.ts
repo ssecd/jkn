@@ -290,10 +290,11 @@ export class SEP extends VClaimBaseApi {
 
 	/**
 	 * Detail data SEP berdasarkan nomor SEP
-	 *
-	 * @param nomor nomor SEP
 	 */
-	async cari(nomor: string) {
+	async cari(params: {
+		/** nomor SEP */
+		nomor: string;
+	}) {
 		return this.send<{
 			noSep: string;
 			tglSep: string;
@@ -360,7 +361,7 @@ export class SEP extends VClaimBaseApi {
 			};
 			eSEP: string;
 		}>({
-			path: `/SEP/${nomor}`,
+			path: `/SEP/${params.nomor}`,
 			method: 'GET'
 		});
 	}

@@ -5,7 +5,7 @@ export class Rujukan extends VClaimBaseApi {
 	/**
 	 * Pencarian data rujukan berdasarkan nomor rujukan
 	 */
-	cariByNomor(params: {
+	async cariByNomor(params: {
 		/** nomor rujukan */
 		nomor: string;
 
@@ -30,7 +30,7 @@ export class Rujukan extends VClaimBaseApi {
 	/**
 	 * Pencarian data rujukan berdasarkan nomor kartu peserta
 	 */
-	cariByNoka(params: {
+	async cariByNoka(params: {
 		/** nomor kartu peserta */
 		nomor: string;
 
@@ -55,7 +55,7 @@ export class Rujukan extends VClaimBaseApi {
 	/**
 	 * Pencarian data rujukan berdasarkan nomor kartu peserta (Multi records)
 	 */
-	cariByNokaMulti(params: {
+	async cariByNokaMulti(params: {
 		/** nomor kartu peserta */
 		nomor: string;
 

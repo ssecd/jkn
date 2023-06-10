@@ -21,7 +21,7 @@ describe(
 		});
 
 		it.concurrent('refJadwalDokter()', async () => {
-			const result = await jkn.antrean.refJadwalDokter('MAT', '2023-05-01');
+			const result = await jkn.antrean.refJadwalDokter({ poli: 'MAT', tanggal: '2023-05-01' });
 			expect(result.metadata.code).toBe(200);
 			expect(result.response?.length).gte(0);
 			expect(result.response?.[0]?.kodesubspesialis).not.toBeFalsy();
@@ -33,13 +33,13 @@ describe(
 		});
 
 		it.concurrent('refPasienFp()', async () => {
-			const result = await jkn.antrean.refPasienFp('noka', '0002084717968');
+			const result = await jkn.antrean.refPasienFp({ jenis: 'noka', nomor: '0002084717968' });
 			expect(result.metadata.code).toBe(1);
 			expect(result.response?.nomorkartu).toBe('0002084717968');
 		});
 
 		it.concurrent('listTaskId()', async () => {
-			const result = await jkn.antrean.listTaskId('2022032204531425');
+			const result = await jkn.antrean.listTaskId({ kodeBooking: '2022032204531425' });
 			expect(result.metadata.code).toBe(200);
 			expect(result.response?.length).gt(0);
 		});
@@ -82,10 +82,10 @@ describe(
 
 		it.concurrent('belumDilayaniPredikat()', async () => {
 			const result = await jkn.antrean.belumDilayaniPredikat({
-				kodePoli: 'MAT',
-				kodeDokter: '292667',
+				poli: 'MAT',
+				dokter: '292667',
 				hari: 2,
-				jamPraktik: '07:00-15:00'
+				jam: '07:00-15:00'
 			});
 			console.log(result); // error: 'No Content'
 		});

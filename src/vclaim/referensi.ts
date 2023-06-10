@@ -3,37 +3,42 @@ import { VClaimBaseApi } from './base.js';
 export class Referensi extends VClaimBaseApi {
 	/**
 	 * Pencarian data diagnosa (ICD-10)
-	 *
-	 * @param keyword kode atau nama diagnosa
 	 */
-	async diagnosa(keyword: string) {
+	async diagnosa(params: {
+		/** kode atau nama diagnosa */
+		keyword: string;
+	}) {
 		return this.send<{ diagnosa: ReferensiResult[] }>({
-			path: `/referensi/diagnosa/${keyword}`,
+			path: `/referensi/diagnosa/${params.keyword}`,
 			method: 'GET'
 		});
 	}
 
 	/**
 	 * Pencarian data poli
-	 *
-	 * @param keyword kode atau nama poli
 	 */
-	async poli(keyword: string) {
+	async poli(params: {
+		/** kode atau nama poli */
+		keyword: string;
+	}) {
 		return this.send<{ poli: ReferensiResult[] }>({
-			path: `/referensi/poli/${keyword}`,
+			path: `/referensi/poli/${params.keyword}`,
 			method: 'GET'
 		});
 	}
 
 	/**
 	 * Pencarian data fasilitas kesehatan
-	 *
-	 * @param keyword kode atau nama faskes
-	 * @param jenis jenis faskes (1 = Faskes tingkat 1) (2 = Faskes tingkat 2)
 	 */
-	async faskes(keyword: string, jenis: 1 | 2) {
+	async faskes(params: {
+		/** kode atau nama faskes */
+		keyword: string;
+
+		/** jenis faskes (1 = Faskes tingkat 1) (2 = Faskes tingkat 2) */
+		jenis: 1 | 2;
+	}) {
 		return this.send<{ faskes: ReferensiResult[] }>({
-			path: `/referensi/faskes/${keyword}/${jenis}`,
+			path: `/referensi/faskes/${params.keyword}/${params.jenis}`,
 			method: 'GET'
 		});
 	}
@@ -70,9 +75,12 @@ export class Referensi extends VClaimBaseApi {
 	/**
 	 * Daftar kabupaten di Indonesia berdasarkan kode provinsi
 	 */
-	async kabupaten(kodeProvinsi: string) {
+	async kabupaten(params: {
+		/** kode provinsi */
+		provinsi: string;
+	}) {
 		return this.send<{ list: ReferensiResult[] }>({
-			path: `/referensi/kabupaten/propinsi/${kodeProvinsi}`,
+			path: `/referensi/kabupaten/propinsi/${params.provinsi}`,
 			method: 'GET'
 		});
 	}
@@ -80,9 +88,12 @@ export class Referensi extends VClaimBaseApi {
 	/**
 	 * Daftar kecamatan di Indonesia berdasarkan kode kabupaten
 	 */
-	async kecamatan(kodeKabupaten: string) {
+	async kecamatan(params: {
+		/** kode kabupaten */
+		kabupaten: string;
+	}) {
 		return this.send<{ list: ReferensiResult[] }>({
-			path: `/referensi/kecamatan/kabupaten/${kodeKabupaten}`,
+			path: `/referensi/kecamatan/kabupaten/${params.kabupaten}`,
 			method: 'GET'
 		});
 	}
@@ -99,24 +110,26 @@ export class Referensi extends VClaimBaseApi {
 
 	/**
 	 * Pencarian data obat generik PRB berdasarkan nama obat
-	 *
-	 * @param nama nama obat generik
 	 */
-	async obatPrb(nama: string) {
+	async obatPrb(params: {
+		/** nama obat generik */
+		nama: string;
+	}) {
 		return this.send<{ list: ReferensiResult[] }>({
-			path: `/referensi/obatprb/${nama}`,
+			path: `/referensi/obatprb/${params.nama}`,
 			method: 'GET'
 		});
 	}
 
 	/**
 	 * Pencarian data prosedur atau tindakan (hanya untuk lembar pengajuan klaim)
-	 *
-	 * @param keyword nama atau kode prosedur
 	 */
-	async klaimProsedur(keyword: string) {
+	async klaimProsedur(params: {
+		/** nama atau kode prosedur */
+		keyword: string;
+	}) {
 		return this.send<{ procedure: ReferensiResult[] }>({
-			path: `/referensi/procedure/${keyword}`,
+			path: `/referensi/procedure/${params.keyword}`,
 			method: 'GET'
 		});
 	}
@@ -133,12 +146,13 @@ export class Referensi extends VClaimBaseApi {
 
 	/**
 	 * Pencarian data dokter berdasarkan nama (hanya untuk lembar pengajuan klaim)
-	 *
-	 * @param nama nama dokter atau DPJP
 	 */
-	async klaimDokter(nama: string) {
+	async klaimDokter(params: {
+		/** nama dokter atau DPJP */
+		nama: string;
+	}) {
 		return this.send<{ list: ReferensiResult[] }>({
-			path: `/referensi/dokter/${nama}`,
+			path: `/referensi/dokter/${params.nama}`,
 			method: 'GET'
 		});
 	}

@@ -172,10 +172,11 @@ export class RencanaKontrol extends VClaimBaseApi {
 
 	/**
 	 * Melihat data SEP untuk keperluan rencana kontrol
-	 *
-	 * @param nomorSep nomor SEP
 	 */
-	async sep(nomorSep: string) {
+	async sep(params: {
+		/** nomor SEP */
+		nomor: string;
+	}) {
 		return this.send<{
 			noSep: string;
 			tglSep: string;
@@ -201,7 +202,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 				tglRujukan: string;
 			};
 		}>({
-			path: `/RencanaKontrol/nosep/${nomorSep}`,
+			path: `/RencanaKontrol/nosep/${params.nomor}`,
 			method: 'GET'
 		});
 	}
@@ -214,10 +215,11 @@ export class RencanaKontrol extends VClaimBaseApi {
 	 * jadi field response SEP kosong atau null. Sedangkan jika pembuatan surat kontrol
 	 * atau jenis kontrol 2, akan ter-isi field response SEP karena terdapat referensi
 	 * nomor SEP asal ketika pembuatan surat kontrol tersebut.
-	 *
-	 * @param nomor nomor surat kontrol
 	 */
-	async cari(nomor: string) {
+	async cari(params: {
+		/** nomor surat kontrol */
+		nomor: string;
+	}) {
 		return this.send<{
 			noSuratKontrol: string;
 			tglRencanaKontrol: string;
@@ -257,7 +259,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 				};
 			};
 		}>({
-			path: `/RencanaKontrol/noSuratKontrol/${nomor}`,
+			path: `/RencanaKontrol/noSuratKontrol/${params.nomor}`,
 			method: 'GET'
 		});
 	}

@@ -7,7 +7,13 @@ export class Monitoring extends VClaimBaseApi {
 	 * @param tanggal tanggal SEP dengan format YYYY-MM-DD
 	 * @param jenis jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan)
 	 */
-	async kunjungan(tanggal: string, jenis: string) {
+	async kunjungan(params: {
+		/** tanggal SEP dengan format YYYY-MM-DD */
+		tanggal: string;
+
+		/** jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan) */
+		jenis: 1 | 2;
+	}) {
 		return this.send<{
 			sep: {
 				diagnosa: string;
@@ -22,7 +28,7 @@ export class Monitoring extends VClaimBaseApi {
 				tglSep: string;
 			}[];
 		}>({
-			path: `/Monitoring/Kunjungan/Tanggal/${tanggal}/JnsPelayanan/${jenis}`,
+			path: `/Monitoring/Kunjungan/Tanggal/${params.tanggal}/JnsPelayanan/${params.jenis}`,
 			method: 'GET'
 		});
 	}
@@ -35,10 +41,10 @@ export class Monitoring extends VClaimBaseApi {
 		tanggal: string;
 
 		/** jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan) */
-		jenis: string;
+		jenis: 1 | 2;
 
 		/** status klaim (1 = Proses Verifikasi) (2 = Pending Verifikasi) (3 = Klaim) */
-		status: string;
+		status: 1 | 2 | 3;
 	}) {
 		return this.send<{
 			klaim: {
@@ -110,7 +116,7 @@ export class Monitoring extends VClaimBaseApi {
 	 */
 	async klaimJasaRaharja(params: {
 		/** jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan) */
-		jenis: string;
+		jenis: 1 | 2;
 
 		/** tanggal awal dengan format YYYY-MM-DD */
 		awal: string;
