@@ -11,28 +11,28 @@ export type Type = 'vclaim' | 'antrean';
 export interface Config {
 	/**
 	 * Cons ID dari BPJS
-	 * 
+	 *
 	 * @default process.env.JKN_CONS_ID
 	 */
 	consId: string;
 
 	/**
 	 * Secret key dari BPJS
-	 * 
+	 *
 	 * @default process.env.JKN_CONS_SECRET
 	 */
 	consSecret: string;
 
 	/**
 	 * User key VClaim dari BPJS
-	 * 
+	 *
 	 * @default process.env.JKN_VCLAIM_USER_KEY
 	 */
 	vclaimUserKey: string;
 
 	/**
 	 * User key Antrean dari BPJS
-	 * 
+	 *
 	 * @default process.env.JKN_ANTREAN_USER_KEY
 	 */
 	antreanUserKey: string;
@@ -43,7 +43,7 @@ export interface Config {
 	 * jika NODE_ENV tidak terdapat nilai. Mode ini berpengaruh pada
 	 * nilai konfigurasi yang digunakan dan JKN API base url.
 	 *
-	 * @default "development"
+	 * @default process.env.NODE_ENV || "development"
 	 */
 	mode: Mode;
 
@@ -113,7 +113,7 @@ export class Fetcher {
 	private configured = false;
 
 	private config: Config = {
-		mode: 'development',
+		mode: process.env.NODE_ENV !== 'production' ? 'development' : process.env.NODE_ENV,
 		consId: process.env.JKN_CONS_ID ?? '',
 		consSecret: process.env.JKN_CONS_SECRET ?? '',
 		vclaimUserKey: process.env.JKN_VCLAIM_USER_KEY ?? '',

@@ -130,9 +130,9 @@ interface Config {
 	 * jika NODE_ENV tidak terdapat nilai. Mode ini berpengaruh pada
 	 * nilai konfigurasi yang digunakan dan JKN API base url.
 	 *
-	 * @default "development"
+	 * @default process.env.NODE_ENV || "development"
 	 */
-	mode: Mode;
+	mode: 'development' | 'production';
 
 	/**
 	 * Secara default bernilai 'falsy' sehingga setiap terjadi kesalahan
