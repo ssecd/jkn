@@ -9,6 +9,7 @@ Instalasi paket dapat dilakukan dengan perintah berikut:
 ```bash
 npm install @ssec-llg/jkn
 ```
+
 Anda juga dapat menggunakan `PNPM` atau `YARN`
 
 ## Penggunaan
@@ -20,7 +21,9 @@ Penggunaan paket ini sangatlah sederhana, ada dapat menginisialisasi global inst
 
 import JKN from '@ssec-llg/jkn';
 
-const jkn = new JKN({ /* config */ });
+const jkn = new JKN({
+	/* config */
+});
 
 export default jkn;
 ```
@@ -33,7 +36,7 @@ Secara default konfigurasi seperti const id atau secret akan dibaca melalui envi
 import JKN from '@ssec-llg/jkn';
 
 const jkn = new JKN({
-	consId: '<cons id dari bpjs>',
+	consId: '<cons id dari bpjs>'
 	// dan seterusnya ...
 });
 
@@ -85,7 +88,6 @@ console.log(result);
 	};
 }
 */
-
 ```
 
 Setiap parameter dan response objek memiliki type TypeScript dan komentar dokumentasi yang dibentuk sesuai dengan dokumentasi API BPJS Kesehatan pada [TrustMark](https://dvlp.bpjs-kesehatan.go.id:8888/trust-mark/main.html) dengan demikian developer dapat membaca langsung dokumentasi cepat dari kode tanpa harus bolak-balik halaman TrustMark yang tentunya akan sangat mempersingkat proses development.
@@ -104,28 +106,28 @@ Konfigurasi mengikuti interface berikut:
 interface Config {
 	/**
 	 * Cons ID dari BPJS
-	 * 
+	 *
 	 * @default process.env.JKN_CONS_ID
 	 */
 	consId: string;
 
 	/**
 	 * Secret key dari BPJS
-	 * 
+	 *
 	 * @default process.env.JKN_CONS_SECRET
 	 */
 	consSecret: string;
 
 	/**
 	 * User key VClaim dari BPJS
-	 * 
+	 *
 	 * @default process.env.JKN_VCLAIM_USER_KEY
 	 */
 	vclaimUserKey: string;
 
 	/**
 	 * User key Antrean dari BPJS
-	 * 
+	 *
 	 * @default process.env.JKN_ANTREAN_USER_KEY
 	 */
 	antreanUserKey: string;
