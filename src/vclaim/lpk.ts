@@ -6,7 +6,7 @@ export class LPK extends VClaimBaseApi {
 	 *
 	 * @param data data LPK
 	 */
-	async insertLpk(data: DataLPK) {
+	async insert(data: DataLPK) {
 		return this.send<string>({
 			path: '/LPK/insert',
 			method: 'POST',
@@ -19,7 +19,7 @@ export class LPK extends VClaimBaseApi {
 	 *
 	 * @param data data LPK
 	 */
-	async updateLpk(data: DataLPK) {
+	async update(data: DataLPK) {
 		return this.send<string>({
 			path: '/LPK/update',
 			method: 'PUT',
@@ -29,25 +29,29 @@ export class LPK extends VClaimBaseApi {
 
 	/**
 	 * Delete Rujukan
-	 *
-	 * @param nomorSep nomor SEP
 	 */
-	async deleteLpk(nomorSep: string) {
+	async delete(params: {
+		/** nomor SEP yang akan dihapus */
+		nomorSep: string;
+	}) {
 		return this.send<string>({
 			path: '/LPK/delete',
 			method: 'DELETE',
-			data: { request: { t_lpk: { noSep: nomorSep } } }
+			data: { request: { t_lpk: { noSep: params.nomorSep } } }
 		});
 	}
 
 	/**
 	 * Data lembar pengajuan klaim berdasarkan
 	 * tanggal masuk dan jenis pelayanan
-	 *
-	 * @param tanggal tanggal masuk
-	 * @param jenis jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan)
 	 */
-	async dataLpk(tanggal: string, jenis: 1 | 2) {
+	async data(params: {
+		/** tanggal masuk dengan format YYYY-MM-DD */
+		tanggal: string;
+
+		/** jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan) */
+		jenis: 1 | 2;
+	}) {
 		return this.send<{
 			lpk: {
 				list: {
@@ -117,7 +121,7 @@ export class LPK extends VClaimBaseApi {
 				}[];
 			};
 		}>({
-			path: `/LPK/TglMasuk/${tanggal}/JnsPelayanan/${jenis}`,
+			path: `/LPK/TglMasuk/${params.tanggal}/JnsPelayanan/${params.jenis}`,
 			method: 'GET'
 		});
 	}

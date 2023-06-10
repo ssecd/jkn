@@ -7,7 +7,7 @@ describe(
 	'VClaim - LPK',
 	() => {
 		it.concurrent('dataLpk()', async () => {
-			const result = await jkn.vclaim.lpk.dataLpk('2022-01-01', 2);
+			const result = await jkn.vclaim.lpk.data({ tanggal: '2021-04-01', jenis: 2 });
 			expect(result.metaData.code).toBe('201'); // no example data
 		});
 	},
