@@ -58,6 +58,8 @@ const jkn = new JKN(async () => {
 export default jkn;
 ```
 
+> ⚠ Perlu diperhatikan bahwa fungsi pada constructor parameter tersebut hanya akan dipanggil satu kali. Bila terjadi perubahan konfigurasi harap memanggil fungsi `invalidateConfig(): Promise<void>` pada instansi JKN untuk memperbaharui atau menerapkan perubahan konfigurasi.
+
 Kemudian anda dapat mengimpor module tersebut di mana pun dengan mudah:
 
 ```ts
