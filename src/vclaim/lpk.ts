@@ -41,7 +41,8 @@ export class LPK extends VClaimBaseApi {
 	}
 
 	/**
-	 * Pencarian data peserta berdasarkan NIK Kependudukan
+	 * Data lembar pengajuan klaim berdasarkan
+	 * tanggal masuk dan jenis pelayanan
 	 *
 	 * @param tanggal tanggal masuk
 	 * @param jenis jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan)
