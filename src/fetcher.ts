@@ -101,11 +101,11 @@ export type SendResponse<T> = {
 const api_base_urls: Record<Type, Record<Mode, string>> = {
 	vclaim: {
 		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/vclaim-rest-dev',
-		production: ''
+		production: 'https://apijkn.bpjs-kesehatan.go.id/vclaim-rest'
 	},
 	antrean: {
 		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev',
-		production: ''
+		production: 'https://apijkn.bpjs-kesehatan.go.id/antreanrs'
 	}
 };
 
