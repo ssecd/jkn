@@ -1,13 +1,14 @@
 {
 	"name": "@ssec-llg/jkn",
-	"version": "0.0.1",
+	"version": "0.0.0",
 	"description": "JKN (BPJS) Bridging API untuk NodeJS",
 	"type": "module",
 	"scripts": {
 		"test": "vitest",
 		"build": "tsc",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"format": "prettier --plugin-search-dir . --write .",
+		"release": "changeset publish"
 	},
 	"keywords": [],
 	"author": {
@@ -26,6 +27,7 @@
 		"import": "./dist/index.js"
 	},
 	"devDependencies": {
+		"@changesets/cli": "^2.26.1",
 		"@types/node": "^20.2.5",
 		"@typescript-eslint/eslint-plugin": "^5.59.8",
 		"@typescript-eslint/parser": "^5.59.8",
