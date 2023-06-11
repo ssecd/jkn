@@ -145,15 +145,15 @@ interface Config {
 	mode: 'development' | 'production';
 
 	/**
-	 * Secara default bernilai 'falsy' sehingga setiap terjadi kesalahan
+	 * Secara default bernilai `false` sehingga setiap terjadi kesalahan
 	 * saat mengirim permintaan ke server JKN menggunakan method `send()`,
 	 * pesan kesalahan akan dikembalikan sebagai pesan response dan log
 	 * error akan dicetak pada konsol atau terminal. Jika bernilai true,
 	 * maka kesalahan akan di-throw.
 	 *
-	 * @default undefined
+	 * @default false
 	 */
-	throw?: boolean;
+	throw: boolean;
 }
 ```
 
