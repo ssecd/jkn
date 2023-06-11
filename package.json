@@ -8,6 +8,9 @@
 	},
 	"homepage": "https://github.com/ssec-llg/jkn",
 	"private": false,
+	"publishConfig": {
+		"access": "public"
+	},
 	"type": "module",
 	"scripts": {
 		"test": "vitest",
