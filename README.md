@@ -10,11 +10,11 @@ Instalasi paket dapat dilakukan dengan perintah berikut:
 npm install @ssec-llg/jkn
 ```
 
-Anda juga dapat menggunakan `PNPM` atau `YARN`
+Instalasi juga dapat dilakukan menggunakan `PNPM` atau `YARN`
 
 ## Penggunaan
 
-Penggunaan paket ini sangatlah sederhana, ada dapat menginisialisasi global instansi pada sebuah modul atau file seperti berikut:
+Penggunaan paket ini sangatlah sederhana, cukup menginisialisasi global instansi pada sebuah modul atau file seperti berikut:
 
 ```ts
 // file: jkn.ts atau jkn.js
@@ -28,7 +28,7 @@ const jkn = new JKN({
 export default jkn;
 ```
 
-Secara default konfigurasi seperti const id atau secret akan dibaca melalui environment variable namun anda dapat mengaturnya pada constructor class JKN seperti berikut:
+Secara default konfigurasi seperti cons id atau secret akan dibaca melalui environment variable namun konfigurasi juga dapat diatur pada constructor class JKN seperti berikut:
 
 ```ts
 // file: jkn.ts atau jkn.js
@@ -43,7 +43,7 @@ const jkn = new JKN({
 export default jkn;
 ```
 
-Anda juga dapat menggunakan fungsi promise pada constructor class JKN untuk mengatur konfigurasi, misalnya pada kasus anda ingin membaca konfigurasi dari database:
+Selain menggunakan objek, konfigurasi juga dapat diatur menggunakan fungsi, misalnya pada kasus membaca atau mendapatkan konfigurasi dari database:
 
 ```ts
 // file: jkn.ts atau jkn.js
@@ -63,7 +63,7 @@ export default jkn;
 
 > ⚠ Perlu diperhatikan bahwa fungsi pada constructor parameter tersebut hanya akan dipanggil satu kali. Bila terjadi perubahan konfigurasi harap memanggil fungsi `invalidateConfig(): Promise<void>` pada instansi JKN untuk memperbaharui atau menerapkan perubahan konfigurasi.
 
-Kemudian anda dapat mengimpor module tersebut di mana pun dengan mudah:
+Kemudian cukup impor module `jkn` tersebut di mana pun saat akan menggunakannya:
 
 ```ts
 import jkn from './path/to/jkn.js';
@@ -163,6 +163,8 @@ interface Config {
 - [x] Antrean
 - [ ] Apotek
 - [ ] PCare
+
+> API yang belum tersedia akan dikembangkan. Jika ingin berkontribusi silakan buat PR.
 
 ## Lisensi
 
