@@ -19,7 +19,14 @@
 		"format": "prettier --plugin-search-dir . --write .",
 		"release": "changeset publish"
 	},
-	"keywords": [],
+	"keywords": [
+		"jkn",
+		"bpjs",
+		"bridging",
+		"vclaim",
+		"antrean",
+		"mobile-jkn"
+	],
 	"author": {
 		"name": "Habib Mustofa",
 		"email": "hm.dev7@gmail.com",
