@@ -1,5 +1,13 @@
 # @ssec-llg/jkn
 
+## 0.0.3
+
+### Patch Changes
+
+- 285df2d: more read tests
+- 285df2d: fix typo endpoint
+- 285df2d: fix type
+
 ## 0.0.2
 
 ### Patch Changes
