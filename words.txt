@@ -58,6 +58,7 @@ Kunj
 kuotajkn
 kuotanonjkn
 laka
+LINGGAU
 namadokter
 namahari
 namapoli
@@ -88,7 +89,7 @@ nosepref
 nosurat
 obatprb
 opsikonsul
-pacsapulang
+pascapulang
 pasienbaru
 pcare
 Pemanggilan
@@ -112,6 +113,7 @@ skdp
 SKTM
 SPRI
 Sriwijaya
+SUMATERA
 sumberdata
 suplesi
 suratkontrol

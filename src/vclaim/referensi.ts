@@ -192,7 +192,7 @@ export class Referensi extends VClaimBaseApi {
 	 */
 	async klaimPaskaPulang() {
 		return this.send<{ list: ReferensiResult[] }>({
-			path: `/referensi/pacsapulang`,
+			path: `/referensi/pascapulang`,
 			method: 'GET'
 		});
 	}
