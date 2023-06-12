@@ -280,6 +280,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		/** jenis filter (1 = tanggal entri) (2 = tanggal rencana kontrol) */
 		filter: 1 | 2;
 	}) {
+		const bulan = String(params.bulan || 0).padStart(2, '0');
 		return this.send<{
 			list: {
 				noSuratKontrol: string;
@@ -301,7 +302,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 				terbitSEP: string;
 			}[];
 		}>({
-			path: `/RencanaKontrol/ListRencanaKontrol/Bulan/${params.bulan}/Tahun/${params.tahun}/Nokartu/${params.nomorKartu}/filter/${params.filter}`,
+			path: `/RencanaKontrol/ListRencanaKontrol/Bulan/${bulan}/Tahun/${params.tahun}/Nokartu/${params.nomorKartu}/filter/${params.filter}`,
 			method: 'GET'
 		});
 	}
@@ -384,7 +385,14 @@ export class RencanaKontrol extends VClaimBaseApi {
 		/** tanggal rencana kontrol dengan format YYYY-MM-DD */
 		tanggal: string;
 	}) {
-		return this.send({
+		return this.send<{
+			list: {
+				kodeDokter: string;
+				namaDokter: string;
+				jadwalPraktek: string;
+				kapasitas: string;
+			}[];
+		}>({
 			path: `/RencanaKontrol/JadwalPraktekDokter/JnsKontrol/${params.jenis}/KdPoli/${params.kodePoli}/TglRencanaKontrol/${params.tanggal}`,
 			method: 'GET'
 		});
