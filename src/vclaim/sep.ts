@@ -879,8 +879,9 @@ export class SEP extends VClaimBaseApi {
 		bulan: number;
 
 		/** tahun penerbitan SEP */
-		tahun: string;
+		tahun: number;
 	}) {
+		const bulan = String(params.bulan || 0).padStart(2, '0');
 		return this.send<{
 			list: {
 				noKartu: string;
@@ -891,7 +892,7 @@ export class SEP extends VClaimBaseApi {
 				status: string;
 			}[];
 		}>({
-			path: `/Sep/persetujuanSEP/list/bulan/${params.bulan}/tahun/${params.tahun}`,
+			path: `/Sep/persetujuanSEP/list/bulan/${bulan}/tahun/${params.tahun}`,
 			method: 'GET'
 		});
 	}
@@ -967,7 +968,7 @@ export class SEP extends VClaimBaseApi {
 		bulan: number;
 
 		/** tahun terbit SEP */
-		tahun: string;
+		tahun: number;
 
 		/**
 		 * teks filter, apabila dikosongkan akan menampilkan semua
@@ -975,6 +976,7 @@ export class SEP extends VClaimBaseApi {
 		 */
 		filter?: string;
 	}) {
+		const bulan = String(params.bulan || 0).padStart(2, '0');
 		const filter = params.filter || '';
 		return this.send<{
 			list: {
@@ -993,7 +995,7 @@ export class SEP extends VClaimBaseApi {
 				user: string;
 			}[];
 		}>({
-			path: `/Sep/updtglplg/list/bulan/${params.bulan}/tahun/${params.tahun}/${filter}`,
+			path: `/Sep/updtglplg/list/bulan/${bulan}/tahun/${params.tahun}/${filter}`,
 			method: 'GET'
 		});
 	}
@@ -1019,7 +1021,8 @@ export class SEP extends VClaimBaseApi {
 			};
 		}>({
 			path: `/sep/cbg/${params.nomor}`,
-			method: 'GET'
+			method: 'GET',
+			skipDecrypt: true
 		});
 	}
 
@@ -1148,6 +1151,7 @@ export class SEP extends VClaimBaseApi {
 				nama: string;
 			}[];
 		}>({
+			// TODO: solve error endpoint not found
 			path: `/SEP/FingerPrint/randomquestion/faskesterdaftar/nokapst/${params.nomorKartu}/tglsep/${params.tanggal}`,
 			method: 'GET'
 		});
