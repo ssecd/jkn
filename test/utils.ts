@@ -21,3 +21,7 @@ export function generateDateRanges(year: number, range = 90): [string, string][]
 
 	return dates;
 }
+
+export function currentIsoDate(): string {
+	return new Date().toISOString().split('T')[0];
+}
