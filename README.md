@@ -96,6 +96,29 @@ console.log(result);
 
 Setiap parameter dan response objek memiliki type TypeScript dan komentar dokumentasi yang dibentuk sesuai dengan dokumentasi API BPJS Kesehatan pada [TrustMark](https://dvlp.bpjs-kesehatan.go.id:8888/trust-mark/main.html) dengan demikian developer dapat membaca langsung dokumentasi cepat dari kode tanpa harus bolak-balik halaman TrustMark yang tentunya akan sangat mempersingkat proses development.
 
+## Tipe Request & Response
+
+Pada kasus tertentu, type dari request atau response diperlukan di luar pemanggilan API method misalnya saat ingin mendefinisikan variable request pada global scope variable atau bahkan pada module berbeda dengan tetap mempertahankan keakuratan type atau menjadikan response sebagai parameter fungsi yang menyimpan response tersebut ke database, hal tersebut dapat dilakukan seperti berikut:
+
+```ts
+import type { AntreanParams, VClaimResponse } from '@ssec-llg/jkn';
+import jkn from './path/to/jkn.js';
+
+const jadwal: AntreanParams<'refJadwalDokter'>[0] = {
+	poli: 'MAT',
+	tanggal: '2023-05-01'
+};
+
+const result = await jkn.antrean.refJadwalDokter(jadwal);
+console.log(result);
+
+// ...
+
+function persistSep(sep: VClaimResponse<'sep', 'insertV2'>) {
+	/* simpan SEP ke database */
+}
+```
+
 ## Konfigurasi
 
 Konfigurasi mengikuti interface berikut:
