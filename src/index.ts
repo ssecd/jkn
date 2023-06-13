@@ -12,6 +12,10 @@ import { SEP } from './vclaim/sep.js';
 
 type CacheKey = `${Type}${string}`;
 
+type JKNResponseType<T extends object, K extends keyof T> = NonNullable<
+	'response' extends keyof Awaited<ReturnType<T[K]>> ? Awaited<ReturnType<T[K]>>['response'] : never
+>;
+
 export default class JKN extends Fetcher {
 	private readonly cached = new Map<CacheKey, BaseApi>();
 
@@ -66,3 +70,19 @@ export default class JKN extends Fetcher {
 		};
 	}
 }
+
+export type AntreanResponse<K extends keyof Antrean> = JKNResponseType<Antrean, K>;
+
+export type AntreanRequest<K extends keyof Antrean> = Parameters<Antrean[K]>;
+
+type VClaim = JKN['vclaim'];
+
+export type VClaimResponse<
+	T extends keyof VClaim, //
+	K extends keyof VClaim[T]
+> = JKNResponseType<VClaim[T], K>;
+
+export type VClaimRequest<
+	T extends keyof VClaim, //
+	K extends keyof VClaim[T]
+> = Parameters<VClaim[T][K]>;
