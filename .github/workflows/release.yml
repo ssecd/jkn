@@ -1,16 +1,18 @@
 name: Release
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types:
+      - closed
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    # prevents this action from running on forks
-    if: github.repository == 'ssec-llg/jkn'
+    # only run when pr merged & prevents from running on forks
+    if: github.event.pull_request.merged == true && github.repository == 'ssec-llg/jkn'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
