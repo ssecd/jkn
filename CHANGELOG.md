@@ -1,5 +1,11 @@
 # @ssec-llg/jkn
 
+## 0.0.4
+
+### Patch Changes
+
+- ef491fa: expose request & response type
+
 ## 0.0.3
 
 ### Patch Changes

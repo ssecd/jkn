@@ -1,6 +1,6 @@
 {
 	"name": "@ssec-llg/jkn",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "JKN (BPJS) Bridging API untuk NodeJS",
 	"repository": {
 		"type": "git",
