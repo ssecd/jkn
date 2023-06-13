@@ -1,6 +1,8 @@
-# JKN SDK
+# JKN
 
 JKN (BPJS) Bridging API untuk NodeJS
+
+![Usage demo](./assets/demo.gif)
 
 ## Instalasi
 
@@ -93,8 +95,6 @@ console.log(result);
 ```
 
 Setiap parameter dan response objek memiliki type TypeScript dan komentar dokumentasi yang dibentuk sesuai dengan dokumentasi API BPJS Kesehatan pada [TrustMark](https://dvlp.bpjs-kesehatan.go.id:8888/trust-mark/main.html) dengan demikian developer dapat membaca langsung dokumentasi cepat dari kode tanpa harus bolak-balik halaman TrustMark yang tentunya akan sangat mempersingkat proses development.
-
-![Editor autocomplete](./assets/autocomplete.png)
 
 ## Konfigurasi
 
