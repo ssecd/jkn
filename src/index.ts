@@ -73,7 +73,7 @@ export default class JKN extends Fetcher {
 
 export type AntreanResponse<K extends keyof Antrean> = JKNResponseType<Antrean, K>;
 
-export type AntreanRequest<K extends keyof Antrean> = Parameters<Antrean[K]>;
+export type AntreanParams<K extends keyof Antrean> = Parameters<Antrean[K]>;
 
 type VClaim = JKN['vclaim'];
 
@@ -82,7 +82,7 @@ export type VClaimResponse<
 	K extends keyof VClaim[T]
 > = JKNResponseType<VClaim[T], K>;
 
-export type VClaimRequest<
+export type VClaimParams<
 	T extends keyof VClaim, //
 	K extends keyof VClaim[T]
 > = Parameters<VClaim[T][K]>;
