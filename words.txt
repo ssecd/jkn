@@ -113,6 +113,7 @@ skdp
 SKTM
 SPRI
 Sriwijaya
+ssecd
 SUMATERA
 sumberdata
 suplesi

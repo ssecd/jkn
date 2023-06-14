@@ -9,7 +9,7 @@ JKN (BPJS) Bridging API untuk NodeJS
 Instalasi paket dapat dilakukan dengan perintah berikut:
 
 ```bash
-npm install @ssec-llg/jkn
+npm install @ssecd/jkn
 ```
 
 Instalasi juga dapat dilakukan menggunakan `PNPM` atau `YARN`
@@ -21,7 +21,7 @@ Penggunaan paket ini sangatlah sederhana, cukup menginisialisasi global instansi
 ```ts
 // file: jkn.ts atau jkn.js
 
-import JKN from '@ssec-llg/jkn';
+import JKN from '@ssecd/jkn';
 
 const jkn = new JKN({
 	/* config */
@@ -35,7 +35,7 @@ Secara default konfigurasi seperti cons id atau secret akan dibaca melalui envir
 ```ts
 // file: jkn.ts atau jkn.js
 
-import JKN from '@ssec-llg/jkn';
+import JKN from '@ssecd/jkn';
 
 const jkn = new JKN({
 	consId: '<cons id dari bpjs>'
@@ -50,7 +50,7 @@ Selain menggunakan objek, konfigurasi juga dapat diatur menggunakan fungsi, misa
 ```ts
 // file: jkn.ts atau jkn.js
 
-import JKN from '@ssec-llg/jkn';
+import JKN from '@ssecd/jkn';
 
 const jkn = new JKN(async () => {
 	const result = await sql`select * from config`;
@@ -101,7 +101,7 @@ Setiap parameter dan response objek memiliki type TypeScript dan komentar dokume
 Pada kasus tertentu, type dari request atau response diperlukan di luar pemanggilan API method misalnya saat ingin mendefinisikan variable request pada global scope variable atau bahkan pada module berbeda dengan tetap mempertahankan keakuratan type atau menjadikan response sebagai parameter fungsi yang menyimpan response tersebut ke database, hal tersebut dapat dilakukan seperti berikut:
 
 ```ts
-import type { AntreanParams, VClaimResponse } from '@ssec-llg/jkn';
+import type { AntreanParams, VClaimResponse } from '@ssecd/jkn';
 import jkn from './path/to/jkn.js';
 
 const jadwal: AntreanParams<'refJadwalDokter'>[0] = {
@@ -183,7 +183,7 @@ interface Config {
 - [ ] Apotek
 - [ ] PCare
 
-> API yang belum tersedia akan dikembangkan. Jika ingin berkontribusi silakan buat PR.
+> API yang belum tersedia akan dikembangkan. Kontribusi sangat dipersilakan dengan membuat PR.
 
 ## Lisensi
 
