@@ -1,5 +1,12 @@
 # @ssecd/jkn
 
+## 0.0.6
+
+### Patch Changes
+
+- 9a5dc84: simplify antrean methods
+- 8c8aec4: make `jenisresep` in update waktu antrean optional
+
 ## 0.0.5
 
 ### Patch Changes
