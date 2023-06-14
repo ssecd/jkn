@@ -1,12 +1,13 @@
 {
-	"name": "@ssec-llg/jkn",
+	"name": "@ssecd/jkn",
+	"displayName": "JKN",
 	"version": "0.0.4",
 	"description": "JKN (BPJS) Bridging API untuk NodeJS",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ssec-llg/jkn"
+		"url": "https://github.com/ssecd/jkn"
 	},
-	"homepage": "https://github.com/ssec-llg/jkn",
+	"homepage": "https://github.com/ssecd/jkn",
 	"private": false,
 	"publishConfig": {
 		"access": "public"

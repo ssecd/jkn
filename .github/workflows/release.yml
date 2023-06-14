@@ -12,7 +12,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   release:
     # only run when pr merged & prevents from running on forks
-    if: github.event.pull_request.merged == true && github.repository == 'ssec-llg/jkn'
+    if: github.event.pull_request.merged == true && github.repository == 'ssecd/jkn'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
