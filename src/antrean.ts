@@ -299,7 +299,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		waktu: number;
 
 		/** khusus yang sudah implementasi antrean farmasi */
-		jenisresep: 'Tidak ada' | 'Racikan' | 'Non racikan';
+		jenisresep?: 'Tidak ada' | 'Racikan' | 'Non racikan';
 	}) {
 		return this.send({
 			path: `/antrean/updatewaktu`,
