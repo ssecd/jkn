@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.0.5
+
+### Patch Changes
+
+- 2b05ab0: rename org name
+
 ## 0.0.4
 
 ### Patch Changes
