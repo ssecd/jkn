@@ -153,7 +153,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 *
 	 * @param data data antrean pasien
 	 */
-	async tambahAntrean(data: {
+	async tambah(data: {
 		/** kode booking antrean yang dibuat unik */
 		kodebooking: string;
 
@@ -237,7 +237,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 *
 	 * @param data data antrean pasien
 	 */
-	async tambahAntreanFarmasi(data: {
+	async tambahFarmasi(data: {
 		kodebooking: string;
 
 		/** 'racikan' | 'non racikan' */
@@ -272,7 +272,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 *
 	 * @param data data waktu antrean
 	 */
-	async updateWaktuAntrean(data: {
+	async updateWaktu(data: {
 		/** kodebooking yang didapat dari servis tambah antrean */
 		kodebooking: string;
 
@@ -313,7 +313,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 *
 	 * @param data kode booking dan keterangan
 	 */
-	async batalAntrean(data: {
+	async batal(data: {
 		/** kodebooking yang didapat dari servis tambah antrean */
 		kodebooking: string;
 
