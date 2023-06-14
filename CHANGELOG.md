@@ -1,4 +1,4 @@
-# @ssec-llg/jkn
+# @ssecd/jkn
 
 ## 0.0.4
 

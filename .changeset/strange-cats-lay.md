@@ -1,5 +1,5 @@
 ---
-'@ssec-llg/jkn': patch
+'@ssecd/jkn': patch
 ---
 
 rename org name
