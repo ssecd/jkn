@@ -63,7 +63,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		 *
 		 * format tanggal YYYY-MM-DD
 		 */
-		tglRencanaKontrol: StreamPipeOptions;
+		tglRencanaKontrol: string;
 
 		/** user pembuat surat kontrol */
 		user: string;
