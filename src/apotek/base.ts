@@ -1,5 +1,5 @@
 import { BaseApi } from '../base.js';
 
-export class VClaimBaseApi extends BaseApi<'apotek'> {
+export class ApotekBaseApi extends BaseApi<'apotek'> {
 	protected type = 'apotek' as const;
 }
