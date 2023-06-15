@@ -12,7 +12,7 @@ export class Monitoring extends VClaimBaseApi {
 		tanggal: string;
 
 		/** jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan) */
-		jenis: 1 | 2;
+		jenis: number;
 	}) {
 		return this.send<{
 			sep: {
@@ -41,10 +41,10 @@ export class Monitoring extends VClaimBaseApi {
 		tanggal: string;
 
 		/** jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan) */
-		jenis: 1 | 2;
+		jenis: number;
 
 		/** status klaim (1 = Proses Verifikasi) (2 = Pending Verifikasi) (3 = Klaim) */
-		status: 1 | 2 | 3;
+		status: number;
 	}) {
 		return this.send<{
 			klaim: {
@@ -116,7 +116,7 @@ export class Monitoring extends VClaimBaseApi {
 	 */
 	async klaimJasaRaharja(params: {
 		/** jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan) */
-		jenis: 1 | 2;
+		jenis: number;
 
 		/** tanggal awal dengan format YYYY-MM-DD */
 		awal: string;

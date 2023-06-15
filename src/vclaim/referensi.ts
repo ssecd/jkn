@@ -35,7 +35,7 @@ export class Referensi extends VClaimBaseApi {
 		keyword: string;
 
 		/** jenis faskes (1 = Faskes tingkat 1) (2 = Faskes tingkat 2) */
-		jenis: 1 | 2;
+		jenis: number;
 	}) {
 		return this.send<{ faskes: ReferensiResult[] }>({
 			path: `/referensi/faskes/${params.keyword}/${params.jenis}`,
@@ -48,7 +48,7 @@ export class Referensi extends VClaimBaseApi {
 	 */
 	async dpjp(params: {
 		/** jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan) */
-		jenis: 1 | 2;
+		jenis: number;
 
 		/** tanggal pelayanan atau tanggal SEP dengan format YYYY-MM-DD */
 		tanggal: string;
