@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.0.7
+
+### Patch Changes
+
+- 9a4742a: fix types
+
 ## 0.0.6
 
 ### Patch Changes
