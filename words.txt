@@ -3,6 +3,8 @@ aproval
 ASABRI
 assesment
 assestmen
+biayapengajuan
+biayasetuju
 BKLL
 BPJS
 carakeluar
@@ -37,7 +39,9 @@ jampraktek
 jeniskunjungan
 jenispasien
 jenisresep
+jnsobat
 jnspelayanan
+jumlahdata
 kapasitaspasien
 katarak
 kddokter
@@ -59,8 +63,10 @@ kuotajkn
 kuotanonjkn
 laka
 LINGGAU
+listsep
 namadokter
 namahari
+namapeserta
 namapoli
 namasubspesialis
 nmdiag
@@ -83,8 +89,11 @@ nomorantrean
 nomorkartu
 nomorreferensi
 norekammedis
+noresep
 norujukan
 nosep
+nosepaasal
+nosepapotek
 nosepref
 nosurat
 obatprb
@@ -104,6 +113,7 @@ racikan
 Raharja
 randomanswer
 randomquestion
+rekap
 ruangrawat
 signa
 Silampari
@@ -123,10 +133,13 @@ taskid
 taskname
 TASPEN
 tgllahir
+tglpelayanan
 tglrujukan
 tglrujukinternal
 tglsep
 Topup
+totalbiayapengajuan
+totalbiayasetuju
 tujuanrujuk
 updatejadwaldokter
 updatewaktu
