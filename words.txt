@@ -111,6 +111,7 @@ sisakuotajkn
 sisakuotanonjkn
 skdp
 SKTM
+spesialistik
 SPRI
 Sriwijaya
 ssecd
