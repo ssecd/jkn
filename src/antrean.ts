@@ -87,7 +87,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 */
 	async refPasienFp(params: {
 		/** `"nik"` atau `"noka"` (Nomor kartu BPJS) */
-		jenis: 'nik' | 'noka';
+		jenis: string;
 
 		/** nomor identitas sesuai jenis */
 		nomor: string;
@@ -158,7 +158,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		kodebooking: string;
 
 		/** JKN | NON JKN */
-		jenispasien: 'JKN' | 'NON JKN';
+		jenispasien: string;
 
 		/** nomor kartu pasien BPJS, diisi kosong jika NON JKN */
 		nomorkartu: string;
@@ -178,7 +178,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		 *
 		 * 0 = Tidak
 		 */
-		pasienbaru: 1 | 0;
+		pasienbaru: number;
 
 		/** nomor rekam medis pasien */
 		norm: string;
@@ -241,7 +241,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		kodebooking: string;
 
 		/** 'racikan' | 'non racikan' */
-		jenisresep: 'racikan' | 'non racikan';
+		jenisresep: string;
 
 		nomorantrean: number;
 		keterangan: string;
@@ -376,7 +376,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		tanggal: string;
 
 		/** jenis waktu (rs atau server) */
-		waktu: 'rs' | 'server';
+		waktu: string;
 	}) {
 		return this.send<{ list: AntreanDashboard[] }>({
 			path: `/dashboard/waktutunggu/tanggal/${params.tanggal}/waktu/${params.waktu}`,
@@ -409,7 +409,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		tahun: number;
 
 		/** jenis waktu (rs atau server) */
-		waktu: 'rs' | 'server';
+		waktu: string;
 	}) {
 		const bulan = String(params.bulan).padStart(2, '0');
 		return this.send<{ list: AntreanDashboard[] }>({

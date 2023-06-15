@@ -15,9 +15,9 @@ export class Rujukan extends VClaimBaseApi {
 		 * 1 = Faskes tingkat 1 atau PCare
 		 *
 		 * 2 = Faskes tingkat 2 atau Rumah Sakit dan Klinik Utama */
-		sumber: 1 | 2;
+		sumber: number;
 	}) {
-		const paths: Record<1 | 2, `/${string}`> = {
+		const paths: Record<number, `/${string}`> = {
 			1: `/Rujukan/${params.nomor}`,
 			2: `/Rujukan/RS/${params.nomor}`
 		};
@@ -40,9 +40,9 @@ export class Rujukan extends VClaimBaseApi {
 		 * 1 = Faskes tingkat 1 atau PCare
 		 *
 		 * 2 = Faskes tingkat 2 atau Rumah Sakit dan Klinik Utama */
-		sumber: 1 | 2;
+		sumber: number;
 	}) {
-		const paths: Record<1 | 2, `/${string}`> = {
+		const paths: Record<number, `/${string}`> = {
 			1: `/Rujukan/Peserta/${params.nomor}`,
 			2: `/Rujukan/RS/Peserta/${params.nomor}`
 		};
@@ -65,9 +65,9 @@ export class Rujukan extends VClaimBaseApi {
 		 * 1 = Faskes tingkat 1 atau PCare
 		 *
 		 * 2 = Faskes tingkat 2 atau Rumah Sakit dan Klinik Utama */
-		sumber: 1 | 2;
+		sumber: number;
 	}) {
-		const paths: Record<1 | 2, `/${string}`> = {
+		const paths: Record<number, `/${string}`> = {
 			1: `/Rujukan/List/Peserta/${params.nomor}`,
 			2: `/Rujukan/RS/List/Peserta/${params.nomor}`
 		};
@@ -485,7 +485,7 @@ export class Rujukan extends VClaimBaseApi {
 	 */
 	async jumlahSep(params: {
 		/** jenis rujukan (1 = FKTP) (2 = FKRTL) */
-		jenis: 1 | 2;
+		jenis: number;
 
 		/** nomor rujukan */
 		nomor: string;

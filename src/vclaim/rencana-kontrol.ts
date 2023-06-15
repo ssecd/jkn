@@ -63,7 +63,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		 *
 		 * format tanggal YYYY-MM-DD
 		 */
-		tglRencanaKontrol: StreamPipeOptions;
+		tglRencanaKontrol: string;
 
 		/** user pembuat surat kontrol */
 		user: string;
@@ -278,7 +278,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		nomorKartu: string;
 
 		/** jenis filter (1 = tanggal entri) (2 = tanggal rencana kontrol) */
-		filter: 1 | 2;
+		filter: number;
 	}) {
 		const bulan = String(params.bulan || 0).padStart(2, '0');
 		return this.send<{
@@ -318,7 +318,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		akhir: string;
 
 		/** jenis filter (1 = tanggal entri) (2 = tanggal rencana kontrol) */
-		filter: 1 | 2;
+		filter: number;
 	}) {
 		return this.send<{
 			list: {
@@ -350,7 +350,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 	 */
 	async poli(params: {
 		/** jenis kontrol (1 = SPRI) (2 = Rencana Kontrol) */
-		jenis: 1 | 2;
+		jenis: number;
 
 		/** nomor kartu jika jenis kunjungan 1 (SPRI) atau nomor SEP jika jenis kunjungan 2 (Rencana Kontrol) */
 		nomor: string;
@@ -377,7 +377,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 	 */
 	async dokter(params: {
 		/** jenis kontrol (1 = SPRI) (2 = Rencana Kontrol) */
-		jenis: 1 | 2;
+		jenis: number;
 
 		/** kode poli JKN */
 		kodePoli: string;

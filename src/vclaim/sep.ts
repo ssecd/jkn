@@ -1106,8 +1106,8 @@ export class SEP extends VClaimBaseApi {
 		tanggal: string;
 	}) {
 		return this.send<{
-			/** kode status (1 = sudah validasi) (2 = belum validasi) */
-			kode: '1' | '2';
+			/** kode status (1 = sudah validasi) (0 = belum validasi) */
+			kode: '1' | '0';
 
 			/** keterangan status */
 			status: string;

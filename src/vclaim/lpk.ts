@@ -50,7 +50,7 @@ export class LPK extends VClaimBaseApi {
 		tanggal: string;
 
 		/** jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan) */
-		jenis: 1 | 2;
+		jenis: number;
 	}) {
 		return this.send<{
 			lpk: {
@@ -138,7 +138,7 @@ interface DataLPK {
 	tglKeluar: string;
 
 	/** penjamin: (1 = JKN) */
-	jaminan: '1';
+	jaminan: string;
 
 	poli: {
 		/** kode poli diambil dari referensi poli */
