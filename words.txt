@@ -41,14 +41,17 @@ jampraktek
 jeniskunjungan
 jenispasien
 jenisresep
+JMLOBT
 jnskelamin
 jnsobat
 jnspelayanan
+JNSROBT
 jumlahdata
 kapasitaspasien
 katarak
 kddokter
 kdjenispeserta
+KDOBT
 kdpenunjang
 kdpoli
 kdpoliasal
@@ -80,6 +83,7 @@ nmdiag
 nmdokter
 nmfaskesasalresep
 nmjenispeserta
+NMOBAT
 nmpenunjang
 nmpoli
 nmpoliasal
@@ -104,8 +108,11 @@ nosep
 nosepaasal
 nosepapotek
 nosepref
+NOSJP
 nosurat
+obatnonracikan
 obatprb
+obatracikan
 opsikonsul
 pascapulang
 pasienbaru
