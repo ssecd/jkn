@@ -197,3 +197,8 @@ Kontribusi sangat dipersilakan dengan membuat PR.
 ## Lisensi
 
 [MIT](./LICENSE)
+
+## Lainnya
+
+[Consent](https://github.com/ssecd/jkn/issues/6)
+
