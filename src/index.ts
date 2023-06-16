@@ -1,4 +1,5 @@
 import { Antrean } from './antrean.js';
+import { Apotek } from './apotek/index.js';
 import { CachedApi } from './base.js';
 import { Fetcher } from './fetcher.js';
 import { VClaim } from './vclaim/index.js';
@@ -22,6 +23,10 @@ export default class JKN extends Fetcher {
 	get vclaim(): VClaim {
 		return VClaim.getInstance(this.cache);
 	}
+
+	get apotek(): Apotek {
+		return Apotek.getInstance(this.cache);
+	}
 }
 
 export type AntreanResponse<K extends keyof Antrean> = JKNResponseType<Antrean, K>;
@@ -37,3 +42,13 @@ export type VClaimParams<
 	T extends keyof VClaim, //
 	K extends keyof VClaim[T]
 > = Parameters<VClaim[T][K]>;
+
+export type ApotekResponse<
+	T extends keyof Apotek, //
+	K extends keyof Apotek[T]
+> = JKNResponseType<Apotek[T], K>;
+
+export type ApotekParams<
+	T extends keyof Apotek, //
+	K extends keyof Apotek[T]
+> = Parameters<Apotek[T][K]>;
