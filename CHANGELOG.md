@@ -1,5 +1,15 @@
 # @ssecd/jkn
 
+## 0.2.0
+
+### Minor Changes
+
+- 62fae0e: add PCare API partial support
+
+### Patch Changes
+
+- 8fd9cab: fix apotek config in doc
+
 ## 0.1.0
 
 ### Minor Changes
