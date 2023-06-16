@@ -188,9 +188,7 @@ interface Config {
 - ✅ VClaim
 - ✅ Antrean
 - ✅ Apotek _(experimental)_
-- 🧩 PCare _(partial)_
-
-> Tanda _partial_ menunjukkan API _belum_ di-implementasi namun tetap dapat melakukan request ke service tersebut secara manual menggunakan method `request()` misalnya `jkn.pcare.request({ /* option */ })` dengan catatan tidak ada dukungan tipe request & response.
+- 🧩 PCare _([partial](https://github.com/ssecd/jkn/pull/26))_
 
 ## Kontribusi
 
