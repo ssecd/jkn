@@ -198,7 +198,7 @@ export class Fetcher {
 		return lz.decompressFromEncodedURIComponent(text);
 	}
 
-	async send<T extends Type, R>(
+	protected async send<T extends Type, R>(
 		type: T,
 		option: SendOption
 	): Promise<SendResponse<R | undefined>[T]> {
