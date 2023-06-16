@@ -154,6 +154,13 @@ interface Config {
 	antreanUserKey: string;
 
 	/**
+	 * User key Apotek dari BPJS
+	 *
+	 * @default process.env.JKN_APOTEK_USER_KEY
+	 */
+	apotekUserKey: string;
+
+	/**
 	 * Berupa mode "development" dan "production". Secara default akan
 	 * membaca nilai environment variable NODE_ENV atau "development"
 	 * jika NODE_ENV tidak terdapat nilai. Mode ini berpengaruh pada
