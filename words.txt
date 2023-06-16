@@ -14,6 +14,7 @@ carakeluar
 createdtime
 daftarfp
 daftarresep
+detailsep
 diagnosaprb
 diagppk
 dinsos
@@ -49,6 +50,7 @@ jampraktek
 jeniskunjungan
 jenispasien
 jenisresep
+jmlobat
 JMLOBT
 jnskelamin
 jnsobat
@@ -72,6 +74,7 @@ klaim
 kodebooking
 kodebu
 kodedokter
+kodeobat
 kodepoli
 kodesubspesialis
 Kontroldan
@@ -80,10 +83,12 @@ kuotajkn
 kuotanonjkn
 laka
 LINGGAU
+listobat
 listsep
 namabu
 namadokter
 namahari
+namaobat
 namapeserta
 namapoli
 namaprb
@@ -92,6 +97,7 @@ nmdiag
 nmdokter
 nmfaskesasalresep
 nmjenispeserta
+nmjnsobat
 NMOBAT
 nmpenunjang
 nmpoli
@@ -143,6 +149,7 @@ randomanswer
 randomquestion
 REFASALSJP
 rekap
+riwayatobat
 ruangrawat
 signa
 Silampari
@@ -175,6 +182,7 @@ tglrujukan
 tglrujukinternal
 tglsep
 TGLSJP
+tipeobat
 Topup
 totalbiayapengajuan
 totalbiayasetuju
