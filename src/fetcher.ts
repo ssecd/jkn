@@ -5,8 +5,7 @@ type MaybePromise<T> = T | Promise<T>;
 
 export type Mode = 'development' | 'production';
 
-// TODO: support more api (pcare)
-export type Type = 'vclaim' | 'antrean' | 'apotek';
+export type Type = 'vclaim' | 'antrean' | 'apotek' | 'pcare';
 
 export interface Config {
 	/**
@@ -43,6 +42,13 @@ export interface Config {
 	 * @default process.env.JKN_APOTEK_USER_KEY
 	 */
 	apotekUserKey: string;
+
+	/**
+	 * User key PCare dari BPJS
+	 *
+	 * @default process.env.JKN_PCARE_USER_KEY
+	 */
+	pcareUserKey: string;
 
 	/**
 	 * Berupa mode "development" dan "production". Secara default akan
@@ -104,6 +110,7 @@ export type SendResponse<T> = {
 	antrean: LowerResponse<T>;
 	vclaim: CamelResponse<T>;
 	apotek: CamelResponse<T>;
+	pcare: CamelResponse<T>;
 };
 
 const api_base_urls: Record<Type, Record<Mode, string>> = {
@@ -118,6 +125,10 @@ const api_base_urls: Record<Type, Record<Mode, string>> = {
 	apotek: {
 		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/apotek-rest-dev',
 		production: 'https://apijkn.bpjs-kesehatan.go.id/apotek-rest'
+	},
+	pcare: {
+		development: ' https://apijkn-dev.bpjs-kesehatan.go.id/pcare-rest-dev',
+		production: ' https://apijkn.bpjs-kesehatan.go.id/pcare-rest'
 	}
 };
 
@@ -131,6 +142,7 @@ export class Fetcher {
 		vclaimUserKey: process.env.JKN_VCLAIM_USER_KEY ?? '',
 		antreanUserKey: process.env.JKN_ANTREAN_USER_KEY ?? '',
 		apotekUserKey: process.env.JKN_APOTEK_USER_KEY ?? '',
+		pcareUserKey: process.env.JKN_PCARE_USER_KEY ?? '',
 		throw: false
 	};
 
@@ -163,7 +175,8 @@ export class Fetcher {
 		return {
 			vclaim: this.config.vclaimUserKey,
 			antrean: this.config.antreanUserKey,
-			apotek: this.config.apotekUserKey
+			apotek: this.config.apotekUserKey,
+			pcare: this.config.pcareUserKey
 		};
 	}
 

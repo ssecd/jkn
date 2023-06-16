@@ -2,7 +2,7 @@
 
 JKN (BPJS) Bridging API untuk NodeJS
 
-![Usage demo](./assets/demo.gif)
+<img width="512" alt="Mudahnya JKN API dari SSEC" src="./assets/demo.gif">
 
 ## Instalasi
 
@@ -154,6 +154,13 @@ interface Config {
 	antreanUserKey: string;
 
 	/**
+	 * User key PCare dari BPJS
+	 *
+	 * @default process.env.JKN_PCARE_USER_KEY
+	 */
+	pcareUserKey: string;
+
+	/**
 	 * Berupa mode "development" dan "production". Secara default akan
 	 * membaca nilai environment variable NODE_ENV atau "development"
 	 * jika NODE_ENV tidak terdapat nilai. Mode ini berpengaruh pada
@@ -176,15 +183,22 @@ interface Config {
 }
 ```
 
-## API tersedia
+## API Tersedia
 
 - ✅ VClaim
 - ✅ Antrean
 - ✅ Apotek _(experimental)_
-- ➖ PCare
+- 🧩 PCare _([partial](https://github.com/ssecd/jkn/pull/26))_
 
-> API yang belum tersedia akan dikembangkan. Kontribusi sangat dipersilakan dengan membuat PR.
+## Kontribusi
+
+Kontribusi sangat dipersilakan dengan membuat PR.
 
 ## Lisensi
 
 [MIT](./LICENSE)
+
+## Lainnya
+
+[Consent](https://github.com/ssecd/jkn/issues/6)
+
