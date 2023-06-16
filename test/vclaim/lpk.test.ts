@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import JKN from '../../src';
-
-const jkn = new JKN();
+import jkn from '../jkn';
 
 describe(
 	'VClaim - LPK',

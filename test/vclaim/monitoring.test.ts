@@ -1,8 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import JKN from '../../src';
+import jkn from '../jkn';
 import { generateDateRanges } from '../utils';
-
-const jkn = new JKN();
 
 describe(
 	'VClaim - Monitoring',
