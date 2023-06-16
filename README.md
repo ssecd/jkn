@@ -154,6 +154,13 @@ interface Config {
 	antreanUserKey: string;
 
 	/**
+	 * User key Apotek dari BPJS
+	 *
+	 * @default process.env.JKN_APOTEK_USER_KEY
+	 */
+	apotekUserKey: string;
+
+	/**
 	 * User key PCare dari BPJS
 	 *
 	 * @default process.env.JKN_PCARE_USER_KEY
