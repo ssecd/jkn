@@ -180,7 +180,7 @@ interface Config {
 
 - ✅ VClaim
 - ✅ Antrean
-- ✅ Apotek
+- ✅ Apotek _(experimental)_
 - ➖ PCare
 
 > API yang belum tersedia akan dikembangkan. Kontribusi sangat dipersilakan dengan membuat PR.
