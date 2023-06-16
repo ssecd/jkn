@@ -160,6 +160,7 @@ interface Config {
 	 */
 	apotekUserKey: string;
 
+	/**
 	 * User key PCare dari BPJS
 	 *
 	 * @default process.env.JKN_PCARE_USER_KEY
