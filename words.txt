@@ -11,6 +11,7 @@ BPJS
 BYTAGRSP
 BYVERRSP
 carakeluar
+checkstock
 createdtime
 daftarfp
 daftarresep
@@ -18,6 +19,7 @@ detailsep
 diagnosaprb
 diagppk
 dinsos
+dpho
 dpjp
 estimasidilayani
 faskes
@@ -45,6 +47,7 @@ Inacbg
 Insertdate
 ispeserta
 iterasi
+jabatankepala
 jadwaldokter
 jampraktek
 jeniskunjungan
@@ -70,6 +73,7 @@ kdpolituj
 kdppk
 kdsubspesialis
 kelasrawat
+kemo
 klaim
 kodebooking
 kodebu
@@ -85,14 +89,20 @@ laka
 LINGGAU
 listobat
 listsep
+namaapoteker
 namabu
 namadokter
 namahari
+namakepala
 namaobat
 namapeserta
+namapetugasapotek
 namapoli
 namaprb
 namasubspesialis
+namaverifikator
+nipkepala
+nippetugasapotek
 nmdiag
 nmdokter
 nmfaskesasalresep
@@ -126,6 +136,7 @@ nosepapotek
 nosepref
 NOSJP
 nosurat
+nppverifikator
 obatnonracikan
 obatprb
 obatracikan
@@ -151,10 +162,12 @@ REFASALSJP
 rekap
 riwayatobat
 ruangrawat
+settingppk
 signa
 Silampari
 sisakuotajkn
 sisakuotanonjkn
+siup
 sjpresep
 skdp
 SKTM
