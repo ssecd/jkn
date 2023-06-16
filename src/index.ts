@@ -1,81 +1,32 @@
 import { Antrean } from './antrean.js';
-import { BaseApi } from './base.js';
-import { Fetcher, Type } from './fetcher.js';
-import { LPK } from './vclaim/lpk.js';
-import { Monitoring } from './vclaim/monitoring.js';
-import { Peserta } from './vclaim/peserta.js';
-import { PRB } from './vclaim/prb.js';
-import { Referensi } from './vclaim/referensi.js';
-import { RencanaKontrol } from './vclaim/rencana-kontrol.js';
-import { Rujukan } from './vclaim/rujukan.js';
-import { SEP } from './vclaim/sep.js';
-
-type CacheKey = `${Type}${string}`;
+import { CachedApi } from './base.js';
+import { Fetcher } from './fetcher.js';
+import { VClaim } from './vclaim/index.js';
 
 type JKNResponseType<T extends object, K extends keyof T> = NonNullable<
 	'response' extends keyof Awaited<ReturnType<T[K]>> ? Awaited<ReturnType<T[K]>>['response'] : never
 >;
 
 export default class JKN extends Fetcher {
-	private readonly cached = new Map<CacheKey, BaseApi>();
-
-	private getApi<K extends CacheKey, V extends BaseApi>(
-		key: K,
-		Api: new (...args: ConstructorParameters<typeof BaseApi>) => V
-	): V {
-		let api = this.cached.get(key);
-		if (!api) {
-			api = new Api(this);
-			this.cached.set(key, api);
-		}
-		return api as V;
-	}
+	private readonly cache = new CachedApi(this);
 
 	async invalidateConfig(): Promise<void> {
-		this.cached.clear();
+		this.cache.clear();
 		super.invalidateConfig();
 	}
 
 	get antrean(): Antrean {
-		return this.getApi('antrean', Antrean);
+		return this.cache.get('antrean', Antrean);
 	}
 
-	get vclaim() {
-		const root = this;
-		return {
-			get lpk() {
-				return root.getApi('vclaim_lpk', LPK);
-			},
-			get monitoring() {
-				return root.getApi('vclaim_monitoring', Monitoring);
-			},
-			get peserta() {
-				return root.getApi('vclaim_peserta', Peserta);
-			},
-			get prb() {
-				return root.getApi('vclaim_prb', PRB);
-			},
-			get referensi() {
-				return root.getApi('vclaim_referensi', Referensi);
-			},
-			get rencanaKontrol() {
-				return root.getApi('vclaim_rencanaKontrol', RencanaKontrol);
-			},
-			get rujukan() {
-				return root.getApi('vclaim_rujukan', Rujukan);
-			},
-			get sep() {
-				return root.getApi('vclaim_sep', SEP);
-			}
-		};
+	get vclaim(): VClaim {
+		return VClaim.getInstance(this.cache);
 	}
 }
 
 export type AntreanResponse<K extends keyof Antrean> = JKNResponseType<Antrean, K>;
 
 export type AntreanParams<K extends keyof Antrean> = Parameters<Antrean[K]>;
-
-type VClaim = JKN['vclaim'];
 
 export type VClaimResponse<
 	T extends keyof VClaim, //
