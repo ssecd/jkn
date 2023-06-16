@@ -2,6 +2,7 @@ import { Antrean } from './antrean.js';
 import { Apotek } from './apotek/index.js';
 import { CachedApi } from './base.js';
 import { Fetcher } from './fetcher.js';
+import { PCare } from './pcare/index.js';
 import { VClaim } from './vclaim/index.js';
 
 type JKNResponseType<T extends object, K extends keyof T> = NonNullable<
@@ -26,6 +27,10 @@ export default class JKN extends Fetcher {
 
 	get apotek(): Apotek {
 		return Apotek.getInstance(this.cache);
+	}
+
+	get pcare(): PCare {
+		return this.cache.get('pcare', PCare);
 	}
 }
 
