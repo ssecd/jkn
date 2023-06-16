@@ -122,7 +122,13 @@ export class Referensi extends ApotekBaseApi {
 		filter?: string;
 	}) {
 		const filter = param.filter ?? '';
-		return this.send({
+		return this.send<{
+			list: {
+				kode: string;
+				nama: string;
+				harga: string;
+			}[];
+		}>({
 			path: `/referensi/obat/${param.jenis}/${param.tanggal}/${filter}`,
 			method: 'GET'
 		});
