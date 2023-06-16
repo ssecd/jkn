@@ -154,6 +154,13 @@ interface Config {
 	antreanUserKey: string;
 
 	/**
+	 * User key PCare dari BPJS
+	 *
+	 * @default process.env.JKN_PCARE_USER_KEY
+	 */
+	pcareUserKey: string;
+
+	/**
 	 * Berupa mode "development" dan "production". Secara default akan
 	 * membaca nilai environment variable NODE_ENV atau "development"
 	 * jika NODE_ENV tidak terdapat nilai. Mode ini berpengaruh pada
@@ -176,14 +183,18 @@ interface Config {
 }
 ```
 
-## API tersedia
+## API Tersedia
 
 - ✅ VClaim
 - ✅ Antrean
 - ✅ Apotek _(experimental)_
-- ➖ PCare
+- 🧩 PCare _(partial)_
 
-> API yang belum tersedia akan dikembangkan. Kontribusi sangat dipersilakan dengan membuat PR.
+> Tanda _partial_ menunjukkan API _belum_ di-implementasi namun tetap dapat melakukan request ke service tersebut secara manual menggunakan method `request()` misalnya `jkn.pcare.request({ /* option */ })` dengan catatan tidak ada dukungan tipe request & response.
+
+## Kontribusi
+
+Kontribusi sangat dipersilakan dengan membuat PR.
 
 ## Lisensi
 
