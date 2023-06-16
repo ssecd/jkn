@@ -178,10 +178,10 @@ interface Config {
 
 ## API tersedia
 
-- [x] VClaim
-- [x] Antrean
-- [ ] Apotek
-- [ ] PCare
+- ✅ VClaim
+- ✅ Antrean
+- ✅ Apotek _(experimental)_
+- ➖ PCare
 
 > API yang belum tersedia akan dikembangkan. Kontribusi sangat dipersilakan dengan membuat PR.
 
