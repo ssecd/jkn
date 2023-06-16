@@ -11,7 +11,6 @@ describe(
 				jenisObat: 0,
 				status: 1
 			});
-			console.log(result);
 			expect(result.metaData.code).toBe('201'); // no example data
 		});
 	},
