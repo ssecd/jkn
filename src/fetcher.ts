@@ -127,8 +127,8 @@ const api_base_urls: Record<Type, Record<Mode, string>> = {
 		production: 'https://apijkn.bpjs-kesehatan.go.id/apotek-rest'
 	},
 	pcare: {
-		development: ' https://apijkn-dev.bpjs-kesehatan.go.id/pcare-rest-dev',
-		production: ' https://apijkn.bpjs-kesehatan.go.id/pcare-rest'
+		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/pcare-rest-dev',
+		production: 'https://apijkn.bpjs-kesehatan.go.id/pcare-rest'
 	}
 };
 
