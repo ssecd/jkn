@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.2.3
+
+### Patch Changes
+
+- ca0a933: fix invalid rencana kontrol insert param type
+
 ## 0.2.2
 
 ### Patch Changes
