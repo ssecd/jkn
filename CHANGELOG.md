@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.2.1
+
+### Patch Changes
+
+- ad24e06: add contribution and issue notes
+
 ## 0.2.0
 
 ### Minor Changes
