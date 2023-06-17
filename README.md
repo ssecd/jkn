@@ -199,7 +199,7 @@ interface Config {
 
 ## Kontribusi
 
-Kontribusi sangat dipersilakan dengan membuat PR.
+Kontribusi sangat dipersilakan dan dapat dilakukan dengan berbagai cara seperti melaporkan masalah, membuat permintaan atau menambahkan fitur melalui PR, atau sekedar memperbaiki kesalahan ketikan. 
 
 ## Lisensi
 
@@ -207,5 +207,7 @@ Kontribusi sangat dipersilakan dengan membuat PR.
 
 ## Lainnya
 
-[Consent](https://github.com/ssecd/jkn/issues/6)
+- [Consent](https://github.com/ssecd/jkn/issues/6)
+- [Pemecahan Masalah](https://github.com/ssecd/jkn/issues?q=is%3Aissue)
+- [Laporkan Bug](https://github.com/ssecd/jkn/issues)
 
