@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.2.2
+
+### Patch Changes
+
+- 654aa9d: fix PCare API issue
+
 ## 0.2.1
 
 ### Patch Changes
