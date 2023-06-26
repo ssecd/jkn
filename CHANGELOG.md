@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.2.4
+
+### Patch Changes
+
+- 39eea45: fix antrean add params type
+
 ## 0.2.3
 
 ### Patch Changes
