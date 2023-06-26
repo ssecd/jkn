@@ -187,7 +187,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		tanggalperiksa: string;
 
 		/** kode dokter BPJS */
-		kodedokter: number;
+		kodedokter: string;
 
 		namadokter: string;
 
