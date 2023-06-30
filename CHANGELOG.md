@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.2.5
+
+### Patch Changes
+
+- fd64e31: fix rujukan insertV2 response type
+
 ## 0.2.4
 
 ### Patch Changes
