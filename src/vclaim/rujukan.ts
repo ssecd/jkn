@@ -292,37 +292,35 @@ export class Rujukan extends VClaimBaseApi {
 	}) {
 		return this.send<{
 			rujukan: {
-				rujukan: {
-					AsalRujukan: {
-						kode: string;
-						nama: string;
-					};
-					diagnosa: {
-						kode: string;
-						nama: string;
-					};
-					noRujukan: string;
-					peserta: {
-						asuransi: string;
-						hakKelas: string | null;
-						jnsPeserta: string;
-						kelamin: string;
-						nama: string;
-						noKartu: string;
-						noMr: string;
-						tglLahir: string;
-					};
-					poliTujuan: {
-						kode: string;
-						nama: string;
-					};
-					tglBerlakuKunjungan: string;
-					tglRencanaKunjungan: string;
-					tglRujukan: string;
-					tujuanRujukan: {
-						kode: string;
-						nama: string;
-					};
+				AsalRujukan: {
+					kode: string;
+					nama: string;
+				};
+				diagnosa: {
+					kode: string;
+					nama: string;
+				};
+				noRujukan: string;
+				peserta: {
+					asuransi: string;
+					hakKelas: string | null;
+					jnsPeserta: string;
+					kelamin: string;
+					nama: string;
+					noKartu: string;
+					noMr: string;
+					tglLahir: string;
+				};
+				poliTujuan: {
+					kode: string;
+					nama: string;
+				};
+				tglBerlakuKunjungan: string;
+				tglRencanaKunjungan: string;
+				tglRujukan: string;
+				tujuanRujukan: {
+					kode: string;
+					nama: string;
 				};
 			};
 		}>({
