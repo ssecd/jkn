@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.2.6
+
+### Patch Changes
+
+- c5f38da: bump dependencies
+
 ## 0.2.5
 
 ### Patch Changes
