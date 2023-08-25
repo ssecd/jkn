@@ -41,6 +41,7 @@ hapusresep
 HEMODIALISA
 HFIS
 Histori
+icare
 ICCU
 IDUSERSJP
 Inacbg

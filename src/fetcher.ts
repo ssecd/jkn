@@ -5,7 +5,7 @@ type MaybePromise<T> = T | Promise<T>;
 
 export type Mode = 'development' | 'production';
 
-export type Type = 'vclaim' | 'antrean' | 'apotek' | 'pcare';
+export type Type = 'vclaim' | 'antrean' | 'apotek' | 'pcare' | 'icare';
 
 export interface Config {
 	/**
@@ -49,6 +49,16 @@ export interface Config {
 	 * @default process.env.JKN_PCARE_USER_KEY
 	 */
 	pcareUserKey: string;
+
+	/**
+	 * User key i-Care dari BPJS
+	 *
+	 * Umumnya user key i-Care ini nilai sama dengan user key VClaim
+	 * untuk FKRTL dan PCare untuk FKTP
+	 *
+	 * @default process.env.JKN_ICARE_USER_KEY
+	 */
+	icareUserKey: string;
 
 	/**
 	 * Berupa mode "development" dan "production". Secara default akan
@@ -98,10 +108,10 @@ export interface LowerResponse<T> {
 	};
 }
 
-export interface CamelResponse<T> {
+export interface CamelResponse<T, C = string> {
 	response: T;
 	metaData: {
-		code: string;
+		code: C;
 		message: string;
 	};
 }
@@ -111,6 +121,7 @@ export type SendResponse<T> = {
 	vclaim: CamelResponse<T>;
 	apotek: CamelResponse<T>;
 	pcare: CamelResponse<T>;
+	icare: CamelResponse<T, number>;
 };
 
 const api_base_urls: Record<Type, Record<Mode, string>> = {
@@ -129,6 +140,10 @@ const api_base_urls: Record<Type, Record<Mode, string>> = {
 	pcare: {
 		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/pcare-rest-dev',
 		production: 'https://apijkn.bpjs-kesehatan.go.id/pcare-rest'
+	},
+	icare: {
+		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/ihs_dev',
+		production: 'https://apijkn.bpjs-kesehatan.go.id/ihs'
 	}
 };
 
@@ -143,6 +158,7 @@ export class Fetcher {
 		antreanUserKey: process.env.JKN_ANTREAN_USER_KEY ?? '',
 		apotekUserKey: process.env.JKN_APOTEK_USER_KEY ?? '',
 		pcareUserKey: process.env.JKN_PCARE_USER_KEY ?? '',
+		icareUserKey: process.env.JKN_ICARE_USER_KEY ?? '',
 		throw: false
 	};
 
@@ -176,7 +192,8 @@ export class Fetcher {
 			vclaim: this.config.vclaimUserKey,
 			antrean: this.config.antreanUserKey,
 			apotek: this.config.apotekUserKey,
-			pcare: this.config.pcareUserKey
+			pcare: this.config.pcareUserKey,
+			icare: this.config.icareUserKey
 		};
 	}
 
@@ -264,13 +281,15 @@ export class Fetcher {
 					: 'An error occurred while requesting information from the JKN API';
 			if (error instanceof Error) message += `. ` + error.message;
 			message += '. ' + response;
-			const code = '500';
 			console.error(error);
+
+			// TODO: find better way to infer generic response type
+			const code = type === 'icare' ? 500 : '500';
 			return {
 				metadata: { code: +code, message },
 				metaData: { code, message },
 				response: undefined
-			};
+			} as unknown as SendResponse<R>[T];
 		}
 	}
 
