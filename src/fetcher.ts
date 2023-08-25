@@ -106,10 +106,10 @@ export interface LowerResponse<T> {
 	};
 }
 
-export interface CamelResponse<T> {
+export interface CamelResponse<T, C = string> {
 	response: T;
 	metaData: {
-		code: string;
+		code: C;
 		message: string;
 	};
 }
@@ -119,7 +119,7 @@ export type SendResponse<T> = {
 	vclaim: CamelResponse<T>;
 	apotek: CamelResponse<T>;
 	pcare: CamelResponse<T>;
-	icare: CamelResponse<T>;
+	icare: CamelResponse<T, number>;
 };
 
 const api_base_urls: Record<Type, Record<Mode, string>> = {
@@ -279,13 +279,15 @@ export class Fetcher {
 					: 'An error occurred while requesting information from the JKN API';
 			if (error instanceof Error) message += `. ` + error.message;
 			message += '. ' + response;
-			const code = '500';
 			console.error(error);
+
+			// TODO: find better way to infer generic response type
+			const code = type === 'icare' ? 500 : '500';
 			return {
 				metadata: { code: +code, message },
 				metaData: { code, message },
 				response: undefined
-			};
+			} as unknown as SendResponse<R>[T];
 		}
 	}
 
