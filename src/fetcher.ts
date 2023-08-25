@@ -52,6 +52,7 @@ export interface Config {
 
 	/**
 	 * User key i-Care dari BPJS
+	 * Umumnya user key i-Care ini nilai sama dengan user key vclaim
 	 *
 	 * @default process.env.JKN_ICARE_USER_KEY
 	 */

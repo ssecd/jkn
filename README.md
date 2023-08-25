@@ -169,6 +169,7 @@ interface Config {
 
 	/**
 	 * User key i-Care dari BPJS
+	 * Umumnya user key i-Care ini nilai sama dengan user key vclaim
 	 *
 	 * @default process.env.JKN_ICARE_USER_KEY
 	 */
@@ -217,4 +218,4 @@ Kontribusi sangat dipersilakan dan dapat dilakukan dengan berbagai cara seperti 
 
 - [Consent](https://github.com/ssecd/jkn/issues/6)
 - [Pemecahan Masalah](https://github.com/ssecd/jkn/issues?q=is%3Aissue)
-- [Laporkan Bug](https://github.com/ssecd/jkn/issues)
+- [Laporkan Bug](https://github.com/ssecd/jkn/issues/new)
