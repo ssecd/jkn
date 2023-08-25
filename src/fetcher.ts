@@ -5,7 +5,7 @@ type MaybePromise<T> = T | Promise<T>;
 
 export type Mode = 'development' | 'production';
 
-export type Type = 'vclaim' | 'antrean' | 'apotek' | 'pcare';
+export type Type = 'vclaim' | 'antrean' | 'apotek' | 'pcare' | 'icare';
 
 export interface Config {
 	/**
@@ -24,6 +24,7 @@ export interface Config {
 
 	/**
 	 * User key VClaim dari BPJS
+	 * User key ini juga digunakan oleh web service i-Care
 	 *
 	 * @default process.env.JKN_VCLAIM_USER_KEY
 	 */
@@ -111,6 +112,7 @@ export type SendResponse<T> = {
 	vclaim: CamelResponse<T>;
 	apotek: CamelResponse<T>;
 	pcare: CamelResponse<T>;
+	icare: CamelResponse<T>;
 };
 
 const api_base_urls: Record<Type, Record<Mode, string>> = {
@@ -129,6 +131,10 @@ const api_base_urls: Record<Type, Record<Mode, string>> = {
 	pcare: {
 		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/pcare-rest-dev',
 		production: 'https://apijkn.bpjs-kesehatan.go.id/pcare-rest'
+	},
+	icare: {
+		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/ihs_dev',
+		production: 'https://apijkn.bpjs-kesehatan.go.id/ihs'
 	}
 };
 
@@ -176,7 +182,8 @@ export class Fetcher {
 			vclaim: this.config.vclaimUserKey,
 			antrean: this.config.antreanUserKey,
 			apotek: this.config.apotekUserKey,
-			pcare: this.config.pcareUserKey
+			pcare: this.config.pcareUserKey,
+			icare: this.config.vclaimUserKey
 		};
 	}
 

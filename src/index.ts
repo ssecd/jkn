@@ -2,6 +2,7 @@ import { Antrean } from './antrean.js';
 import { Apotek } from './apotek/index.js';
 import { CachedApi } from './base.js';
 import { Fetcher } from './fetcher.js';
+import { ICare } from './icare.js';
 import { PCare } from './pcare/index.js';
 import { VClaim } from './vclaim/index.js';
 
@@ -31,6 +32,10 @@ export default class JKN extends Fetcher {
 
 	get pcare(): PCare {
 		return this.cache.get('pcare', PCare);
+	}
+
+	get icare(): ICare {
+		return this.cache.get('icare', ICare);
 	}
 }
 
