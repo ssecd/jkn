@@ -18,7 +18,7 @@ describe(
 			const result = await jkn.icare.fktp({
 				param: '0002084717968'
 			});
-			expect(result.metaData.code).toBe('200');
+			expect(result.metaData.code).toBe(200);
 			expect(result.response?.url).not.toBeFalsy();
 		});
 	},
