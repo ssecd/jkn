@@ -24,7 +24,6 @@ export interface Config {
 
 	/**
 	 * User key VClaim dari BPJS
-	 * User key ini juga digunakan oleh web service i-Care
 	 *
 	 * @default process.env.JKN_VCLAIM_USER_KEY
 	 */
@@ -50,6 +49,13 @@ export interface Config {
 	 * @default process.env.JKN_PCARE_USER_KEY
 	 */
 	pcareUserKey: string;
+
+	/**
+	 * User key i-Care dari BPJS
+	 *
+	 * @default process.env.JKN_ICARE_USER_KEY
+	 */
+	icareUserKey: string;
 
 	/**
 	 * Berupa mode "development" dan "production". Secara default akan
@@ -149,6 +155,7 @@ export class Fetcher {
 		antreanUserKey: process.env.JKN_ANTREAN_USER_KEY ?? '',
 		apotekUserKey: process.env.JKN_APOTEK_USER_KEY ?? '',
 		pcareUserKey: process.env.JKN_PCARE_USER_KEY ?? '',
+		icareUserKey: process.env.JKN_ICARE_USER_KEY ?? '',
 		throw: false
 	};
 
@@ -183,7 +190,7 @@ export class Fetcher {
 			antrean: this.config.antreanUserKey,
 			apotek: this.config.apotekUserKey,
 			pcare: this.config.pcareUserKey,
-			icare: this.config.vclaimUserKey
+			icare: this.config.icareUserKey
 		};
 	}
 

@@ -168,6 +168,13 @@ interface Config {
 	pcareUserKey: string;
 
 	/**
+	 * User key i-Care dari BPJS
+	 *
+	 * @default process.env.JKN_ICARE_USER_KEY
+	 */
+	icareUserKey: string;
+
+	/**
 	 * Berupa mode "development" dan "production". Secara default akan
 	 * membaca nilai environment variable NODE_ENV atau "development"
 	 * jika NODE_ENV tidak terdapat nilai. Mode ini berpengaruh pada
@@ -200,7 +207,7 @@ interface Config {
 
 ## Kontribusi
 
-Kontribusi sangat dipersilakan dan dapat dilakukan dengan berbagai cara seperti melaporkan masalah, membuat permintaan atau menambahkan fitur melalui PR, atau sekedar memperbaiki kesalahan ketikan. 
+Kontribusi sangat dipersilakan dan dapat dilakukan dengan berbagai cara seperti melaporkan masalah, membuat permintaan atau menambahkan fitur melalui PR, atau sekedar memperbaiki kesalahan ketikan.
 
 ## Lisensi
 
@@ -211,4 +218,3 @@ Kontribusi sangat dipersilakan dan dapat dilakukan dengan berbagai cara seperti 
 - [Consent](https://github.com/ssecd/jkn/issues/6)
 - [Pemecahan Masalah](https://github.com/ssecd/jkn/issues?q=is%3Aissue)
 - [Laporkan Bug](https://github.com/ssecd/jkn/issues)
-
