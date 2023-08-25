@@ -14,6 +14,7 @@ export class ICare extends BaseApi<'icare'> {
 			path: `/api/rs/validate`,
 			method: 'POST',
 			skipContentTypeHack: true,
+			headers: { 'Content-Type': 'Application/json' },
 			data
 		});
 	}
@@ -26,6 +27,7 @@ export class ICare extends BaseApi<'icare'> {
 			path: `/api/pcare/validate`,
 			method: 'POST',
 			skipContentTypeHack: true,
+			headers: { 'Content-Type': 'Application/json' },
 			data
 		});
 	}
