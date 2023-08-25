@@ -52,7 +52,9 @@ export interface Config {
 
 	/**
 	 * User key i-Care dari BPJS
-	 * Umumnya user key i-Care ini nilai sama dengan user key vclaim
+	 *
+	 * Umumnya user key i-Care ini nilai sama dengan user key VClaim
+	 * untuk FKRTL dan PCare untuk FKTP
 	 *
 	 * @default process.env.JKN_ICARE_USER_KEY
 	 */
