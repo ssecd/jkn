@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.3.0
+
+### Minor Changes
+
+- 5e48a47: implement i-care service
+
 ## 0.2.6
 
 ### Patch Changes
