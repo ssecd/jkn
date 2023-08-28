@@ -143,7 +143,7 @@ const api_base_urls: Record<Type, Record<Mode, string>> = {
 	},
 	icare: {
 		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/ihs_dev',
-		production: 'https://apijkn.bpjs-kesehatan.go.id/ihs'
+		production: 'https://apijkn.bpjs-kesehatan.go.id/wsihs'
 	}
 };
 
