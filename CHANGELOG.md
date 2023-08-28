@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.3.1
+
+### Patch Changes
+
+- 6403a78: fix i-Care production url
+
 ## 0.3.0
 
 ### Minor Changes
