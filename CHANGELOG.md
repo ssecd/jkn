@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.3.2
+
+### Patch Changes
+
+- 0372602: fix SEP deleteV2 error response
+
 ## 0.3.1
 
 ### Patch Changes
