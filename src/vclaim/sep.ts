@@ -750,6 +750,7 @@ export class SEP extends VClaimBaseApi {
 		return this.send<string>({
 			path: `/SEP/2.0/delete`,
 			method: 'DELETE',
+			skipDecrypt: true,
 			data: { request: { t_sep: data } }
 		});
 	}

@@ -3,8 +3,18 @@ import jkn from '../jkn';
 import { currentIsoDate } from '../utils';
 
 describe(
-	'VClaim - cari',
+	'VClaim - SEP',
 	() => {
+		it.concurrent('delete() - 200 ok', async () => {
+			const result = await jkn.vclaim.sep.deleteV2({
+				noSep: '0089S0020823V000003',
+				user: 'Test User'
+			});
+			console.log(result.metaData);
+			expect(result.metaData.code).toBe('200');
+			expect(result.response).toBe('0089S0020823V000003');
+		});
+
 		it.concurrent('cari() - 200 ok', async () => {
 			const result = await jkn.vclaim.sep.cari({
 				nomor: '0089S0020523V000001'
