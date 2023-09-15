@@ -15,7 +15,7 @@ export default class JKN extends Fetcher {
 
 	async invalidateConfig(): Promise<void> {
 		this.cache.clear();
-		super.invalidateConfig();
+		await super.invalidateConfig();
 	}
 
 	get antrean(): Antrean {
