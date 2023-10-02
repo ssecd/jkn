@@ -1,5 +1,12 @@
 # @ssecd/jkn
 
+## 0.3.3
+
+### Patch Changes
+
+- 521db1b: fix missing "List Rujukan Khusus" api
+- b83cdc7: fix not awaited `invalidateConfig()`
+
 ## 0.3.2
 
 ### Patch Changes
