@@ -43,6 +43,7 @@ HFIS
 Histori
 icare
 ICCU
+idrujukan
 IDUSERSJP
 Inacbg
 Insertdate

@@ -32,6 +32,15 @@ describe(
 			expect(result.response?.rujukan[0].peserta.noKartu).toBe('0002084717968');
 		});
 
+		it.concurrent('listKhusus() - 200 ok', async () => {
+			const result = await jkn.vclaim.rujukan.listKhusus({
+				bulan: 7,
+				tahun: 2023
+			});
+			expect(result.metaData.code).toBe('200');
+			expect(result.response?.rujukan).not.toBeFalsy();
+		});
+
 		it.concurrent('listSpesialistik() - 200 ok', async () => {
 			const result = await jkn.vclaim.rujukan.listSpesialistik({
 				kodePpk: '0089S002',

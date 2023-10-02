@@ -257,6 +257,32 @@ export class Rujukan extends VClaimBaseApi {
 	}
 
 	/**
+	 * List data rujukan khusus
+	 */
+	async listKhusus(params: {
+		/** bulan dimulai dari 1 (Januari) */
+		bulan: number;
+
+		/** misalnya 2020 */
+		tahun: number;
+	}) {
+		return this.send<{
+			rujukan: {
+				idrujukan: string;
+				norujukan: string;
+				nokapst: string;
+				nmpst: string;
+				diagppk: string;
+				tglrujukan_awal: string;
+				tglrujukan_berakhir: string;
+			}[];
+		}>({
+			path: `/Rujukan/Khusus/List/Bulan/${params.bulan}/Tahun/${params.tahun}`,
+			method: 'GET'
+		});
+	}
+
+	/**
 	 * Insert rujukan menggunakan versi 2.0
 	 */
 	async insertV2(data: {
