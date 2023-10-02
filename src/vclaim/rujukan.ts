@@ -266,7 +266,17 @@ export class Rujukan extends VClaimBaseApi {
 		/** misalnya 2020 */
 		tahun: number;
 	}) {
-		return this.send({
+		return this.send<{
+			rujukan: {
+				idrujukan: string;
+				norujukan: string;
+				nokapst: string;
+				nmpst: string;
+				diagppk: string;
+				tglrujukan_awal: string;
+				tglrujukan_berakhir: string;
+			}[];
+		}>({
 			path: `/Rujukan/Khusus/List/Bulan/${params.bulan}/Tahun/${params.tahun}`,
 			method: 'GET'
 		});
