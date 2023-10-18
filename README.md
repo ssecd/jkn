@@ -222,6 +222,7 @@ interface Config {
 - ✅ Apotek _(experimental)_
 - 🧩 PCare _([partial](https://github.com/ssecd/jkn/pull/26))_
 - ✅ i-Care
+- ✅ Rekam Medis
 
 ## Kontribusi
 
