@@ -1,79 +1,29 @@
-export interface MRBundle {
-	resourceType: string;
-	id: string;
-	meta: { lastUpdated: Date };
-	identifier: {
-		system: string;
-		value: string;
-	};
-	type: string;
-	entry: {
-		resource: {
-			resourceType: string;
-			id: string;
-			status: string;
-			type: {
-				coding: {
-					system: string;
-					code: string;
-				}[];
-				text: string;
-			};
-			subject: {
-				reference: string;
-				display: string;
-			};
-			encounter: { reference: string };
-			/** date with time. example: 2018-12-31 17:08:43 */
-			date: string;
-			author: {
-				reference: string;
-				display: string;
-			}[];
-			title: string;
-			confidentiality: string;
-			section: {
-				title: string;
-				code: {
-					coding: {
-						system: string;
-						code: string;
-						display: string;
-					}[];
-				};
-				text: {
-					status: string;
-					div: string;
-				};
-				entry?: { reference: string }[];
-				mode?: string;
-			}[];
-		};
-	}[];
+export interface Bundle<T = fhir5.FhirResource> extends fhir5.Bundle<T> {}
+
+export interface Composition extends fhir5.Composition {}
+
+export interface Patient extends fhir5.Patient {}
+
+export interface Encounter extends fhir5.Encounter {
+	subject?: fhir5.Encounter['subject'] & { noSep: string };
 }
 
-export interface Composition {}
+export interface MedicationRequest extends fhir5.MedicationRequest {}
 
-export interface Patient {}
+export interface Practitioner extends fhir5.Practitioner {}
 
-export interface Encounter {}
+export interface Organization extends fhir5.Organization {}
 
-export interface MedicationRequest {}
+export interface Condition extends fhir5.Condition {}
 
-export interface Practitioner {}
+export interface DiagnosticReport extends fhir5.DiagnosticReport {}
 
-export interface Organization {}
+export interface Procedure extends fhir5.Procedure {}
 
-export interface Condition {}
-
-export interface DiagnosticReport {}
-
-export interface Procedure {}
-
-export interface Device {}
+export interface Device extends fhir5.Device {}
 
 export type RekamMedisFormat =
-	| MRBundle
+	| Bundle
 	| Composition
 	| Patient
 	| Encounter
