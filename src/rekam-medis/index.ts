@@ -1,5 +1,6 @@
 import { BaseApi } from '../base.js';
 import { Config } from '../fetcher.js';
+import { RekamMedisFormat } from './types.js';
 import { encrypt, gzip } from './utils.js';
 
 export class RekamMedis extends BaseApi<'rekamMedis'> {
@@ -24,7 +25,7 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
 		 * Proses kompresi dan enkripsi akan dilakukan
 		 * secara otomatis pada method ini
 		 */
-		dataRekamMedis: unknown;
+		dataRekamMedis: RekamMedisFormat;
 	}) {
 		const dataMR = await preprocess(data.dataRekamMedis, this.config);
 		return this.send({

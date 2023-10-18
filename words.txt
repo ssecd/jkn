@@ -28,6 +28,7 @@ FASKESASAL
 faskesasalresep
 faskesterdaftar
 fdate
+FHIR
 FKRTL
 FKTP
 flaginternal
