@@ -4,6 +4,7 @@ import { CachedApi } from './base.js';
 import { Fetcher } from './fetcher.js';
 import { ICare } from './icare.js';
 import { PCare } from './pcare/index.js';
+import { RekamMedis } from './rekam-medis/index.js';
 import { VClaim } from './vclaim/index.js';
 
 type JKNResponseType<T extends object, K extends keyof T> = NonNullable<
@@ -36,6 +37,10 @@ export default class JKN extends Fetcher {
 
 	get icare(): ICare {
 		return this.cache.get('icare', ICare);
+	}
+
+	get rekamMedis(): RekamMedis {
+		return this.cache.get('rekamMedis', RekamMedis);
 	}
 }
 
