@@ -9,6 +9,14 @@ export type Type = 'vclaim' | 'antrean' | 'apotek' | 'pcare' | 'icare' | 'rekamM
 
 export interface Config {
 	/**
+	 * Kode PPK yang diberikan BPJS.
+	 *
+	 * Diperlukan untuk melakukan proses encryption
+	 * pada web service eRekam Medis.
+	 */
+	ppkCode: string;
+
+	/**
 	 * Cons ID dari BPJS
 	 *
 	 * @default process.env.JKN_CONS_ID
@@ -164,6 +172,7 @@ export class Fetcher {
 
 	private config: Config = {
 		mode: process.env.NODE_ENV !== 'production' ? 'development' : process.env.NODE_ENV,
+		ppkCode: process.env.JKN_PPK_CODE ?? '',
 		consId: process.env.JKN_CONS_ID ?? '',
 		consSecret: process.env.JKN_CONS_SECRET ?? '',
 		vclaimUserKey: process.env.JKN_VCLAIM_USER_KEY ?? '',

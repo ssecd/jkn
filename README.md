@@ -126,6 +126,14 @@ Konfigurasi mengikuti interface berikut:
 ```ts
 interface Config {
 	/**
+	 * Kode PPK yang diberikan BPJS.
+	 *
+	 * Diperlukan untuk melakukan proses encryption
+	 * pada web service eRekam Medis.
+	 */
+	ppkCode: string;
+
+	/**
 	 * Cons ID dari BPJS
 	 *
 	 * @default process.env.JKN_CONS_ID
@@ -169,7 +177,7 @@ interface Config {
 
 	/**
 	 * User key i-Care dari BPJS
-	 * 
+	 *
 	 * Umumnya user key i-Care ini nilai sama dengan user key VClaim
 	 * untuk FKRTL dan PCare untuk FKTP
 	 *
@@ -178,7 +186,7 @@ interface Config {
 	icareUserKey: string;
 
 	/**
-	 * User key eRekam Medis dari BPJS	 
+	 * User key eRekam Medis dari BPJS
 	 *
 	 * @default process.env.JKN_REKAM_MEDIS_USER_KEY
 	 */
