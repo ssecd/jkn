@@ -178,6 +178,13 @@ interface Config {
 	icareUserKey: string;
 
 	/**
+	 * User key eRekam Medis dari BPJS	 
+	 *
+	 * @default process.env.JKN_REKAM_MEDIS_USER_KEY
+	 */
+	rekamMedisUserKey: string;
+
+	/**
 	 * Berupa mode "development" dan "production". Secara default akan
 	 * membaca nilai environment variable NODE_ENV atau "development"
 	 * jika NODE_ENV tidak terdapat nilai. Mode ini berpengaruh pada
