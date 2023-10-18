@@ -21,6 +21,7 @@ diagppk
 dinsos
 dpho
 dpjp
+enkripsi
 estimasidilayani
 faskes
 FASKESASAL

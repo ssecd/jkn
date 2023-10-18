@@ -1,11 +1,13 @@
 import { BaseApi } from '../base.js';
+import { Config } from '../fetcher.js';
+import { encrypt, gzip } from './utils.js';
 
 export class RekamMedis extends BaseApi<'rekamMedis'> {
 	protected type = 'rekamMedis' as const;
 
 	async insert(data: {
 		/** nomor SEP */
-		nomorSep: string;
+		nomorSEP: string;
 
 		/** jenis pelayanan (1 = Rawat Inap) (2 = Rawat Jalan) */
 		jenisPelayanan: string;
@@ -16,10 +18,15 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
 		/** tahun penerbitan SEP misal 2023 */
 		tahun: number;
 
-		/** data rekam medis yang akan dikirim */
+		/**
+		 * data rekam medis berupa plain object
+		 *
+		 * Proses kompresi dan enkripsi akan dilakukan
+		 * secara otomatis pada method ini
+		 */
 		dataRekamMedis: unknown;
 	}) {
-		const dataMR = preprocess(data.dataRekamMedis);
+		const dataMR = await preprocess(data.dataRekamMedis, this.config);
 		return this.send({
 			path: `/`,
 			method: 'POST',
@@ -27,7 +34,7 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
 			headers: { 'Content-Type': 'text/plain' },
 			data: {
 				request: {
-					noSep: data.nomorSep,
+					noSep: data.nomorSEP,
 					jnsPelayanan: data.jenisPelayanan,
 					bulan: String(data.bulan),
 					tahun: String(data.tahun),
@@ -44,6 +51,13 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
  * dan KODE PPK. Ini berdasarkan spesifikasi yang telah ditentukan
  * pada halaman TrustMark BPJS Kesehatan.
  */
-function preprocess(data: unknown): string {
-	return 'TODO' + data;
+async function preprocess(data: unknown, config: Config): Promise<string> {
+	try {
+		const value = JSON.stringify(data);
+		const compressed = await gzip(value);
+		return encrypt(compressed.toString(), config);
+	} catch (err) {
+		// TODO: define custom error
+		throw new Error(`failed to compress or encrypt data. ${err}`);
+	}
 }
