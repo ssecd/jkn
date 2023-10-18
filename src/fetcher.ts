@@ -320,4 +320,8 @@ export class Fetcher {
 		this.configured = false;
 		await this.applyConfig();
 	}
+
+	get configuration(): Config {
+		return this.config;
+	}
 }

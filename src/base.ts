@@ -1,4 +1,4 @@
-import { Fetcher, SendOption, Type } from './fetcher.js';
+import { Config, Fetcher, SendOption, Type } from './fetcher.js';
 
 export abstract class BaseApi<T extends Type = Type> {
 	protected abstract readonly type: T;
@@ -7,6 +7,10 @@ export abstract class BaseApi<T extends Type = Type> {
 
 	protected send<R>(option: SendOption) {
 		return this.fetcher.send<T, R>(this.type, option);
+	}
+
+	protected get config(): Config {
+		return this.fetcher.configuration;
 	}
 }
 
