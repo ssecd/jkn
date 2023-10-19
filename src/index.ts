@@ -62,3 +62,7 @@ export type ApotekParams<
 	T extends keyof Apotek, //
 	K extends keyof Apotek[T]
 > = Parameters<Apotek[T][K]>;
+
+export type ICareResponse<K extends keyof ICare> = JKNResponseType<ICare, K>;
+
+export type ICareParams<K extends keyof ICare> = Parameters<ICare[K]>;
