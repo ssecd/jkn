@@ -14,7 +14,7 @@ npm install @ssecd/jkn
 
 Instalasi juga dapat dilakukan menggunakan `PNPM` atau `YARN`
 
-> ⚠ Untuk dukungan *type* pada API Rekam Medis, perlu menambahkan development dependensi `@types/fhir` dengan perintah `npm install --save-dev @types/fhir` atau `pnpm i -D @types/fhir`.
+> ⚠ Untuk dukungan _type_ pada API Rekam Medis, perlu menambahkan development dependensi `@types/fhir` dengan perintah `npm install --save-dev @types/fhir` atau `pnpm i -D @types/fhir`.
 
 ## Penggunaan
 
