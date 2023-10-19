@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -13,6 +13,9 @@ devDependencies:
   '@changesets/cli':
     specifier: ^2.26.2
     version: 2.26.2
+  '@types/fhir':
+    specifier: ^0.0.38
+    version: 0.0.38
   '@types/node':
     specifier: ^20.5.0
     version: 20.5.0
@@ -580,6 +583,10 @@ packages:
 
   /@types/chai@4.3.5:
     resolution: {integrity: sha512-mEo1sAde+UCE6b2hxn332f1g1E8WfYRu6p5SvTKr2ZKC1f7gFJXk4h5PyGP9Dt6gCaG8y8XhwnXWC6Iy2cmBng==}
+    dev: true
+
+  /@types/fhir@0.0.38:
+    resolution: {integrity: sha512-0ia8Ng9OR6yI3J1+TkZxAzp02oarQLfM0mGBUjVf1+7X+hD9UW7TNz7/heRP5QQ9evyRz89Ok/IxSuubx2TzMg==}
     dev: true
 
   /@types/is-ci@3.0.0:

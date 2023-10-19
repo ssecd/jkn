@@ -14,6 +14,8 @@ npm install @ssecd/jkn
 
 Instalasi juga dapat dilakukan menggunakan `PNPM` atau `YARN`
 
+> ⚠ Untuk dukungan *type* pada API Rekam Medis, perlu menambahkan development dependensi `@types/fhir` dengan perintah `npm install --save-dev @types/fhir` atau `pnpm i -D @types/fhir`.
+
 ## Penggunaan
 
 Penggunaan paket ini sangatlah sederhana, cukup menginisialisasi global instansi pada sebuah modul atau file seperti berikut:
@@ -126,6 +128,14 @@ Konfigurasi mengikuti interface berikut:
 ```ts
 interface Config {
 	/**
+	 * Kode PPK yang diberikan BPJS.
+	 *
+	 * Diperlukan untuk melakukan proses encryption
+	 * pada web service eRekam Medis.
+	 */
+	ppkCode: string;
+
+	/**
 	 * Cons ID dari BPJS
 	 *
 	 * @default process.env.JKN_CONS_ID
@@ -169,13 +179,20 @@ interface Config {
 
 	/**
 	 * User key i-Care dari BPJS
-	 * 
+	 *
 	 * Umumnya user key i-Care ini nilai sama dengan user key VClaim
 	 * untuk FKRTL dan PCare untuk FKTP
 	 *
 	 * @default process.env.JKN_ICARE_USER_KEY
 	 */
 	icareUserKey: string;
+
+	/**
+	 * User key eRekam Medis dari BPJS
+	 *
+	 * @default process.env.JKN_REKAM_MEDIS_USER_KEY
+	 */
+	rekamMedisUserKey: string;
 
 	/**
 	 * Berupa mode "development" dan "production". Secara default akan
@@ -207,6 +224,7 @@ interface Config {
 - ✅ Apotek _(experimental)_
 - 🧩 PCare _([partial](https://github.com/ssecd/jkn/pull/26))_
 - ✅ i-Care
+- ✅ Rekam Medis
 
 ## Kontribusi
 

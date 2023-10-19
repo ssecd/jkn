@@ -21,12 +21,14 @@ diagppk
 dinsos
 dpho
 dpjp
+enkripsi
 estimasidilayani
 faskes
 FASKESASAL
 faskesasalresep
 faskesterdaftar
 fdate
+FHIR
 FKRTL
 FKTP
 flaginternal
