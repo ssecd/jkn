@@ -1,26 +1,26 @@
-export interface Bundle<T = fhir5.FhirResource> extends fhir5.Bundle<T> {}
+export interface Bundle<T = fhir4.FhirResource> extends fhir4.Bundle<T> {}
 
-export interface Composition extends fhir5.Composition {}
+export interface Composition extends fhir4.Composition {}
 
-export interface Patient extends fhir5.Patient {}
+export interface Patient extends fhir4.Patient {}
 
-export interface Encounter extends fhir5.Encounter {
-	subject?: fhir5.Encounter['subject'] & { noSep: string };
+export interface Encounter extends fhir4.Encounter {
+	subject?: fhir4.Encounter['subject'] & { noSep: string };
 }
 
-export interface MedicationRequest extends fhir5.MedicationRequest {}
+export interface MedicationRequest extends fhir4.MedicationRequest {}
 
-export interface Practitioner extends fhir5.Practitioner {}
+export interface Practitioner extends fhir4.Practitioner {}
 
-export interface Organization extends fhir5.Organization {}
+export interface Organization extends fhir4.Organization {}
 
-export interface Condition extends fhir5.Condition {}
+export interface Condition extends fhir4.Condition {}
 
-export interface DiagnosticReport extends fhir5.DiagnosticReport {}
+export interface DiagnosticReport extends fhir4.DiagnosticReport {}
 
-export interface Procedure extends fhir5.Procedure {}
+export interface Procedure extends fhir4.Procedure {}
 
-export interface Device extends fhir5.Device {}
+export interface Device extends fhir4.Device {}
 
 export type RekamMedisFormat =
 	| Bundle
