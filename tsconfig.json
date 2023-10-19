@@ -5,7 +5,7 @@
 		"resolveJsonModule": true,
 		"moduleResolution": "NodeNext",
 		"strict": true,
-		"module": "esnext",
+		"module": "NodeNext",
 		"target": "esnext",
 		"lib": ["esnext", "DOM"],
 		"outDir": "dist",
