@@ -1,5 +1,15 @@
 # @ssecd/jkn
 
+## 0.4.0
+
+### Minor Changes
+
+- 13cbb7d: implement Rekam Medis web service
+
+### Patch Changes
+
+- f63c4ef: fix types
+
 ## 0.3.3
 
 ### Patch Changes
