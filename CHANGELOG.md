@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.4.1
+
+### Patch Changes
+
+- bd30658: clarify Rekam Medis implementation
+
 ## 0.4.0
 
 ### Minor Changes
