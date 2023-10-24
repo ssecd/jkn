@@ -9,8 +9,8 @@ export abstract class BaseApi<T extends Type = Type> {
 		return this.fetcher.send<T, R>(this.type, option);
 	}
 
-	protected get config(): Config {
-		return this.fetcher.configuration;
+	protected async getConfig(): Promise<Config> {
+		return this.fetcher.getConfig();
 	}
 }
 

@@ -115,10 +115,10 @@ export interface SendOption {
 	skipContentTypeHack?: boolean;
 }
 
-export interface LowerResponse<T> {
+export interface LowerResponse<T, C = number> {
 	response: T;
 	metadata: {
-		code: number;
+		code: C;
 		message: string;
 	};
 }
@@ -137,7 +137,7 @@ export type SendResponse<T> = {
 	apotek: CamelResponse<T>;
 	pcare: CamelResponse<T>;
 	icare: CamelResponse<T, number>;
-	rekamMedis: LowerResponse<T>;
+	rekamMedis: LowerResponse<T, string>;
 };
 
 const api_base_urls: Record<Type, Record<Mode, string>> = {
@@ -321,7 +321,8 @@ export class Fetcher {
 		await this.applyConfig();
 	}
 
-	get configuration(): Config {
+	async getConfig(): Promise<Config> {
+		await this.applyConfig();
 		return this.config;
 	}
 }
