@@ -30,7 +30,7 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
 		const config = await this.getConfig();
 		const dataMR = await preprocess(data.dataRekamMedis, config);
 		return this.send({
-			path: `/`,
+			path: `/eclaim/rekammedis/insert`,
 			method: 'POST',
 			skipContentTypeHack: true,
 			headers: { 'Content-Type': 'text/plain' },

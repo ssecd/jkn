@@ -21,6 +21,7 @@ diagppk
 dinsos
 dpho
 dpjp
+eclaim
 enkripsi
 estimasidilayani
 faskes
@@ -163,6 +164,7 @@ Raharja
 randomanswer
 randomquestion
 REFASALSJP
+rekammedis
 rekap
 riwayatobat
 ruangrawat
