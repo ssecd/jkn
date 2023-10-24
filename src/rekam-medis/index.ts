@@ -27,7 +27,8 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
 		 */
 		dataRekamMedis: RekamMedisFormat;
 	}) {
-		const dataMR = await preprocess(data.dataRekamMedis, this.config);
+		const config = await this.getConfig();
+		const dataMR = await preprocess(data.dataRekamMedis, config);
 		return this.send({
 			path: `/`,
 			method: 'POST',

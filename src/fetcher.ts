@@ -321,7 +321,8 @@ export class Fetcher {
 		await this.applyConfig();
 	}
 
-	get configuration(): Config {
+	async getConfig(): Promise<Config> {
+		await this.applyConfig();
 		return this.config;
 	}
 }
