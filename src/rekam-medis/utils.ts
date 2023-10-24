@@ -4,7 +4,7 @@ import { createCipheriv, createHash } from 'node:crypto';
 
 export async function gzip(value: string): Promise<Buffer> {
 	return new Promise((resolve, reject) => {
-		zlib.gzip(Buffer.from(value), (err, buf) => {
+		zlib.gzip(value, (err, buf) => {
 			if (err) reject(err);
 			else resolve(buf);
 		});
