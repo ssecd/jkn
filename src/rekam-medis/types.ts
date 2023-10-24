@@ -21,16 +21,3 @@ export interface DiagnosticReport extends fhir4.DiagnosticReport {}
 export interface Procedure extends fhir4.Procedure {}
 
 export interface Device extends fhir4.Device {}
-
-export type RekamMedisFormat =
-	| Bundle
-	| Composition
-	| Patient
-	| Encounter
-	| MedicationRequest
-	| Practitioner
-	| Organization
-	| Condition
-	| DiagnosticReport
-	| Procedure
-	| Device;

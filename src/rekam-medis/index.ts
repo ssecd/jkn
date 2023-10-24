@@ -1,12 +1,12 @@
 import { BaseApi } from '../base.js';
 import { Config } from '../fetcher.js';
-import { RekamMedisFormat } from './types.js';
+import { Bundle } from './types.js';
 import { encrypt, gzip } from './utils.js';
 
 export class RekamMedis extends BaseApi<'rekamMedis'> {
 	protected type = 'rekamMedis' as const;
 
-	async insert(data: {
+	async insert<T>(data: {
 		/** nomor SEP */
 		nomorSEP: string;
 
@@ -25,14 +25,15 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
 		 * Proses kompresi dan enkripsi akan dilakukan
 		 * secara otomatis pada method ini
 		 */
-		dataRekamMedis: RekamMedisFormat;
+		dataRekamMedis: Bundle<T>;
 	}) {
 		const config = await this.getConfig();
 		const dataMR = await preprocess(data.dataRekamMedis, config);
-		return this.send({
+		return this.send<{ keterangan: string }>({
 			path: `/eclaim/rekammedis/insert`,
 			method: 'POST',
 			skipContentTypeHack: true,
+			skipDecrypt: true,
 			headers: { 'Content-Type': 'text/plain' },
 			data: {
 				request: {
