@@ -57,7 +57,7 @@ async function preprocess(data: unknown, config: Config): Promise<string> {
 	try {
 		const value = JSON.stringify(data);
 		const compressed = await gzip(value);
-		return encrypt(compressed.toString(), config);
+		return encrypt(compressed.toString('base64'), config);
 	} catch (err) {
 		// TODO: define custom error
 		throw new Error(`failed to compress or encrypt data. ${err}`);

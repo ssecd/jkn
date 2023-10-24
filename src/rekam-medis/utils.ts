@@ -21,7 +21,7 @@ export function encrypt(value: string, config: Config): string {
 	const key = createHash('sha256').update(keyPlain, 'utf8').digest();
 	const iv = Uint8Array.from(key.subarray(0, 16));
 	const cipher = createCipheriv('aes-256-cbc', key, iv);
-	let enc = cipher.update(value, 'base64', 'utf8');
-	enc += cipher.final('utf8');
+	let enc = cipher.update(value, 'utf8', 'base64');
+	enc += cipher.final('base64');
 	return enc;
 }
