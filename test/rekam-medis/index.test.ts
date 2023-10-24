@@ -26,7 +26,77 @@ describe(
 						{
 							resource: {
 								resourceType: 'Patient',
-								gender: 'male'
+								active: true,
+								identifier: [
+									{
+										use: 'usual',
+										type: {
+											coding: [
+												{
+													system: 'http://terminology.hl7.org/CodeSystem/v2-0203',
+													code: 'MR'
+												}
+											]
+										},
+										value: '010038',
+										assigner: {
+											display: 'KU MATA SILAMPARI SRIWIJAYA EC'
+										}
+									},
+									{
+										use: 'official',
+										type: {
+											coding: [
+												{
+													system: 'http://terminology.hl7.org/CodeSystem/v2-0203',
+													code: 'MB'
+												}
+											]
+										},
+										value: '0002084717968',
+										assigner: {
+											display: 'BPJS KESEHATAN'
+										}
+									},
+									{
+										use: 'official',
+										type: {
+											coding: [
+												{
+													system: 'http://terminology.hl7.org/CodeSystem/v2-0203',
+													code: 'NNIDN'
+												}
+											]
+										},
+										value: '3301097112650109',
+										assigner: {
+											display: 'KEMENDAGRI'
+										}
+									}
+								],
+								name: [
+									{
+										use: 'official',
+										text: 'KERIYAH'
+									}
+								],
+								gender: 'female',
+								birthDate: '1966-01-22',
+								maritalStatus: {
+									coding: [
+										{
+											system: 'http://hl7.org/fhir/ValueSet/marital-status',
+											code: 'W'
+										}
+									]
+								},
+								telecom: [
+									{
+										system: 'phone',
+										use: 'mobile',
+										value: '089695791118'
+									}
+								]
 							}
 						}
 					]
