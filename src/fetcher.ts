@@ -95,6 +95,8 @@ export interface Config {
 	 * @default false
 	 */
 	throw: boolean;
+
+	baseUrls: Partial<Record<Type, Record<Mode, string>>>;
 }
 
 export interface SendOption {
@@ -140,7 +142,7 @@ export type SendResponse<T> = {
 	rekamMedis: LowerResponse<T, string>;
 };
 
-const api_base_urls: Record<Type, Record<Mode, string>> = {
+const defaultBaseUrls: Record<Type, Record<Mode, string>> = {
 	vclaim: {
 		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/vclaim-rest-dev',
 		production: 'https://apijkn.bpjs-kesehatan.go.id/vclaim-rest'
@@ -181,7 +183,8 @@ export class Fetcher {
 		pcareUserKey: process.env.JKN_PCARE_USER_KEY ?? '',
 		icareUserKey: process.env.JKN_ICARE_USER_KEY ?? '',
 		rekamMedisUserKey: process.env.JKN_REKAM_MEDIS_USER_KEY ?? '',
-		throw: false
+		throw: false,
+		baseUrls: defaultBaseUrls
 	};
 
 	constructor(private userConfig?: Partial<Config> | (() => MaybePromise<Partial<Config>>)) {}
@@ -190,16 +193,10 @@ export class Fetcher {
 		if (!this.userConfig || this.configured) return;
 
 		if (typeof this.userConfig === 'object') {
-			this.config = {
-				...this.config,
-				...this.userConfig
-			};
+			this.config = this.mergeConfig(this.config, this.userConfig);
 		} else if (typeof this.userConfig === 'function') {
-			const config = await this.userConfig();
-			this.config = {
-				...this.config,
-				...config
-			};
+			const userConfig = await this.userConfig();
+			this.config = this.mergeConfig(this.config, userConfig);
 		}
 
 		if (!this.config.consId || !this.config.consSecret) {
@@ -207,6 +204,11 @@ export class Fetcher {
 		}
 
 		this.configured = true;
+	}
+
+	private mergeConfig(target: Config, source: Partial<Config>): Config {
+		const baseUrls = { ...target.baseUrls, ...source.baseUrls };
+		return { ...target, ...source, baseUrls };
 	}
 
 	private get userKeyMap(): Record<Type, string | undefined> {
@@ -260,7 +262,10 @@ export class Fetcher {
 
 		let response = '';
 		try {
-			const url = new URL(api_base_urls[type][this.config.mode] + option.path);
+			const baseUrl = this.config.baseUrls[type];
+			if (!baseUrl) throw new Error(`base url of type "${type}" is invalid`);
+
+			const url = new URL(baseUrl[this.config.mode] + option.path);
 			const init: RequestInit = { method: option.method ?? 'GET' };
 			const headers = { ...this.getDefaultHeaders(type), ...(option.headers ?? {}) };
 
