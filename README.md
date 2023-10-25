@@ -132,7 +132,7 @@ interface Config {
 	 *
 	 * Diperlukan untuk melakukan proses encryption
 	 * pada web service eRekam Medis.
-	 * 
+	 *
 	 * @default process.env.JKN_PPK_CODE
 	 */
 	ppkCode: string;
