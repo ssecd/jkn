@@ -125,7 +125,7 @@ function persistSep(sep: VClaimResponse<'sep', 'insertV2'>) {
 
 Konfigurasi mengikuti interface berikut:
 
-```ts
+````ts
 interface Config {
 	/**
 	 * Kode PPK yang diberikan BPJS.
@@ -214,8 +214,24 @@ interface Config {
 	 * @default false
 	 */
 	throw: boolean;
+
+	/**
+	 * Base URL web service dari BPJS. Secara default sudah diatur
+	 * berdasarkan base url yang ada di TrustMark. Nilai dapat diatur
+	 * secara partial, misalnya:
+	 *
+	 * ```
+	 * baseUrls: {
+	 * 	vclaim: {
+	 * 		development: 'http://dev.example.com',
+	 * 		production: 'http://prod.example.com'
+	 * 	}
+	 * }
+	 * ```
+	 */
+	baseUrls: Partial<Record<Type, Record<Mode, string>>>;
 }
-```
+````
 
 ## API Tersedia
 

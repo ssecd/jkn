@@ -13,6 +13,8 @@ export interface Config {
 	 *
 	 * Diperlukan untuk melakukan proses encryption
 	 * pada web service eRekam Medis.
+	 *
+	 * @default process.env.JKN_PPK_CODE
 	 */
 	ppkCode: string;
 
@@ -96,6 +98,20 @@ export interface Config {
 	 */
 	throw: boolean;
 
+	/**
+	 * Base URL web service dari BPJS. Secara default sudah diatur
+	 * berdasarkan base url yang ada di TrustMark. Nilai dapat diatur
+	 * secara partial, misalnya:
+	 *
+	 * ```
+	 * baseUrls: {
+	 * 	vclaim: {
+	 * 		development: 'http://dev.example.com',
+	 * 		production: 'http://prod.example.com'
+	 * 	}
+	 * }
+	 * ```
+	 */
 	baseUrls: Partial<Record<Type, Record<Mode, string>>>;
 }
 
@@ -207,6 +223,7 @@ export class Fetcher {
 	}
 
 	private mergeConfig(target: Config, source: Partial<Config>): Config {
+		// simple object merge strategy because only baseUrls is typeof object for now
 		const baseUrls = { ...target.baseUrls, ...source.baseUrls };
 		return { ...target, ...source, baseUrls };
 	}
