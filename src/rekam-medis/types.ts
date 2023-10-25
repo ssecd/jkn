@@ -1,5 +1,3 @@
-export interface Bundle<T = fhir4.FhirResource> extends fhir4.Bundle<T> {}
-
 export interface Composition extends fhir4.Composition {}
 
 export interface Patient extends fhir4.Patient {}
@@ -21,3 +19,17 @@ export interface DiagnosticReport extends fhir4.DiagnosticReport {}
 export interface Procedure extends fhir4.Procedure {}
 
 export interface Device extends fhir4.Device {}
+
+export type JKNFhirResource =
+	| Composition
+	| Patient
+	| Encounter
+	| MedicationRequest
+	| Practitioner
+	| Organization
+	| Condition
+	| DiagnosticReport
+	| Procedure
+	| Device;
+
+export interface Bundle<T = JKNFhirResource> extends fhir4.Bundle<T> {}

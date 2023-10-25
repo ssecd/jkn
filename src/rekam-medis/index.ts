@@ -1,12 +1,12 @@
 import { BaseApi } from '../base.js';
 import { Config } from '../fetcher.js';
-import { Bundle } from './types.js';
+import { Bundle, JKNFhirResource } from './types.js';
 import { encrypt, gzip } from './utils.js';
 
 export class RekamMedis extends BaseApi<'rekamMedis'> {
 	protected type = 'rekamMedis' as const;
 
-	async insert<T>(data: {
+	async insert<T = JKNFhirResource>(data: {
 		/** nomor SEP */
 		nomorSEP: string;
 
@@ -54,11 +54,15 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
  * dan KODE PPK. Ini berdasarkan spesifikasi yang telah ditentukan
  * pada halaman TrustMark BPJS Kesehatan.
  */
-async function preprocess(data: unknown, config: Config): Promise<string> {
+async function preprocess<T>(data: Bundle<T>, config: Config): Promise<string> {
 	try {
 		const value = JSON.stringify(data);
 		const compressed = await gzip(value);
-		return encrypt(compressed.toString('base64'), config);
+		return encrypt(compressed.toString('base64'), [
+			config.consId,
+			config.consSecret,
+			config.ppkCode
+		]);
 	} catch (err) {
 		// TODO: define custom error
 		throw new Error(`failed to compress or encrypt data. ${err}`);
