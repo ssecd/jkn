@@ -1,12 +1,12 @@
 import { BaseApi } from '../base.js';
 import { Config } from '../fetcher.js';
-import { Bundle } from './types.js';
+import { Bundle, JKNFhirResource } from './types.js';
 import { encrypt, gzip } from './utils.js';
 
 export class RekamMedis extends BaseApi<'rekamMedis'> {
 	protected type = 'rekamMedis' as const;
 
-	async insert<T>(data: {
+	async insert<T = JKNFhirResource>(data: {
 		/** nomor SEP */
 		nomorSEP: string;
 

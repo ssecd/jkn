@@ -1,12 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { Patient } from '../../src/rekam-medis/types';
 import jkn from '../jkn';
 
 describe(
 	'RekamMedis',
 	() => {
 		it.concurrent('insert()', async () => {
-			const result = await jkn.rekamMedis.insert<Patient>({
+			const result = await jkn.rekamMedis.insert({
 				bulan: 5,
 				tahun: 2023,
 				jenisPelayanan: '2',
