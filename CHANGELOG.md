@@ -1,5 +1,15 @@
 # @ssecd/jkn
 
+## 0.5.0
+
+### Minor Changes
+
+- d12029f: add custom base url config
+
+### Patch Changes
+
+- 8999ede: improve Rekam Medis types
+
 ## 0.4.1
 
 ### Patch Changes
