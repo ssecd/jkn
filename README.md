@@ -1,5 +1,3 @@
-# JKN
-
 JKN (BPJS) Bridging API untuk NodeJS
 
 <img width="512" alt="Mudahnya JKN API dari SSEC" src="./assets/demo.gif">
