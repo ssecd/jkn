@@ -84,6 +84,7 @@ klaim
 kodebooking
 kodebu
 kodedokter
+kodekelas
 kodeobat
 kodepoli
 kodesubspesialis
@@ -99,6 +100,7 @@ namaapoteker
 namabu
 namadokter
 namahari
+namakelas
 namakepala
 namaobat
 namapeserta
@@ -207,6 +209,7 @@ tipeobat
 Topup
 totalbiayapengajuan
 totalbiayasetuju
+totalitems
 tujuanrujuk
 updatejadwaldokter
 updatewaktu
