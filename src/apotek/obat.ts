@@ -5,6 +5,7 @@ export class Obat extends ApotekBaseApi {
 	 * Simpan data obat non racikan
 	 */
 	async saveNonRacikan(data: {
+		/** nomor SEP Resep dari hasil simpan resep */
 		NOSJP: string;
 		NORESEP: string;
 		KDOBT: string;
@@ -26,6 +27,7 @@ export class Obat extends ApotekBaseApi {
 	 * Simpan data obat racikan
 	 */
 	async saveRacikan(data: {
+		/** nomor SEP Resep dari hasil simpan resep */
 		NOSJP: string;
 		NORESEP: string;
 		JNSROBT: string;
