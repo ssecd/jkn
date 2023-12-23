@@ -162,7 +162,7 @@ export type SendResponse<T, M> = {
 	antrean: LowerResponse<T, number, M>;
 	vclaim: CamelResponse<T, string, M>;
 	apotek: CamelResponse<T, string, M>;
-	pcare: CamelResponse<T, string, M>;
+	pcare: CamelResponse<T, number, M>;
 	icare: CamelResponse<T, number, M>;
 	rekamMedis: LowerResponse<T, string, M>;
 };
