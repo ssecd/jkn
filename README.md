@@ -152,6 +152,13 @@ interface Config {
 	consSecret: string;
 
 	/**
+	 * User key Aplicares dari BPJS
+	 *
+	 * @default process.env.JKN_APLICARES_USER_KEY
+	 */
+	aplicaresUserKey: string;
+
+	/**
 	 * User key VClaim dari BPJS
 	 *
 	 * @default process.env.JKN_VCLAIM_USER_KEY
@@ -237,6 +244,7 @@ interface Config {
 
 ## API Tersedia
 
+- ✅ Aplicares
 - ✅ VClaim
 - ✅ Antrean
 - ✅ Apotek _(experimental)_
