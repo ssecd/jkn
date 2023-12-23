@@ -44,16 +44,16 @@
 		"import": "./dist/index.js"
 	},
 	"devDependencies": {
-		"@changesets/cli": "^2.26.2",
+		"@changesets/cli": "^2.27.1",
 		"@types/fhir": "^0.0.38",
-		"@types/node": "^20.8.7",
-		"@typescript-eslint/eslint-plugin": "^6.8.0",
-		"@typescript-eslint/parser": "^6.8.0",
+		"@types/node": "^20.10.5",
+		"@typescript-eslint/eslint-plugin": "^6.15.0",
+		"@typescript-eslint/parser": "^6.15.0",
 		"dotenv": "^16.3.1",
-		"eslint": "^8.51.0",
-		"eslint-config-prettier": "^9.0.0",
-		"prettier": "^3.0.3",
-		"typescript": "^5.2.2",
+		"eslint": "^8.56.0",
+		"eslint-config-prettier": "^9.1.0",
+		"prettier": "^3.1.1",
+		"typescript": "^5.3.3",
 		"vitest": "^0.34.6"
 	},
 	"dependencies": {
