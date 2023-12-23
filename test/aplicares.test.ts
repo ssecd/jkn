@@ -33,8 +33,7 @@ describe(
 
 		it.concurrent('read()', async () => {
 			const { response, metadata } = await jkn.aplicares.read({ start: 1, limit: 2 });
-			console.log(metadata, response);
-			expect(1).toBe(1);
+			expect(response?.list.length).toBe(metadata.totalitems);
 		});
 	},
 	{ timeout: 25_000 }
