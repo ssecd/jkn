@@ -168,8 +168,8 @@ export type SendResponse<T> = {
 
 const defaultBaseUrls: Record<Type, Record<Mode, string>> = {
 	aplicares: {
-		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/aplicaresws',
-		production: 'https://apijkn.bpjs-kesehatan.go.id/aplicaresws'
+		development: 'https://dvlp.bpjs-kesehatan.go.id:8888/aplicaresws',
+		production: 'https://new-api.bpjs-kesehatan.go.id/aplicaresws'
 	},
 	vclaim: {
 		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/vclaim-rest-dev',
