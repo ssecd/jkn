@@ -18,4 +18,22 @@ export class Aplicares extends BaseApi<'aplicares'> {
 			skipDecrypt: true
 		});
 	}
+
+	async updateBed(data: {
+		kodekelas: string;
+		koderuang: string;
+		namaruang: string;
+		kapasitas: number;
+		tersedia: number;
+		tersediapria?: number;
+		tersediawanita?: number;
+		tersediapriawanita?: number;
+	}) {
+		const { ppkCode } = await this.getConfig();
+		return this.send({
+			path: `/rest/bed/update/${ppkCode}`,
+			method: 'POST',
+			data
+		});
+	}
 }

@@ -87,6 +87,7 @@ kodedokter
 kodekelas
 kodeobat
 kodepoli
+koderuang
 kodesubspesialis
 Kontroldan
 Kunj
@@ -107,6 +108,7 @@ namapeserta
 namapetugasapotek
 namapoli
 namaprb
+namaruang
 namasubspesialis
 namaverifikator
 nipkepala
@@ -192,6 +194,9 @@ tanggalperiksa
 taskid
 taskname
 TASPEN
+tersediapria
+tersediapriawanita
+tersediawanita
 TGLENTRY
 tgllahir
 tgllhr
