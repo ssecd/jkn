@@ -87,6 +87,7 @@ kodedokter
 kodekelas
 kodeobat
 kodepoli
+kodeppk
 koderuang
 kodesubspesialis
 Kontroldan
@@ -94,6 +95,7 @@ Kunj
 kuotajkn
 kuotanonjkn
 laka
+lastupdate
 LINGGAU
 listobat
 listsep
@@ -172,6 +174,7 @@ REFASALSJP
 rekammedis
 rekap
 riwayatobat
+rownumber
 ruangrawat
 settingppk
 signa

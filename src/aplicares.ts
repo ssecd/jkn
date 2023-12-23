@@ -55,6 +55,37 @@ export class Aplicares extends BaseApi<'aplicares'> {
 			data
 		});
 	}
+
+	/**
+	 * Melihat Data Ketersediaan Kamar Faskes
+	 *
+	 * Property `start` dan `limit` berfungsi untuk paging, jika faskes
+	 * ingin menampilkan data dari baris pertama sampai baris kesepuluh
+	 * maka `start` = `1` dan `limit` = `1`, nilai `start` dimulai dari `1`.
+	 */
+	async read(params: {
+		/** paging start */
+		start: number;
+
+		/** paging limit */
+		limit: number;
+	}) {
+		const { ppkCode } = await this.requiredConfig('ppkCode');
+		return this.send<
+			{
+				list: (AplicaresBedData & {
+					kodeppk: string;
+					rownumber: number;
+					lastupdate: string;
+				})[];
+			},
+			{ totalitems: number }
+		>({
+			path: `/rest/bed/read/${ppkCode}/${params.start}/${params.limit}`,
+			method: 'GET',
+			skipDecrypt: true
+		});
+	}
 }
 
 interface AplicaresBedData {
