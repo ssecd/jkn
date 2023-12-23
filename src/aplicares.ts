@@ -30,11 +30,13 @@ export class Aplicares extends BaseApi<'aplicares'> {
 	 * tempat tidur untuk pasien laki-laki, perempuan, dan laki–laki atau
 	 * perempuan.
 	 */
-	async updateBed(data: AplicaresBedData) {
+	async update(data: AplicaresBedData) {
 		const { ppkCode } = await this.requiredConfig('ppkCode');
 		return this.send({
 			path: `/rest/bed/update/${ppkCode}`,
 			method: 'POST',
+			skipContentTypeHack: true,
+			headers: { 'Content-Type': 'application/json' },
 			data
 		});
 	}
@@ -47,11 +49,13 @@ export class Aplicares extends BaseApi<'aplicares'> {
 	 * tempat tidur untuk pasien laki-laki, perempuan, dan laki–laki atau
 	 * perempuan.
 	 */
-	async createRuang(data: AplicaresBedData) {
+	async create(data: AplicaresBedData) {
 		const { ppkCode } = await this.requiredConfig('ppkCode');
-		return this.send({
+		return this.send<undefined>({
 			path: `/rest/bed/create/${ppkCode}`,
 			method: 'POST',
+			skipContentTypeHack: true,
+			headers: { 'Content-Type': 'application/json' },
 			data
 		});
 	}
