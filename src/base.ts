@@ -5,8 +5,8 @@ export abstract class BaseApi<T extends Type = Type> {
 
 	constructor(private readonly fetcher: Fetcher) {}
 
-	protected send<R>(option: SendOption) {
-		return this.fetcher.send<T, R>(this.type, option);
+	protected send<R, M = unknown>(option: SendOption) {
+		return this.fetcher.send<T, R, M>(this.type, option);
 	}
 
 	protected async getConfig(): Promise<Config> {

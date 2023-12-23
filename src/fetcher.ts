@@ -140,30 +140,30 @@ export interface SendOption {
 	skipContentTypeHack?: boolean;
 }
 
-export interface LowerResponse<T, C = number> {
+export interface LowerResponse<T, C, E> {
 	response: T;
 	metadata: {
 		code: C;
 		message: string;
-	};
+	} & E;
 }
 
-export interface CamelResponse<T, C = string> {
+export interface CamelResponse<T, C, E> {
 	response: T;
 	metaData: {
 		code: C;
 		message: string;
-	};
+	} & E;
 }
 
-export type SendResponse<T> = {
-	aplicares: LowerResponse<T>;
-	antrean: LowerResponse<T>;
-	vclaim: CamelResponse<T>;
-	apotek: CamelResponse<T>;
-	pcare: CamelResponse<T>;
-	icare: CamelResponse<T, number>;
-	rekamMedis: LowerResponse<T, string>;
+export type SendResponse<T, M> = {
+	aplicares: LowerResponse<T, number, M>;
+	antrean: LowerResponse<T, number, M>;
+	vclaim: CamelResponse<T, string, M>;
+	apotek: CamelResponse<T, string, M>;
+	pcare: CamelResponse<T, string, M>;
+	icare: CamelResponse<T, number, M>;
+	rekamMedis: LowerResponse<T, string, M>;
 };
 
 const defaultBaseUrls: Record<Type, Record<Mode, string>> = {
@@ -284,10 +284,10 @@ export class Fetcher {
 		return lz.decompressFromEncodedURIComponent(text);
 	}
 
-	async send<T extends Type, R>(
+	async send<T extends Type, R, M>(
 		type: T,
 		option: SendOption
-	): Promise<SendResponse<R | undefined>[T]> {
+	): Promise<SendResponse<R | undefined, M | undefined>[T]> {
 		await this.applyConfig();
 		if (!option.path.startsWith('/')) throw new Error(`path must be starts with "/"`);
 
@@ -319,7 +319,7 @@ export class Fetcher {
 			}
 
 			response = await fetch(url, init).then((r) => r.text());
-			const json: SendResponse<R>[T] = JSON.parse(response);
+			const json: SendResponse<R, M>[T] = JSON.parse(response);
 
 			if (json.response && !option.skipDecrypt) {
 				const decrypted = this.decrypt(String(json.response), headers['X-timestamp']);
@@ -348,7 +348,7 @@ export class Fetcher {
 				metadata: { code: +code, message },
 				metaData: { code, message },
 				response: undefined
-			} as unknown as SendResponse<R>[T];
+			} as unknown as SendResponse<R, M>[T];
 		}
 	}
 
