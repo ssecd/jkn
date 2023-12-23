@@ -130,8 +130,9 @@ interface Config {
 	/**
 	 * Kode PPK yang diberikan BPJS.
 	 *
-	 * Diperlukan untuk melakukan proses encryption
-	 * pada web service eRekam Medis.
+	 * Diperlukan untuk melakukan proses enkripsi
+	 * pada service eRekamMedis and request pada
+	 * service Aplicares
 	 *
 	 * @default process.env.JKN_PPK_CODE
 	 */
@@ -150,6 +151,13 @@ interface Config {
 	 * @default process.env.JKN_CONS_SECRET
 	 */
 	consSecret: string;
+
+	/**
+	 * User key Aplicares dari BPJS
+	 *
+	 * @default process.env.JKN_APLICARES_USER_KEY
+	 */
+	aplicaresUserKey: string;
 
 	/**
 	 * User key VClaim dari BPJS
@@ -237,6 +245,7 @@ interface Config {
 
 ## API Tersedia
 
+- ✅ Aplicares
 - ✅ VClaim
 - ✅ Antrean
 - ✅ Apotek _(experimental)_

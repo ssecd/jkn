@@ -5,12 +5,23 @@ export abstract class BaseApi<T extends Type = Type> {
 
 	constructor(private readonly fetcher: Fetcher) {}
 
-	protected send<R>(option: SendOption) {
-		return this.fetcher.send<T, R>(this.type, option);
+	protected send<R, M = unknown>(option: SendOption) {
+		return this.fetcher.send<T, R, M>(this.type, option);
 	}
 
 	protected async getConfig(): Promise<Config> {
 		return this.fetcher.getConfig();
+	}
+
+	protected async requiredConfig(...keys: (keyof Config)[]) {
+		const config = await this.getConfig();
+		for (const key of keys) {
+			if (!config[key]) {
+				const message = `The "${key}" config value must not be falsy for this request`;
+				throw new Error(message);
+			}
+		}
+		return config;
 	}
 }
 
