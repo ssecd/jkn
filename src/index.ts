@@ -1,4 +1,5 @@
 import { Antrean } from './antrean.js';
+import { Aplicares } from './aplicares.js';
 import { Apotek } from './apotek/index.js';
 import { CachedApi } from './base.js';
 import { Fetcher } from './fetcher.js';
@@ -17,6 +18,10 @@ export default class JKN extends Fetcher {
 
 	get antrean(): Antrean {
 		return this.cache.get('antrean', Antrean);
+	}
+
+	get aplicares(): Aplicares {
+		return this.cache.get('aplicares', Aplicares);
 	}
 
 	get vclaim(): VClaim {
