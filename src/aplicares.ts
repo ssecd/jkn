@@ -90,6 +90,26 @@ export class Aplicares extends BaseApi<'aplicares'> {
 			skipDecrypt: true
 		});
 	}
+
+	/**
+	 * Hapus Ruangan
+	 */
+	async delete(data: {
+		/** kode kelas ruang rawat sesuai dengan mapping BPJS Kesehatan */
+		kodekelas: string;
+
+		/** kode ruangan faskes */
+		koderuang: string;
+	}) {
+		const { ppkCode } = await this.requiredConfig('ppkCode');
+		return this.send<undefined>({
+			path: `/rest/bed/delete/${ppkCode}`,
+			method: 'POST',
+			skipContentTypeHack: true,
+			headers: { 'Content-Type': 'application/json' },
+			data
+		});
+	}
 }
 
 interface AplicaresBedData {

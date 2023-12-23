@@ -35,6 +35,14 @@ describe(
 			const { response, metadata } = await jkn.aplicares.read({ start: 1, limit: 2 });
 			expect(response?.list.length).toBe(metadata.totalitems);
 		});
+
+		it.concurrent('delete()', async () => {
+			const { metadata } = await jkn.aplicares.delete({
+				kodekelas: 'VIP',
+				koderuang: 'R0001'
+			});
+			expect(metadata.code).toBe(1);
+		});
 	},
 	{ timeout: 25_000 }
 );
