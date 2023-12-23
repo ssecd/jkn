@@ -4,6 +4,16 @@ JKN (BPJS) Bridging API untuk NodeJS
 
 <img width="512" alt="Mudahnya JKN API dari SSEC" src="./assets/demo.gif">
 
+## Fitur
+
+- ✅ Aplicares
+- ✅ VClaim
+- ✅ Antrean
+- ✅ Apotek
+- ✅ i-Care
+- ✅ Rekam Medis
+- 🧩 PCare _([partial](https://github.com/ssecd/jkn/pull/26))_
+
 ## Instalasi
 
 Instalasi paket dapat dilakukan dengan perintah berikut:
@@ -12,9 +22,13 @@ Instalasi paket dapat dilakukan dengan perintah berikut:
 npm install @ssecd/jkn
 ```
 
-Instalasi juga dapat dilakukan menggunakan `PNPM` atau `YARN`
+Untuk dukungan _type_ pada API Rekam Medis, perlu menambahkan development dependensi `@types/fhir` dengan perintah:
 
-> ⚠ Untuk dukungan _type_ pada API Rekam Medis, perlu menambahkan development dependensi `@types/fhir` dengan perintah `npm install --save-dev @types/fhir` atau `pnpm i -D @types/fhir`.
+```bash
+npm install --save-dev @types/fhir
+```
+
+Instalasi juga dapat dilakukan menggunakan `PNPM` atau `YARN`
 
 ## Penggunaan
 
@@ -25,14 +39,12 @@ Penggunaan paket ini sangatlah sederhana, cukup menginisialisasi global instansi
 
 import JKN from '@ssecd/jkn';
 
-const jkn = new JKN({
-	/* config */
-});
+const jkn = new JKN();
 
 export default jkn;
 ```
 
-Secara default konfigurasi seperti cons id atau secret akan dibaca melalui environment variable namun konfigurasi juga dapat diatur pada constructor class JKN seperti berikut:
+Secara default konfigurasi seperti cons id atau cons secret akan dibaca melalui environment variable namun konfigurasi juga dapat diatur pada constructor class JKN seperti berikut:
 
 ```ts
 // file: jkn.ts atau jkn.js
@@ -65,7 +77,7 @@ const jkn = new JKN(async () => {
 export default jkn;
 ```
 
-> ⚠ Perlu diperhatikan bahwa fungsi pada constructor parameter tersebut hanya akan dipanggil satu kali. Bila terjadi perubahan konfigurasi harap memanggil fungsi `invalidateConfig(): Promise<void>` pada instansi JKN untuk memperbaharui atau menerapkan perubahan konfigurasi.
+Perlu diperhatikan bahwa fungsi pada constructor parameter tersebut hanya akan dipanggil satu kali. Bila terjadi perubahan konfigurasi harap memanggil fungsi `await invalidateConfig()` pada instansi JKN untuk memperbaharui atau menerapkan perubahan konfigurasi.
 
 Kemudian cukup impor module `jkn` tersebut di mana pun saat akan menggunakannya:
 
@@ -242,16 +254,6 @@ interface Config {
 	baseUrls: Partial<Record<Type, Record<Mode, string>>>;
 }
 ````
-
-## API Tersedia
-
-- ✅ Aplicares
-- ✅ VClaim
-- ✅ Antrean
-- ✅ Apotek _(experimental)_
-- 🧩 PCare _([partial](https://github.com/ssecd/jkn/pull/26))_
-- ✅ i-Care
-- ✅ Rekam Medis
 
 ## Kontribusi
 
