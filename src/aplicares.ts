@@ -29,7 +29,7 @@ export class Aplicares extends BaseApi<'aplicares'> {
 		tersediawanita?: number;
 		tersediapriawanita?: number;
 	}) {
-		const { ppkCode } = await this.getConfig();
+		const { ppkCode } = await this.requiredConfig('ppkCode');
 		return this.send({
 			path: `/rest/bed/update/${ppkCode}`,
 			method: 'POST',

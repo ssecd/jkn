@@ -12,6 +12,17 @@ export abstract class BaseApi<T extends Type = Type> {
 	protected async getConfig(): Promise<Config> {
 		return this.fetcher.getConfig();
 	}
+
+	protected async requiredConfig(...keys: (keyof Config)[]) {
+		const config = await this.getConfig();
+		for (const key of keys) {
+			if (!config[key]) {
+				const message = `The "${key}" config value must not be falsy for this request`;
+				throw new Error(message);
+			}
+		}
+		return config;
+	}
 }
 
 type CacheKey = `${Type}${string}`;

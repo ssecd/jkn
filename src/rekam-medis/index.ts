@@ -27,7 +27,7 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
 		 */
 		dataRekamMedis: Bundle<T>;
 	}) {
-		const config = await this.getConfig();
+		const config = await this.requiredConfig('ppkCode');
 		const dataMR = await preprocess(data.dataRekamMedis, config);
 		return this.send<{ keterangan: string }>({
 			path: `/eclaim/rekammedis/insert`,
