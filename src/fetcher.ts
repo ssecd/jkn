@@ -5,7 +5,7 @@ type MaybePromise<T> = T | Promise<T>;
 
 export type Mode = 'development' | 'production';
 
-export type Type = 'vclaim' | 'antrean' | 'apotek' | 'pcare' | 'icare' | 'rekamMedis';
+export type Type = 'aplicares' | 'vclaim' | 'antrean' | 'apotek' | 'pcare' | 'icare' | 'rekamMedis';
 
 export interface Config {
 	/**
@@ -31,6 +31,13 @@ export interface Config {
 	 * @default process.env.JKN_CONS_SECRET
 	 */
 	consSecret: string;
+
+	/**
+	 * User key Aplicares dari BPJS
+	 *
+	 * @default process.env.JKN_APLICARES_USER_KEY
+	 */
+	aplicaresUserKey: string;
 
 	/**
 	 * User key VClaim dari BPJS
@@ -150,6 +157,7 @@ export interface CamelResponse<T, C = string> {
 }
 
 export type SendResponse<T> = {
+	aplicares: LowerResponse<T>;
 	antrean: LowerResponse<T>;
 	vclaim: CamelResponse<T>;
 	apotek: CamelResponse<T>;
@@ -159,6 +167,10 @@ export type SendResponse<T> = {
 };
 
 const defaultBaseUrls: Record<Type, Record<Mode, string>> = {
+	aplicares: {
+		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/aplicaresws',
+		production: 'https://apijkn.bpjs-kesehatan.go.id/aplicaresws'
+	},
 	vclaim: {
 		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/vclaim-rest-dev',
 		production: 'https://apijkn.bpjs-kesehatan.go.id/vclaim-rest'
@@ -193,6 +205,7 @@ export class Fetcher {
 		ppkCode: process.env.JKN_PPK_CODE ?? '',
 		consId: process.env.JKN_CONS_ID ?? '',
 		consSecret: process.env.JKN_CONS_SECRET ?? '',
+		aplicaresUserKey: process.env.JKN_APLICARES_USER_KEY ?? '',
 		vclaimUserKey: process.env.JKN_VCLAIM_USER_KEY ?? '',
 		antreanUserKey: process.env.JKN_ANTREAN_USER_KEY ?? '',
 		apotekUserKey: process.env.JKN_APOTEK_USER_KEY ?? '',
@@ -230,6 +243,7 @@ export class Fetcher {
 
 	private get userKeyMap(): Record<Type, string | undefined> {
 		return {
+			aplicares: this.config.aplicaresUserKey,
 			vclaim: this.config.vclaimUserKey,
 			antrean: this.config.antreanUserKey,
 			apotek: this.config.apotekUserKey,
