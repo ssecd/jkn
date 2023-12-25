@@ -16,6 +16,8 @@ export class PelayananObat extends ApotekBaseApi {
 		return this.send<string>({
 			path: `/pelayanan/obat/hapus/`,
 			method: 'DELETE',
+			headers: { 'Content-Type': 'application/json' },
+			skipContentTypeHack: true,
 			data
 		});
 	}
@@ -24,7 +26,7 @@ export class PelayananObat extends ApotekBaseApi {
 	 * Data daftar pelayanan obat
 	 */
 	async daftar(params: {
-		/** nomor SEP kunjungan */
+		/** nomor SEP Resep dari response simpan resep */
 		nomorSep: string;
 	}) {
 		return this.send<{
@@ -50,7 +52,7 @@ export class PelayananObat extends ApotekBaseApi {
 				};
 			};
 		}>({
-			path: `/obat/daftar/${params.nomorSep}`,
+			path: `/pelayanan/obat/daftar/${params.nomorSep}`,
 			method: 'GET'
 		});
 	}

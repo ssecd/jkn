@@ -14,7 +14,7 @@ export class Monitoring extends ApotekBaseApi {
 		/** jenis obat (0 = Semua) (1 = Obat PRB) (2 = Obat Kronis Belum Stabil) (3 = Obat Kemoterapi) */
 		jenisObat: number;
 
-		/** status klaim (1 = Belum di-verifikasi) (2 = Sudah Verifikasi) */
+		/** status klaim (0 = Belum di-verifikasi) (1 = Sudah Verifikasi) */
 		status: number;
 	}) {
 		return this.send<{

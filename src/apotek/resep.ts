@@ -12,7 +12,12 @@ export class Resep extends ApotekBaseApi {
 
 		POLIRSP: string;
 
-		/** (1 = Obat PRB) (2 = Obat Kronis Belum Stabil) (3 = Obat Kemoterapi) */
+		/**
+		 * (1 = Obat PRB) (2 = Obat Kronis Belum Stabil) (3 = Obat Kemoterapi)
+		 *
+		 * nomor Resep maksimal 5 digit, di-generate sesuai kebutuhan, dalam 1
+		 * bulan klaim tidak boleh ada yang sama.
+		 */
 		KDJNSOBAT: string;
 
 		NORESEP: string;
@@ -35,6 +40,7 @@ export class Resep extends ApotekBaseApi {
 			noKartu: string;
 			nama: string;
 			faskesAsal: string;
+			/** Nomor SEP Resep */
 			noApotik: string;
 			noResep: string;
 			tglResep: string;
@@ -53,8 +59,10 @@ export class Resep extends ApotekBaseApi {
 	 * Hapus data resep
 	 */
 	async hapus(data: {
+		/** nomor SEP Resep dari response simpan resep */
 		nosjp: string;
 
+		/** nomor SEP Kunjungan */
 		refasalsjp: string;
 
 		noresep: string;
@@ -62,6 +70,8 @@ export class Resep extends ApotekBaseApi {
 		return this.send<null>({
 			path: `/hapusresep`,
 			method: 'DELETE',
+			headers: { 'Content-Type': 'application/json' },
+			skipContentTypeHack: true,
 			data
 		});
 	}
