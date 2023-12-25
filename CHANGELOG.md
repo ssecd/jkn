@@ -1,5 +1,17 @@
 # @ssecd/jkn
 
+## 0.6.0
+
+### Minor Changes
+
+- 69f1475: Implement Aplicares services
+
+### Patch Changes
+
+- 7c957e7: fix PCare `metaData.code` type
+- 551ee3a: Clarify Apotek service implementation
+- 0db81f8: Bump dependencies
+
 ## 0.5.0
 
 ### Minor Changes
