@@ -1,35 +1,21 @@
-export interface Composition extends fhir4.Composition {}
+export interface Composition {}
 
-export interface Patient extends fhir4.Patient {}
+export interface Patient  {}
 
-export interface Encounter extends fhir4.Encounter {
-	subject?: fhir4.Encounter['subject'] & { noSep: string };
-}
+export interface Encounter {}
 
-export interface MedicationRequest extends fhir4.MedicationRequest {}
+export interface MedicationRequest  {}
 
-export interface Practitioner extends fhir4.Practitioner {}
+export interface Practitioner  {}
 
-export interface Organization extends fhir4.Organization {}
+export interface Organization  {}
 
-export interface Condition extends fhir4.Condition {}
+export interface Condition  {}
 
-export interface DiagnosticReport extends fhir4.DiagnosticReport {}
+export interface DiagnosticReport  {}
 
-export interface Procedure extends fhir4.Procedure {}
+export interface Procedure  {}
 
-export interface Device extends fhir4.Device {}
+export interface Device  {}
 
-export type JKNFhirResource =
-	| Composition
-	| Patient
-	| Encounter
-	| MedicationRequest
-	| Practitioner
-	| Organization
-	| Condition
-	| DiagnosticReport
-	| Procedure
-	| Device;
-
-export interface Bundle<T = JKNFhirResource> extends fhir4.Bundle<T> {}
+export interface Bundle {}
