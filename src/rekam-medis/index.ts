@@ -54,17 +54,14 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
  * dan KODE PPK. Ini berdasarkan spesifikasi yang telah ditentukan
  * pada halaman TrustMark BPJS Kesehatan.
  */
-async function preprocess<T>(data: Bundle, config: Config): Promise<string> {
+async function preprocess(data: Bundle, { consId, consSecret, ppkCode }: Config): Promise<string> {
 	try {
 		const value = JSON.stringify(data);
 		const compressed = await gzip(value);
-		return encrypt(compressed.toString('base64'), [
-			config.consId,
-			config.consSecret,
-			config.ppkCode
-		]);
+		const key = consId + consSecret + ppkCode;
+		return encrypt(compressed.toString('base64'), key);
 	} catch (err) {
-		// TODO: define custom error
-		throw new Error(`failed to compress or encrypt data. ${err}`);
+		const message = err instanceof Error ? err.message : JSON.stringify(err);
+		throw new Error(`failed to compress or encrypt data. ${message}`);
 	}
 }
