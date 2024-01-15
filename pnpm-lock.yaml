@@ -13,9 +13,6 @@ devDependencies:
   '@changesets/cli':
     specifier: ^2.27.1
     version: 2.27.1
-  '@types/fhir':
-    specifier: ^0.0.38
-    version: 0.0.38
   '@types/node':
     specifier: ^20.10.5
     version: 20.10.5
@@ -582,10 +579,6 @@ packages:
 
   /@types/chai@4.3.9:
     resolution: {integrity: sha512-69TtiDzu0bcmKQv3yg1Zx409/Kd7r0b5F1PfpYJfSHzLGtB53547V4u+9iqKYsTu/O2ai6KTb0TInNpvuQ3qmg==}
-    dev: true
-
-  /@types/fhir@0.0.38:
-    resolution: {integrity: sha512-0ia8Ng9OR6yI3J1+TkZxAzp02oarQLfM0mGBUjVf1+7X+hD9UW7TNz7/heRP5QQ9evyRz89Ok/IxSuubx2TzMg==}
     dev: true
 
   /@types/json-schema@7.0.15:
