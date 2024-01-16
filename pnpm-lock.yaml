@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@types/fhir':
+    specifier: ^0.0.40
+    version: 0.0.40
   lz-string:
     specifier: ^1.5.0
     version: 1.5.0
@@ -580,6 +583,10 @@ packages:
   /@types/chai@4.3.9:
     resolution: {integrity: sha512-69TtiDzu0bcmKQv3yg1Zx409/Kd7r0b5F1PfpYJfSHzLGtB53547V4u+9iqKYsTu/O2ai6KTb0TInNpvuQ3qmg==}
     dev: true
+
+  /@types/fhir@0.0.40:
+    resolution: {integrity: sha512-ae00uDa0GrgPl4sDsGpHEdUjxCeot0UEEhgO/4PljimMKrPMyEVMZpsiAjwCp+dARn7zybOflnLK+nfORLjxDw==}
+    dev: false
 
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}

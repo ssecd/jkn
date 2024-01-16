@@ -13,6 +13,7 @@ BYTAGRSP
 BYVERRSP
 carakeluar
 checkstock
+Codeable
 createdtime
 daftarfp
 daftarresep

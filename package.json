@@ -58,6 +58,9 @@
 	"dependencies": {
 		"lz-string": "^1.5.0"
 	},
+	"peerDependencies": {
+		"@types/fhir": "^0.0.40"
+	},
 	"packageManager": "pnpm@8.6.1",
 	"engines": {
 		"pnpm": "^8.0.0"

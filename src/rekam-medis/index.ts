@@ -1,6 +1,6 @@
 import { BaseApi } from '../base.js';
 import { Config } from '../fetcher.js';
-import { Bundle } from './types.js';
+import { MRBundle } from './types.js';
 import { encrypt, gzip } from './utils.js';
 
 export class RekamMedis extends BaseApi<'rekamMedis'> {
@@ -25,7 +25,7 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
 		 * Proses kompresi dan enkripsi akan dilakukan
 		 * secara otomatis pada method ini
 		 */
-		dataRekamMedis: Bundle;
+		dataRekamMedis: MRBundle;
 	}) {
 		const config = await this.requiredConfig('ppkCode');
 		const dataMR = await preprocess(data.dataRekamMedis, config);
@@ -54,7 +54,7 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
  * dan KODE PPK. Ini berdasarkan spesifikasi yang telah ditentukan
  * pada halaman TrustMark BPJS Kesehatan.
  */
-async function preprocess(data: Bundle, { consId, consSecret, ppkCode }: Config): Promise<string> {
+async function preprocess(data: MRBundle, { consId, consSecret, ppkCode }: Config): Promise<string> {
 	try {
 		const value = JSON.stringify(data);
 		const compressed = await gzip(value);
