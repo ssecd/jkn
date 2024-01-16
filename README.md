@@ -20,6 +20,12 @@ Instalasi paket dapat dilakukan dengan perintah berikut:
 npm install @ssecd/jkn
 ```
 
+Untuk dukungan _type_ pada API Rekam Medis, perlu menambahkan development dependensi `@types/fhir` dengan perintah:
+
+```bash
+npm install --save-dev @types/fhir
+```
+
 Instalasi juga dapat dilakukan menggunakan `PNPM` atau `YARN`
 
 ## Penggunaan
