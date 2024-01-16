@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.6.1
+
+### Patch Changes
+
+- be4257a: Fix Rekam Medis bundle types
+
 ## 0.6.0
 
 ### Minor Changes
