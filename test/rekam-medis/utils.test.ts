@@ -13,7 +13,7 @@ describe('utils', () => {
 	});
 
 	it.concurrent('decrypt()', async () => {
-		const keys = ['a', 'b', 'c'];
+		const keys = ['a', 'b', 'c'].join();
 		const result1 = encrypt('data1', keys);
 		const result2 = encrypt('data2', keys);
 
