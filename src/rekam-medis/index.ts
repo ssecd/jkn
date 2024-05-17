@@ -1,3 +1,6 @@
+import { existsSync, mkdirSync } from 'fs';
+import { writeFile } from 'fs/promises';
+import { inspect } from 'util';
 import { BaseApi } from '../base.js';
 import { Config } from '../fetcher.js';
 import { MRBundle } from './types.js';
@@ -26,9 +29,32 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
 		 * secara otomatis pada method ini
 		 */
 		dataRekamMedis: MRBundle;
+
+		/** log `dataMR` request data ke console atau file */
+		debug?: 'console' | 'file';
 	}) {
 		const config = await this.requiredConfig('ppkCode');
 		const dataMR = await preprocess(data.dataRekamMedis, config);
+
+		if (config.mode === 'development' && data.debug) {
+			const result = {
+				...data,
+				dataMR,
+				dataMRPlain: data.dataRekamMedis,
+				dataRekamMedis: undefined
+			};
+
+			if (data.debug === 'console') {
+				console.debug(inspect(result, false, null, true));
+			} else if (data.debug === 'file') {
+				if (!existsSync('debug')) mkdirSync('debug');
+				writeFile(
+					`debug/JKN_MR_BUNDLE_${data.nomorSEP}.json`,
+					JSON.stringify(result, null, 2)
+				).catch(console.error);
+			}
+		}
+
 		return this.send<{ keterangan: string }>({
 			path: `/eclaim/rekammedis/insert`,
 			method: 'POST',
@@ -54,7 +80,10 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
  * dan KODE PPK. Ini berdasarkan spesifikasi yang telah ditentukan
  * pada halaman TrustMark BPJS Kesehatan.
  */
-async function preprocess(data: MRBundle, { consId, consSecret, ppkCode }: Config): Promise<string> {
+async function preprocess(
+	data: MRBundle,
+	{ consId, consSecret, ppkCode }: Config
+): Promise<string> {
 	try {
 		const value = JSON.stringify(data);
 		const compressed = await gzip(value);
