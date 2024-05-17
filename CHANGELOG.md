@@ -1,5 +1,14 @@
 # @ssecd/jkn
 
+## 0.6.2
+
+### Patch Changes
+
+- 489d827: Bump dependencies
+- 7f6de5f: fix missing `eSEP` prop
+- 22a02d5: add debug option for EMR API
+- f9743b2: bundle declaration
+
 ## 0.6.1
 
 ### Patch Changes
