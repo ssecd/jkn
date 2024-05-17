@@ -52,9 +52,9 @@
 		"dts-buddy": "^0.4.7",
 		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
-		"prettier": "^3.1.1",
+		"prettier": "^3.2.4",
 		"typescript": "^5.3.3",
-		"vitest": "^0.34.6"
+		"vitest": "^1.2.1"
 	},
 	"dependencies": {
 		"lz-string": "^1.5.0"
