@@ -10,6 +10,7 @@ describe(
 				tahun: 2023,
 				jenisPelayanan: '2',
 				nomorSEP: '0089S0020523V000001',
+				debug: 'file',
 				dataRekamMedis: {
 					resourceType: 'Bundle',
 					id: '123456',
