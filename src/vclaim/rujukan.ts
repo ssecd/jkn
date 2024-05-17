@@ -547,6 +547,7 @@ interface DataRujukan {
 			dinsos: string | null;
 			noSKTM: string | null;
 			prolanisPRB: string | null;
+			eSEP: string | null;
 		};
 		jenisPeserta: {
 			keterangan: string;
