@@ -45,8 +45,8 @@ export default class JKN extends Fetcher {
 	}
 }
 
-type JKNResponseType<T extends object, K extends keyof T> = NonNullable<
-	// @ts-expect-error T[K] will always a method of class T
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type JKNResponseType<T extends Record<string, any>, K extends keyof T> = NonNullable<
 	'response' extends keyof Awaited<ReturnType<T[K]>> ? Awaited<ReturnType<T[K]>>['response'] : never
 >;
 

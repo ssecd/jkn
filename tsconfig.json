@@ -7,10 +7,10 @@
 		"strict": true,
 		"module": "NodeNext",
 		"target": "esnext",
-		"lib": ["esnext", "DOM"],
+		"lib": ["esnext"],
 		"outDir": "dist",
 		"rootDirs": ["."],
-		"declaration": true,
+		"declaration": false,
 		"stripInternal": true
 	},
 	"include": [
