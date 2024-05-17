@@ -10,7 +10,7 @@
 		"lib": ["esnext"],
 		"outDir": "dist",
 		"rootDirs": ["."],
-		"declaration": true,
+		"declaration": false,
 		"stripInternal": true
 	},
 	"include": [
