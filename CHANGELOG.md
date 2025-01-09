@@ -1,5 +1,12 @@
 # @ssecd/jkn
 
+## 0.6.3
+
+### Patch Changes
+
+- e1f1269: fix module exports (#89)
+- e938e83: bump dependencies
+
 ## 0.6.2
 
 ### Patch Changes
