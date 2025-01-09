@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # skip test for now
+      # skip test for now, we can always run it locally
       # - name: Test
       #   run: pnpm test
 

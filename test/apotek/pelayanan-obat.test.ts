@@ -3,6 +3,7 @@ import jkn from '../jkn';
 
 describe(
 	'Apotek - Pelayanan Obat',
+	{ timeout: 25_000 },
 	() => {
 		it.concurrent('daftar() - 201 no data', async () => {
 			const result = await jkn.apotek.pelayananObat.daftar({
@@ -19,6 +20,5 @@ describe(
 			});
 			expect(result.metaData.code).toBe('201');
 		});
-	},
-	{ timeout: 25_000 }
+	}
 );
