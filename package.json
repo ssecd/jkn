@@ -44,26 +44,25 @@
 		"import": "./dist/index.js"
 	},
 	"devDependencies": {
-		"@changesets/cli": "^2.27.1",
-		"@types/node": "^20.10.5",
-		"@typescript-eslint/eslint-plugin": "^6.15.0",
-		"@typescript-eslint/parser": "^6.15.0",
+		"@changesets/cli": "^2.27.11",
+		"@eslint/eslintrc": "^3.2.0",
+		"@eslint/js": "^9.17.0",
+		"@types/node": "^22.10.5",
+		"@typescript-eslint/eslint-plugin": "^8.19.1",
+		"@typescript-eslint/parser": "^8.19.1",
 		"dotenv": "^16.3.1",
-		"dts-buddy": "^0.4.7",
-		"eslint": "^8.56.0",
+		"dts-buddy": "^0.5.4",
+		"eslint": "^9.17.0",
 		"eslint-config-prettier": "^9.1.0",
-		"prettier": "^3.2.4",
-		"typescript": "^5.3.3",
-		"vitest": "^1.2.1"
+		"globals": "^15.14.0",
+		"prettier": "^3.4.2",
+		"typescript": "^5.7.3",
+		"vitest": "^2.1.8"
 	},
 	"dependencies": {
 		"lz-string": "^1.5.0"
 	},
 	"peerDependencies": {
 		"@types/fhir": "^0.0.40"
-	},
-	"packageManager": "pnpm@8.6.1",
-	"engines": {
-		"pnpm": "^8.0.0"
 	}
 }
