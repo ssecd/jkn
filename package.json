@@ -67,5 +67,6 @@
 	},
 	"peerDependencies": {
 		"@types/fhir": "^0.0.40"
-	}
+	},
+	"packageManager": "pnpm@9.15.3"
 }
