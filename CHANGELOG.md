@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.6.4
+
+### Patch Changes
+
+- 5bdb389: update dependencies
+
 ## 0.6.3
 
 ### Patch Changes
