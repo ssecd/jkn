@@ -21,6 +21,14 @@ describe('VClaim - SEP', { timeout: 25_000 }, () => {
 		expect(result.response?.noSep).toBe('0089S0020523V000001');
 	});
 
+	it.concurrent('cariByRujukan() - 200 ok', async () => {
+		const result = await jkn.vclaim.sep.cariByRujukan({
+			nomorRujukan: '061201030423P000001'
+		});
+		expect(result.metaData.code).toBe('200');
+		expect(result.response?.noRujukan).toBe('061201030423P000001');
+	});
+
 	it.concurrent('suplesiJasaRaharja() - 201 no data', async () => {
 		const result = await jkn.vclaim.sep.suplesiJasaRaharja({
 			nomorKartu: '0002084717968',
