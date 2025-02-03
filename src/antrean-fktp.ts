@@ -46,19 +46,47 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 		});
 	}
 
+	/**
+	 * Tambah antrean baru
+	 */
 	async tambah(data: {
+		/** nomor kartu peserta/pasien BPJS, diisi kosong jika Non-JKN/BPJS */
 		nomorkartu: string;
+
+		/** NIK atau nomor induk kependudukan pasien */
 		nik: string;
+
+		/** nomor handphone pasien */
 		nohp: string;
+
+		/** kode poli sub-spesialis BPJS */
 		kodepoli: string;
+
+		/** nama poli sesuai kode poli */
 		namapoli: string;
+
+		/** nomor rekam medis pasien */
 		norm: string;
+
+		/** tanggal periksa atau pelayanan */
 		tanggalperiksa: string;
+
+		/** kode dokter BPJS */
 		kodedokter: number;
+
+		/** nama dokter sesuai kode dokter */
 		namadokter: string;
+
+		/** jam praktik dokter */
 		jampraktek: string;
+
+		/** nomor antrean lengkap */
 		nomorantrean: string;
+
+		/** hanya angka urut antrean sesuai nomor antrean */
 		angkaantrean: number;
+
+		/** informasi untuk pasien */
 		keterangan: string;
 	}) {
 		return this.send({
@@ -68,6 +96,10 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 		});
 	}
 
+	/**
+	 * Update status antrean untuk pernyataan hadir atau
+	 * tidak hadir dalam pelayanan/pemeriksaan
+	 */
 	async updateStatus(data: {
 		/** tanggal periksa atau pelayanan */
 		tanggalperiksa: string;
