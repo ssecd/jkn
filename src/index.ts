@@ -1,3 +1,4 @@
+import { AntreanFKTP } from './antrean-fktp.js';
 import { Antrean } from './antrean.js';
 import { Aplicares } from './aplicares.js';
 import { Apotek } from './apotek/index.js';
@@ -34,6 +35,10 @@ export default class JKN extends Fetcher {
 
 	get pcare(): PCare {
 		return this.cache.get('pcare', PCare);
+	}
+
+	get antreanFktp(): AntreanFKTP {
+		return this.cache.get('antrean-fktp', AntreanFKTP);
 	}
 
 	get icare(): ICare {

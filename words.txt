@@ -96,6 +96,7 @@ Kunj
 kuotajkn
 kuotanonjkn
 laka
+lastsep
 lastupdate
 LINGGAU
 listobat

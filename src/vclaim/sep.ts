@@ -295,73 +295,21 @@ export class SEP extends VClaimBaseApi {
 		/** nomor SEP */
 		nomor: string;
 	}) {
-		return this.send<{
-			noSep: string;
-			tglSep: string;
-			jnsPelayanan: string;
-			kelasRawat: string;
-			diagnosa: string;
-			noRujukan: string;
-			poli: string;
-			poliEksekutif: string;
-			catatan: string;
-			penjamin: string | null;
-			kdStatusKecelakaan: string;
-			nmstatusKecelakaan: string;
-			lokasiKejadian: {
-				kdKab: string | null;
-				kdKec: string | null;
-				kdProp: string | null;
-				ketKejadian: string | null;
-				lokasi: string | null;
-				tglKejadian: string | null;
-			};
-			dpjp: {
-				kdDPJP: string;
-				nmDPJP: string;
-			};
-			peserta: {
-				asuransi: string | null;
-				hakKelas: string;
-				jnsPeserta: string;
-				kelamin: string;
-				nama: string;
-				noKartu: string;
-				noMr: string;
-				tglLahir: string;
-			};
-			klsRawat: {
-				klsRawatHak: string;
-				klsRawatNaik: string | null;
-				pembiayaan: string | null;
-				penanggungJawab: string | null;
-			};
-			kontrol: {
-				kdDokter: string;
-				nmDokter: string;
-				noSurat: string;
-			};
-			cob: string;
-			katarak: string;
-			tujuanKunj: {
-				kode: string;
-				nama: string;
-			};
-			flagProcedure: {
-				kode: string;
-				nama: string;
-			};
-			kdPenunjang: {
-				kode: string;
-				nama: string;
-			};
-			assestmenPel: {
-				kode: string;
-				nama: string;
-			};
-			eSEP: string;
-		}>({
+		return this.send<SEPDetail>({
 			path: `/SEP/${params.nomor}`,
+			method: 'GET'
+		});
+	}
+
+	/**
+	 * Detail data SEP terakhir berdasarkan nomor rujukan
+	 */
+	async cariByRujukan(params: {
+		/** Nomor rujukan */
+		nomorRujukan: string;
+	}) {
+		return this.send<SEPDetail>({
+			path: `/Rujukan/lastsep/norujukan/${params.nomorRujukan}`,
 			method: 'GET'
 		});
 	}
@@ -1193,4 +1141,72 @@ export class SEP extends VClaimBaseApi {
 			data: { request: { t_sep: data } }
 		});
 	}
+}
+
+interface SEPDetail {
+	noSep: string;
+	tglSep: string;
+	jnsPelayanan: string;
+	kelasRawat: string;
+	diagnosa: string;
+	noRujukan: string;
+	poli: string;
+	poliEksekutif: string;
+	catatan: string;
+	penjamin: string | null;
+	kdStatusKecelakaan: string;
+	nmstatusKecelakaan: string;
+	informasi: string | null;
+	lokasiKejadian: {
+		kdKab: string | null;
+		kdKec: string | null;
+		kdProp: string | null;
+		ketKejadian: string | null;
+		lokasi: string | null;
+		tglKejadian: string | null;
+	};
+	dpjp: {
+		kdDPJP: string;
+		nmDPJP: string;
+	};
+	peserta: {
+		asuransi: string | null;
+		hakKelas: string;
+		jnsPeserta: string;
+		kelamin: string;
+		nama: string;
+		noKartu: string;
+		noMr: string;
+		tglLahir: string;
+	};
+	klsRawat: {
+		klsRawatHak: string;
+		klsRawatNaik: string | null;
+		pembiayaan: string | null;
+		penanggungJawab: string | null;
+	};
+	kontrol: {
+		kdDokter: string;
+		nmDokter: string;
+		noSurat: string;
+	};
+	cob: string;
+	katarak: string;
+	tujuanKunj: {
+		kode: string;
+		nama: string;
+	};
+	flagProcedure: {
+		kode: string;
+		nama: string;
+	};
+	kdPenunjang: {
+		kode: string;
+		nama: string;
+	};
+	assestmenPel: {
+		kode: string;
+		nama: string;
+	};
+	eSEP: string;
 }
