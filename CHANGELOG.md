@@ -1,5 +1,15 @@
 # @ssecd/jkn
 
+## 0.7.0
+
+### Minor Changes
+
+- 08bd641: implement new endpoints (#99)
+
+### Patch Changes
+
+- 5bdb389: update dependencies
+
 ## 0.6.3
 
 ### Patch Changes
