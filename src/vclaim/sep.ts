@@ -1156,6 +1156,7 @@ interface SEPDetail {
 	penjamin: string | null;
 	kdStatusKecelakaan: string;
 	nmstatusKecelakaan: string;
+	informasi: string | null;
 	lokasiKejadian: {
 		kdKab: string | null;
 		kdKec: string | null;
