@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.7.1
+
+### Patch Changes
+
+- 7bc46c1: fix `vclaim.rancanaKontrol.dataByTanggal` response type
+
 ## 0.7.0
 
 ### Minor Changes
