@@ -338,7 +338,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 				namaDokter: string;
 				noKartu: string;
 				nama: string;
-			};
+			}[];
 		}>({
 			path: `/RencanaKontrol/ListRencanaKontrol/tglAwal/${params.awal}/tglAkhir/${params.akhir}/filter/${params.filter}`,
 			method: 'GET'
