@@ -281,27 +281,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		filter: number;
 	}) {
 		const bulan = String(params.bulan || 0).padStart(2, '0');
-		return this.send<{
-			list: {
-				noSuratKontrol: string;
-				jnsPelayanan: string;
-				jnsKontrol: string;
-				namaJnsKontrol: string;
-				tglRencanaKontrol: string;
-				tglTerbitKontrol: string;
-				noSepAsalKontrol: string;
-				poliAsal: string;
-				namaPoliAsal: string;
-				poliTujuan: string;
-				namaPoliTujuan: string;
-				tglSEP: string;
-				kodeDokter: string;
-				namaDokter: string;
-				noKartu: string;
-				nama: string;
-				terbitSEP: string;
-			}[];
-		}>({
+		return this.send<{ list: RencanaKontrolListItem[] }>({
 			path: `/RencanaKontrol/ListRencanaKontrol/Bulan/${bulan}/Tahun/${params.tahun}/Nokartu/${params.nomorKartu}/filter/${params.filter}`,
 			method: 'GET'
 		});
@@ -320,26 +300,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		/** jenis filter (1 = tanggal entri) (2 = tanggal rencana kontrol) */
 		filter: number;
 	}) {
-		return this.send<{
-			list: {
-				noSuratKontrol: string;
-				jnsPelayanan: string;
-				jnsKontrol: string;
-				namaJnsKontrol: string;
-				tglRencanaKontrol: string;
-				tglTerbitKontrol: string;
-				noSepAsalKontrol: string;
-				poliAsal: string;
-				namaPoliAsal: string;
-				poliTujuan: string;
-				namaPoliTujuan: string;
-				tglSEP: string;
-				kodeDokter: string;
-				namaDokter: string;
-				noKartu: string;
-				nama: string;
-			}[];
-		}>({
+		return this.send<{ list: RencanaKontrolListItem[] }>({
 			path: `/RencanaKontrol/ListRencanaKontrol/tglAwal/${params.awal}/tglAkhir/${params.akhir}/filter/${params.filter}`,
 			method: 'GET'
 		});
@@ -397,4 +358,24 @@ export class RencanaKontrol extends VClaimBaseApi {
 			method: 'GET'
 		});
 	}
+}
+
+interface RencanaKontrolListItem {
+	noSuratKontrol: string;
+	jnsPelayanan: string;
+	jnsKontrol: string;
+	namaJnsKontrol: string;
+	tglRencanaKontrol: string;
+	tglTerbitKontrol: string;
+	noSepAsalKontrol: string;
+	poliAsal: string;
+	namaPoliAsal: string;
+	poliTujuan: string;
+	namaPoliTujuan: string;
+	tglSEP: string;
+	kodeDokter: string;
+	namaDokter: string;
+	noKartu: string;
+	nama: string;
+	terbitSEP: 'Belum' | 'Sudah' | string;
 }
