@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.7.2
+
+### Patch Changes
+
+- 3c4856a: fix vclaim missing type (#103)
+
 ## 0.7.1
 
 ### Patch Changes
