@@ -1,5 +1,5 @@
-import { createDecipheriv, createHash, createHmac } from 'crypto';
 import lz from 'lz-string';
+import { createDecipheriv, createHash, createHmac } from 'node:crypto';
 
 type MaybePromise<T> = T | Promise<T>;
 
