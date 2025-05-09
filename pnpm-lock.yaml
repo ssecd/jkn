@@ -33,9 +33,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.22.0
         version: 8.22.0(eslint@9.19.0)(typescript@5.7.3)
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
       dts-buddy:
         specifier: ^0.5.4
         version: 0.5.4(typescript@5.7.3)
@@ -656,10 +653,6 @@ packages:
   dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
     engines: {node: '>=8'}
-
-  dotenv@16.4.7:
-    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
-    engines: {node: '>=12'}
 
   dts-buddy@0.5.4:
     resolution: {integrity: sha512-a3jJYbMXK98aJvhdV/v+tEKTTEJXXWtMjrl5L8jJL7rnZzGtPA6JNHJZ5//NVRw4JiB5T10Ie5T7h/QsP3aaYw==}
@@ -1931,8 +1924,6 @@ snapshots:
   dir-glob@3.0.1:
     dependencies:
       path-type: 4.0.0
-
-  dotenv@16.4.7: {}
 
   dts-buddy@0.5.4(typescript@5.7.3):
     dependencies:
