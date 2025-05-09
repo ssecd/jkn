@@ -1,6 +1,6 @@
-import { existsSync, mkdirSync } from 'fs';
-import { writeFile } from 'fs/promises';
-import { inspect } from 'util';
+import { existsSync, mkdirSync } from 'node:fs';
+import { writeFile } from 'node:fs/promises';
+import { inspect } from 'node:util';
 import { BaseApi } from '../base.js';
 import { Config } from '../fetcher.js';
 import { MRBundle } from './types.js';
