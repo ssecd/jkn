@@ -7,7 +7,7 @@ describe('RekamMedis', { timeout: 25_000 }, () => {
 			bulan: 5,
 			tahun: 2023,
 			jenisPelayanan: '2',
-			nomorSEP: '0089S0020523V000001',
+			nomorSEP: process.env.TEST_SEP_NUM!,
 			debug: 'file',
 			dataRekamMedis: {
 				resourceType: 'Bundle',
@@ -17,7 +17,7 @@ describe('RekamMedis', { timeout: 25_000 }, () => {
 				},
 				identifier: {
 					system: 'sep',
-					value: '0089S0020523V000001'
+					value: process.env.TEST_SEP_NUM!
 				},
 				type: 'document',
 				entry: [
@@ -36,9 +36,9 @@ describe('RekamMedis', { timeout: 25_000 }, () => {
 											}
 										]
 									},
-									value: '010038',
+									value: process.env.TEST_RM_NUM!,
 									assigner: {
-										display: 'KU MATA SILAMPARI SRIWIJAYA EC'
+										display: process.env.TEST_FASKES_NAME!
 									}
 								},
 								{
@@ -51,7 +51,7 @@ describe('RekamMedis', { timeout: 25_000 }, () => {
 											}
 										]
 									},
-									value: '0002084717968',
+									value: process.env.TEST_PATIENT_JKN_CARD_NUM!,
 									assigner: {
 										display: 'BPJS KESEHATAN'
 									}
@@ -66,7 +66,7 @@ describe('RekamMedis', { timeout: 25_000 }, () => {
 											}
 										]
 									},
-									value: '3301097112650109',
+									value: process.env.TEST_PATIENT_NIK!,
 									assigner: {
 										display: 'KEMENDAGRI'
 									}
@@ -75,7 +75,7 @@ describe('RekamMedis', { timeout: 25_000 }, () => {
 							name: [
 								{
 									use: 'official',
-									text: 'KERIYAH'
+									text: process.env.TEST_PATIENT_NAME
 								}
 							],
 							gender: 'female',
@@ -92,7 +92,7 @@ describe('RekamMedis', { timeout: 25_000 }, () => {
 								{
 									system: 'phone',
 									use: 'mobile',
-									value: '089695791118'
+									value: process.env.TEST_PATIENT_PHONE
 								}
 							]
 						}
