@@ -1,5 +1,13 @@
 # @ssecd/jkn
 
+## 0.7.3
+
+### Patch Changes
+
+- 1a5d357: Standarize module import
+- 6d08ed2: Use native env file loader
+- addca80: Update dependencies
+
 ## 0.7.2
 
 ### Patch Changes
