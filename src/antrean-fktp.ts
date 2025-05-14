@@ -2,6 +2,9 @@ import { BaseApi } from './base.js';
 
 export class AntreanFKTP extends BaseApi<'pcare'> {
 	protected type = 'pcare' as const;
+	private get name() {
+		return this.constructor.name + ' -> ';
+	}
 
 	/**
 	 * Melihat referensi poli berdasarkan tanggal pelayanan
@@ -18,7 +21,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 				kodepoli: string;
 			}[];
 		}>({
-			name: 'Referensi Poli',
+			name: this.name + 'Referensi Poli',
 			path: `/ref/poli/tanggal/${params.tanggal}`,
 			method: 'GET'
 		});
@@ -42,7 +45,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 				kapasitas: number;
 			}[];
 		}>({
-			name: 'Referensi Dokter',
+			name: this.name + 'Referensi Dokter',
 			path: `/ref/dokter/kodepoli/${params.kodePoli}/tanggal/${params.tanggal}`,
 			method: 'GET'
 		});
@@ -92,7 +95,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 		keterangan: string;
 	}) {
 		return this.send({
-			name: 'Tambah Antrean',
+			name: this.name + 'Tambah Antrean',
 			path: `/antrean/add`,
 			method: 'POST',
 			data
@@ -125,7 +128,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 		waktu: number;
 	}) {
 		return this.send({
-			name: 'Update Status / Panggil Antrean',
+			name: this.name + 'Update Status / Panggil Antrean',
 			path: `/antrean/panggil`,
 			method: 'POST',
 			data
@@ -149,7 +152,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 		alasan: string;
 	}) {
 		return this.send({
-			name: 'Batal Antrean',
+			name: this.name + 'Batal Antrean',
 			path: `/antrean/batal`,
 			method: 'POST',
 			data
