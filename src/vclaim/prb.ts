@@ -2,6 +2,10 @@ import { VClaimBaseApi } from './base.js';
 
 // TODO: make generic request and response data type as possible
 export class PRB extends VClaimBaseApi {
+	private get name() {
+		return this.constructor.name + ' -> ';
+	}
+
 	/**
 	 * Insert data rujuk balik
 	 */
@@ -71,6 +75,7 @@ export class PRB extends VClaimBaseApi {
 			saran: string;
 			tglSRB: string;
 		}>({
+			name: this.name + 'Insert PRB',
 			path: '/PRB/insert',
 			method: 'POST',
 			data: { request: { t_prb: data } }
@@ -114,6 +119,7 @@ export class PRB extends VClaimBaseApi {
 		}[];
 	}) {
 		return this.send<string>({
+			name: this.name + 'Update PRB',
 			path: '/PRB/Update',
 			method: 'PUT',
 			data: { request: { t_prb: data } }
@@ -134,6 +140,7 @@ export class PRB extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Hapus PRB',
 			path: '/PRB/Delete',
 			method: 'DELETE',
 			data: { request: { t_prb: data } }
@@ -183,6 +190,7 @@ export class PRB extends VClaimBaseApi {
 				tglSRB: string;
 			};
 		}>({
+			name: this.name + 'Cari by Nomor SRB',
 			path: `/prb/${params.nomorSrb}/nosep/${params.nomorSep}`,
 			method: 'GET'
 		});
@@ -224,6 +232,7 @@ export class PRB extends VClaimBaseApi {
 				}[];
 			};
 		}>({
+			name: this.name + 'Cari by Tanggal SRB',
 			path: `/prb/tglMulai/${params.awal}/tglAkhir/${params.akhir}`,
 			method: 'GET'
 		});

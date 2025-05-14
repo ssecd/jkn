@@ -2,6 +2,10 @@ import { VClaimBaseApi } from './base.js';
 
 // TODO: make generic request and response data type as possible
 export class Rujukan extends VClaimBaseApi {
+	private get name() {
+		return this.constructor.name + ' -> ';
+	}
+
 	/**
 	 * Pencarian data rujukan berdasarkan nomor rujukan
 	 */
@@ -22,6 +26,7 @@ export class Rujukan extends VClaimBaseApi {
 			2: `/Rujukan/RS/${params.nomor}`
 		};
 		return this.send<{ rujukan: DataRujukan }>({
+			name: this.name + `Berdasarkan Nomor (${params.sumber})`,
 			path: paths[params.sumber],
 			method: 'GET'
 		});
@@ -47,6 +52,7 @@ export class Rujukan extends VClaimBaseApi {
 			2: `/Rujukan/RS/Peserta/${params.nomor}`
 		};
 		return this.send<{ rujukan: DataRujukan }>({
+			name: this.name + `Berdasarkan No. Kartu (${params.sumber})`,
 			path: paths[params.sumber],
 			method: 'GET'
 		});
@@ -72,6 +78,7 @@ export class Rujukan extends VClaimBaseApi {
 			2: `/Rujukan/RS/List/Peserta/${params.nomor}`
 		};
 		return this.send<{ rujukan: DataRujukan[] }>({
+			name: this.name + `Berdasarkan No. Kartu (${params.sumber}) Multi`,
 			path: paths[params.sumber],
 			method: 'GET'
 		});
@@ -143,6 +150,7 @@ export class Rujukan extends VClaimBaseApi {
 				};
 			};
 		}>({
+			name: this.name + 'Insert',
 			path: `/Rujukan/insert`,
 			method: 'POST',
 			data: { request: { t_rujukan: data } }
@@ -181,6 +189,7 @@ export class Rujukan extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Update',
 			path: `/Rujukan/update`,
 			method: 'PUT',
 			data: { request: { t_rujukan: data } }
@@ -198,6 +207,7 @@ export class Rujukan extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Hapus',
 			path: `/Rujukan/delete`,
 			method: 'DELETE',
 			data: { request: { t_rujukan: data } }
@@ -230,6 +240,7 @@ export class Rujukan extends VClaimBaseApi {
 				tglrujukan_berakhir: string;
 			};
 		}>({
+			name: this.name + 'Insert Rujukan Khusus',
 			path: `/Rujukan/Khusus/insert`,
 			method: 'POST',
 			data
@@ -250,6 +261,7 @@ export class Rujukan extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Hapus Rujukan Khusus',
 			path: `/Rujukan/Khusus/delete`,
 			method: 'POST',
 			data: { request: { t_rujukan: data } }
@@ -277,6 +289,7 @@ export class Rujukan extends VClaimBaseApi {
 				tglrujukan_berakhir: string;
 			}[];
 		}>({
+			name: this.name + 'List Rujukan Khusus',
 			path: `/Rujukan/Khusus/List/Bulan/${params.bulan}/Tahun/${params.tahun}`,
 			method: 'GET'
 		});
@@ -350,6 +363,7 @@ export class Rujukan extends VClaimBaseApi {
 				};
 			};
 		}>({
+			name: this.name + 'Insert V2',
 			path: `/Rujukan/2.0/insert`,
 			method: 'POST',
 			data: { request: { t_rujukan: data } }
@@ -391,6 +405,7 @@ export class Rujukan extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Update V2',
 			path: `/Rujukan/2.0/Update`,
 			method: 'PUT',
 			data: { request: { t_rujukan: data } }
@@ -416,6 +431,7 @@ export class Rujukan extends VClaimBaseApi {
 				persentase: string;
 			}[];
 		}>({
+			name: this.name + 'List Spesialistik Rujukan',
 			path: `/Rujukan/ListSpesialistik/PPKRujukan/${params.kodePpk}/TglRujukan/${params.tanggal}`,
 			method: 'GET'
 		});
@@ -434,6 +450,7 @@ export class Rujukan extends VClaimBaseApi {
 				namaSarana: string;
 			}[];
 		}>({
+			name: this.name + 'List Sarana',
 			path: `/Rujukan/ListSarana/PPKRujukan/${params.kodePpk}`,
 			method: 'GET'
 		});
@@ -461,6 +478,7 @@ export class Rujukan extends VClaimBaseApi {
 				namaPpkDirujuk: string;
 			}[];
 		}>({
+			name: this.name + 'List Rujukan Keluar Faskes',
 			path: `/Rujukan/Keluar/List/tglMulai/${params.awal}/tglAkhir/${params.akhir}`,
 			method: 'GET'
 		});
@@ -515,6 +533,7 @@ export class Rujukan extends VClaimBaseApi {
 		nomor: string;
 	}) {
 		return this.send<{ jumlahSEP: string }>({
+			name: this.name + 'List Rujukan Keluar Faskes Berdasarkan No. Rujukan',
 			path: `/Rujukan/JumlahSEP/${params.jenis}/${params.nomor}`,
 			method: 'GET'
 		});

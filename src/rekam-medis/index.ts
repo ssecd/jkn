@@ -56,6 +56,7 @@ export class RekamMedis extends BaseApi<'rekamMedis'> {
 		}
 
 		return this.send<{ keterangan: string }>({
+			name: 'Insert Medical Record',
 			path: `/eclaim/rekammedis/insert`,
 			method: 'POST',
 			skipContentTypeHack: true,

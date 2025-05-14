@@ -2,6 +2,10 @@ import { VClaimBaseApi } from './base.js';
 
 // TODO: make generic request and response data type as possible
 export class RencanaKontrol extends VClaimBaseApi {
+	private get name() {
+		return this.constructor.name + ' -> ';
+	}
+
 	/**
 	 * Insert rencana kontrol
 	 */
@@ -35,6 +39,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 			kelamin: string;
 			tglLahir: string;
 		}>({
+			name: this.name + 'Insert',
 			path: `/RencanaKontrol/insert`,
 			method: 'POST',
 			data: { request: data }
@@ -77,6 +82,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 			kelamin: string;
 			tglLahir: string;
 		}>({
+			name: this.name + 'Update',
 			path: `/RencanaKontrol/Update`,
 			method: 'PUT',
 			data: { request: data }
@@ -94,6 +100,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<null>({
+			name: this.name + 'Hapus',
 			path: `/RencanaKontrol/Delete`,
 			method: 'DELETE',
 			data: { request: { t_suratkontrol: data } }
@@ -129,6 +136,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 			tglLahir: string;
 			namaDiagnosa: string | null;
 		}>({
+			name: this.name + 'Insert SPRI',
 			path: `/RencanaKontrol/InsertSPRI`,
 			method: 'POST',
 			data: { request: data }
@@ -164,6 +172,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 			tglLahir: string;
 			namaDiagnosa: string | null;
 		}>({
+			name: this.name + 'Update SPRI',
 			path: `/RencanaKontrol/UpdateSPRI`,
 			method: 'PUT',
 			data: { request: data }
@@ -202,6 +211,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 				tglRujukan: string;
 			};
 		}>({
+			name: this.name + 'Cari SEP',
 			path: `/RencanaKontrol/nosep/${params.nomor}`,
 			method: 'GET'
 		});
@@ -259,6 +269,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 				};
 			};
 		}>({
+			name: this.name + 'Cari Surat Kontrol',
 			path: `/RencanaKontrol/noSuratKontrol/${params.nomor}`,
 			method: 'GET'
 		});
@@ -282,6 +293,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 	}) {
 		const bulan = String(params.bulan || 0).padStart(2, '0');
 		return this.send<{ list: RencanaKontrolListItem[] }>({
+			name: this.name + 'Data Berdasarkan No. Kartu',
 			path: `/RencanaKontrol/ListRencanaKontrol/Bulan/${bulan}/Tahun/${params.tahun}/Nokartu/${params.nomorKartu}/filter/${params.filter}`,
 			method: 'GET'
 		});
@@ -301,6 +313,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		filter: number;
 	}) {
 		return this.send<{ list: RencanaKontrolListItem[] }>({
+			name: this.name + 'Data Berdasarkan Tanggal',
 			path: `/RencanaKontrol/ListRencanaKontrol/tglAwal/${params.awal}/tglAkhir/${params.akhir}/filter/${params.filter}`,
 			method: 'GET'
 		});
@@ -328,6 +341,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 				persentase: '0.00';
 			}[];
 		}>({
+			name: this.name + 'Data Poli/Spesialistik',
 			path: `/RencanaKontrol/ListSpesialistik/JnsKontrol/${params.jenis}/nomor/${params.nomor}/TglRencanaKontrol/${params.tanggal}`,
 			method: 'GET'
 		});
@@ -354,6 +368,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 				kapasitas: string;
 			}[];
 		}>({
+			name: this.name + 'Data Dokter',
 			path: `/RencanaKontrol/JadwalPraktekDokter/JnsKontrol/${params.jenis}/KdPoli/${params.kodePoli}/TglRencanaKontrol/${params.tanggal}`,
 			method: 'GET'
 		});

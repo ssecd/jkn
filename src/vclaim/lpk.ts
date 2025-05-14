@@ -1,6 +1,10 @@
 import { VClaimBaseApi } from './base.js';
 
 export class LPK extends VClaimBaseApi {
+	private get name() {
+		return this.constructor.name + ' -> ';
+	}
+
 	/**
 	 * Insert Rujukan
 	 *
@@ -8,6 +12,7 @@ export class LPK extends VClaimBaseApi {
 	 */
 	async insert(data: DataLPK) {
 		return this.send<string>({
+			name: this.name + 'Insert LPK',
 			path: '/LPK/insert',
 			method: 'POST',
 			data: { request: { t_lpk: data } }
@@ -21,6 +26,7 @@ export class LPK extends VClaimBaseApi {
 	 */
 	async update(data: DataLPK) {
 		return this.send<string>({
+			name: this.name + 'Update LPK',
 			path: '/LPK/update',
 			method: 'PUT',
 			data: { request: { t_lpk: data } }
@@ -35,6 +41,7 @@ export class LPK extends VClaimBaseApi {
 		nomorSep: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Delete LPK',
 			path: '/LPK/delete',
 			method: 'DELETE',
 			data: { request: { t_lpk: { noSep: params.nomorSep } } }
@@ -121,6 +128,7 @@ export class LPK extends VClaimBaseApi {
 				}[];
 			};
 		}>({
+			name: this.name + 'Data Pengajuan Lembar Klaim',
 			path: `/LPK/TglMasuk/${params.tanggal}/JnsPelayanan/${params.jenis}`,
 			method: 'GET'
 		});
