@@ -1,6 +1,10 @@
 import { ApotekBaseApi } from './base.js';
 
 export class PelayananObat extends ApotekBaseApi {
+	private get name() {
+		return this.constructor.name + ' -> ';
+	}
+
 	/**
 	 * Hapus pelayanan obat
 	 */
@@ -14,6 +18,7 @@ export class PelayananObat extends ApotekBaseApi {
 		tipeobat: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Hapus',
 			path: `/pelayanan/obat/hapus/`,
 			method: 'DELETE',
 			headers: { 'Content-Type': 'application/json' },
@@ -52,6 +57,7 @@ export class PelayananObat extends ApotekBaseApi {
 				};
 			};
 		}>({
+			name: this.name + 'List/Daftar',
 			path: `/pelayanan/obat/daftar/${params.nomorSep}`,
 			method: 'GET'
 		});
@@ -85,6 +91,7 @@ export class PelayananObat extends ApotekBaseApi {
 				}[];
 			};
 		}>({
+			name: this.name + 'Riwayat',
 			path: `/riwayatobat/${params.awal}/${params.akhir}/${params.nomorKartu}`,
 			method: 'GET'
 		});

@@ -1,6 +1,10 @@
 import { ApotekBaseApi } from './base.js';
 
 export class Monitoring extends ApotekBaseApi {
+	private get name() {
+		return this.constructor.name + ' -> ';
+	}
+
 	/**
 	 * Data klaim resep
 	 */
@@ -35,6 +39,7 @@ export class Monitoring extends ApotekBaseApi {
 				}[];
 			};
 		}>({
+			name: this.name + 'Data Klaim',
 			path: `/monitoring/klaim/${params.bulan}/${params.tahun}/${params.jenisObat}/${params.status}`,
 			method: 'GET'
 		});

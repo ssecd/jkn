@@ -1,6 +1,10 @@
 import { ApotekBaseApi } from './base.js';
 
 export class Referensi extends ApotekBaseApi {
+	private get name() {
+		return this.constructor.name + ' -> ';
+	}
+
 	/**
 	 * Daftar obat DPHO
 	 */
@@ -18,6 +22,7 @@ export class Referensi extends ApotekBaseApi {
 				aktif: string | null;
 			}[];
 		}>({
+			name: this.name + 'DPHO',
 			path: `/referensi/dpho`,
 			method: 'GET'
 		});
@@ -36,6 +41,7 @@ export class Referensi extends ApotekBaseApi {
 				nama: string;
 			}[];
 		}>({
+			name: this.name + 'Poli',
 			path: `/referensi/poli/${params.keyword}`,
 			method: 'GET'
 		});
@@ -61,6 +67,7 @@ export class Referensi extends ApotekBaseApi {
 				nama: string;
 			}[];
 		}>({
+			name: this.name + 'Fasilitas Kesehatan',
 			path: `/referensi/ppk/${params.jenis}/${params.nama}`,
 			method: 'GET'
 		});
@@ -88,6 +95,7 @@ export class Referensi extends ApotekBaseApi {
 			nippetugasapotek: string;
 			checkstock: 'True' | 'False';
 		}>({
+			name: this.name + 'Setting',
 			path: `/referensi/settingppk/read/${params.kodeApotek}`,
 			method: 'GET'
 		});
@@ -103,6 +111,7 @@ export class Referensi extends ApotekBaseApi {
 				nama: string;
 			}[];
 		}>({
+			name: this.name + 'Spesialistik',
 			path: `/referensi/spesialistik`,
 			method: 'GET'
 		});
@@ -129,6 +138,7 @@ export class Referensi extends ApotekBaseApi {
 				harga: string;
 			}[];
 		}>({
+			name: this.name + 'Cari Obat',
 			path: `/referensi/obat/${param.jenis}/${param.tanggal}/${filter}`,
 			method: 'GET'
 		});

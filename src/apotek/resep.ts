@@ -1,6 +1,10 @@
 import { ApotekBaseApi } from './base.js';
 
 export class Resep extends ApotekBaseApi {
+	private get name() {
+		return this.constructor.name + ' -> ';
+	}
+
 	/**
 	 * Simpan data resep
 	 */
@@ -49,6 +53,7 @@ export class Resep extends ApotekBaseApi {
 			byVerRsp: string;
 			tglEntry: string;
 		}>({
+			name: this.name + 'Simpan',
 			path: `/sjpresep/v3/insert`,
 			method: 'POST',
 			data
@@ -68,6 +73,7 @@ export class Resep extends ApotekBaseApi {
 		noresep: string;
 	}) {
 		return this.send<null>({
+			name: this.name + 'Hapus',
 			path: `/hapusresep`,
 			method: 'DELETE',
 			headers: { 'Content-Type': 'application/json' },
@@ -109,6 +115,7 @@ export class Resep extends ApotekBaseApi {
 				FASKESASAL: string;
 			};
 		}>({
+			name: this.name + 'List/Daftar',
 			path: `/daftarresep`,
 			method: 'POST',
 			data

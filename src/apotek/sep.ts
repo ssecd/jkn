@@ -1,6 +1,10 @@
 import { ApotekBaseApi } from './base.js';
 
 export class SEP extends ApotekBaseApi {
+	private get name() {
+		return this.constructor.name + ' -> ';
+	}
+
 	/**
 	 * Data kunjungan berdasarkan nomor SEP
 	 */
@@ -34,6 +38,7 @@ export class SEP extends ApotekBaseApi {
 			kodedokter: string;
 			namadokter: string | null;
 		}>({
+			name: this.name + 'Cari No. Kunjungan/SEP',
 			path: `/sep/${params.nomorSep}`,
 			method: 'GET'
 		});

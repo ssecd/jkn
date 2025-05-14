@@ -1,6 +1,10 @@
 import { ApotekBaseApi } from './base.js';
 
 export class Obat extends ApotekBaseApi {
+	private get name() {
+		return this.constructor.name + ' -> ';
+	}
+
 	/**
 	 * Simpan data obat non racikan
 	 */
@@ -17,6 +21,7 @@ export class Obat extends ApotekBaseApi {
 		CatKhsObt: string;
 	}) {
 		return this.send<null>({
+			name: this.name + 'Simpan (Non-Racikan)',
 			path: `/obatnonracikan/v3/insert`,
 			method: 'POST',
 			data
@@ -41,6 +46,7 @@ export class Obat extends ApotekBaseApi {
 		CatKhsObt: string;
 	}) {
 		return this.send<null>({
+			name: this.name + 'Simpan (Racikan)',
 			path: `/obatracikan/v3/insert`,
 			method: 'POST',
 			data
