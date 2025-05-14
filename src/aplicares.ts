@@ -16,6 +16,7 @@ export class Aplicares extends BaseApi<'aplicares'> {
 			},
 			{ totalitems: number }
 		>({
+			name: 'Referensi Kamar',
 			path: `/rest/ref/kelas`,
 			method: 'GET',
 			skipDecrypt: true
@@ -33,6 +34,7 @@ export class Aplicares extends BaseApi<'aplicares'> {
 	async update(data: AplicaresBedData) {
 		const { ppkCode } = await this.requiredConfig('ppkCode');
 		return this.send({
+			name: 'Update Ketersediaan Tempat Tidur',
 			path: `/rest/bed/update/${ppkCode}`,
 			method: 'POST',
 			skipContentTypeHack: true,
@@ -52,6 +54,7 @@ export class Aplicares extends BaseApi<'aplicares'> {
 	async create(data: AplicaresBedData) {
 		const { ppkCode } = await this.requiredConfig('ppkCode');
 		return this.send<undefined>({
+			name: 'Ruangan Baru',
 			path: `/rest/bed/create/${ppkCode}`,
 			method: 'POST',
 			skipContentTypeHack: true,
@@ -85,6 +88,7 @@ export class Aplicares extends BaseApi<'aplicares'> {
 			},
 			{ totalitems: number }
 		>({
+			name: 'Ketersediaan Kamar Faskes',
 			path: `/rest/bed/read/${ppkCode}/${params.start}/${params.limit}`,
 			method: 'GET',
 			skipDecrypt: true
@@ -103,6 +107,7 @@ export class Aplicares extends BaseApi<'aplicares'> {
 	}) {
 		const { ppkCode } = await this.requiredConfig('ppkCode');
 		return this.send<undefined>({
+			name: 'Hapus Ruangan',
 			path: `/rest/bed/delete/${ppkCode}`,
 			method: 'POST',
 			skipContentTypeHack: true,

@@ -124,6 +124,8 @@ export interface Config {
 }
 
 export interface SendOption {
+	/** name of request, it helpful for log or collect stats */
+	name?: string;
 	path: `/${string}`;
 	method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
 	data?: unknown;
@@ -200,13 +202,12 @@ const defaultBaseUrls: Record<Type, Record<Mode, string>> = {
 
 export class Fetcher {
 	// simply using custom event function instead of node:EventEmitter
-	public onRequest: ((option: SendOption) => void) | undefined = undefined;
+	public onRequest: ((info: SendOption & { type: Type }) => void) | undefined = undefined;
 	public onResponse:
 		| ((
 				info: SendOption & {
 					/** in milliseconds */ duration: number;
 					type: Type;
-					name?: string; // TODO: name of request, it helpful for log or collect stats
 				},
 				result: Awaited<ReturnType<typeof this.send>>
 		  ) => void)
@@ -334,7 +335,7 @@ export class Fetcher {
 				}
 			}
 
-			this.onRequest?.(option);
+			this.onRequest?.({ ...option, type });
 			const startedAt = performance.now();
 			response = await fetch(url, init).then((r) => r.text());
 			const json: SendResponse<R, M>[T] = JSON.parse(response);

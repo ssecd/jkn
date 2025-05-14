@@ -18,6 +18,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 				kodepoli: string;
 			}[];
 		}>({
+			name: 'Referensi Poli',
 			path: `/ref/poli/tanggal/${params.tanggal}`,
 			method: 'GET'
 		});
@@ -41,6 +42,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 				kapasitas: number;
 			}[];
 		}>({
+			name: 'Referensi Dokter',
 			path: `/ref/dokter/kodepoli/${params.kodePoli}/tanggal/${params.tanggal}`,
 			method: 'GET'
 		});
@@ -90,6 +92,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 		keterangan: string;
 	}) {
 		return this.send({
+			name: 'Tambah Antrean',
 			path: `/antrean/add`,
 			method: 'POST',
 			data
@@ -122,6 +125,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 		waktu: number;
 	}) {
 		return this.send({
+			name: 'Update Status / Panggil Antrean',
 			path: `/antrean/panggil`,
 			method: 'POST',
 			data
@@ -145,6 +149,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 		alasan: string;
 	}) {
 		return this.send({
+			name: 'Batal Antrean',
 			path: `/antrean/batal`,
 			method: 'POST',
 			data
