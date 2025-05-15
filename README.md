@@ -155,8 +155,8 @@ Contoh penggunaan event:
 
 ```ts
 jkn.onResponse = (info, result) => {
-	console.log('~>', Math.round(info.duration) + 'ms', info.name);
-	// ~> 314ms antrean -> Referensi Poli
+	console.log('>', Math.round(info.duration) + 'ms', info.type, info.name);
+	// > 279ms vclaim Peserta -> NIK
 };
 ```
 

@@ -6,7 +6,6 @@ export abstract class BaseApi<T extends Type = Type> {
 	constructor(private readonly fetcher: Fetcher) {}
 
 	protected send<R, M = unknown>(option: SendOption) {
-		option.name = `${this.type} -> ${option.name || 'unknown'}`;
 		return this.fetcher.send<T, R, M>(this.type, option);
 	}
 
