@@ -159,14 +159,14 @@ export interface CamelResponse<T, C, E> {
 	} & E;
 }
 
-export type SendResponse<T, M> = {
-	aplicares: LowerResponse<T, number, M>;
-	antrean: LowerResponse<T, number, M>;
-	vclaim: CamelResponse<T, string, M>;
-	apotek: CamelResponse<T, string, M>;
-	pcare: CamelResponse<T, number, M>;
-	icare: CamelResponse<T, number, M>;
-	rekamMedis: LowerResponse<T, string, M>;
+export type SendResponse<Response, ExtraMetadata> = {
+	aplicares: LowerResponse<Response, number, ExtraMetadata>;
+	antrean: LowerResponse<Response, number, ExtraMetadata>;
+	vclaim: CamelResponse<Response, string, ExtraMetadata>;
+	apotek: CamelResponse<Response, string, ExtraMetadata>;
+	pcare: CamelResponse<Response, number, ExtraMetadata>;
+	icare: CamelResponse<Response, number, ExtraMetadata>;
+	rekamMedis: LowerResponse<Response, string, ExtraMetadata>;
 };
 
 const defaultBaseUrls: Record<Type, Record<Mode, string>> = {
@@ -202,18 +202,20 @@ const defaultBaseUrls: Record<Type, Record<Mode, string>> = {
 
 export class Fetcher {
 	// simply using custom event function instead of node:EventEmitter
-	public onRequest: ((info: SendOption & { type: Type }) => void) | undefined = undefined;
+	public onRequest: ((info: SendOption & { type: Type }) => MaybePromise<void>) | undefined =
+		undefined;
+
 	public onResponse:
-		| ((
+		| (<T extends Type = Type>(
 				info: SendOption & {
 					/** in milliseconds */ duration: number;
-					type: Type;
+					type: T;
 				},
-				result: Awaited<ReturnType<typeof this.send>>
-		  ) => void)
+				result: SendResponse<unknown, unknown>[T]
+		  ) => MaybePromise<void>)
 		| undefined = undefined;
 
-	public onError: ((error: unknown) => void) | undefined = undefined;
+	public onError: ((error: unknown) => MaybePromise<void>) | undefined = undefined;
 
 	private configured = false;
 
