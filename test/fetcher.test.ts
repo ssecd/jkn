@@ -22,4 +22,24 @@ describe('Fetcher', () => {
 			'https://apijkn-dev.bpjs-kesehatan.go.id/vclaim-rest-dev'
 		);
 	});
+
+	it.concurrent('optional keys', async () => {
+		const originalEnv = structuredClone(process.env);
+
+		process.env.JKN_VCLAIM_USER_KEY = 'X';
+		delete process.env.JKN_APOTEK_USER_KEY;
+		delete process.env.JKN_ICARE_USER_KEY;
+		delete process.env.JKN_REKAM_MEDIS_USER_KEY;
+		delete process.env.JKN_APLICARES_USER_KEY;
+
+		const fetcher = new Fetcher();
+		const config = await fetcher.getConfig();
+
+		expect(config.apotekUserKey).toEqual(config.vclaimUserKey);
+		expect(config.icareUserKey).toEqual(config.vclaimUserKey);
+		expect(config.rekamMedisUserKey).toEqual(config.vclaimUserKey);
+		expect(config.aplicaresUserKey).toEqual(config.vclaimUserKey);
+
+		process.env = originalEnv;
+	});
 });

@@ -235,7 +235,23 @@ export class Fetcher {
 		baseUrls: defaultBaseUrls
 	};
 
-	constructor(private userConfig?: Partial<Config> | (() => MaybePromise<Partial<Config>>)) {}
+	constructor(private userConfig?: Partial<Config> | (() => MaybePromise<Partial<Config>>)) {
+		if (!this.config.aplicaresUserKey) {
+			this.config.aplicaresUserKey = this.config.vclaimUserKey;
+		}
+
+		if (!this.config.apotekUserKey) {
+			this.config.apotekUserKey = this.config.vclaimUserKey;
+		}
+
+		if (!this.config.icareUserKey) {
+			this.config.icareUserKey = this.config.vclaimUserKey;
+		}
+
+		if (!this.config.rekamMedisUserKey) {
+			this.config.rekamMedisUserKey = this.config.vclaimUserKey;
+		}
+	}
 
 	private async applyConfig() {
 		if (!this.userConfig || this.configured) return;
