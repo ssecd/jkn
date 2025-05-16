@@ -41,5 +41,10 @@ describe('Fetcher', () => {
 		expect(config.aplicaresUserKey).toEqual(config.vclaimUserKey);
 
 		process.env = originalEnv;
+
+		const fetcher2 = new Fetcher({ vclaimUserKey: 'Y' });
+		const config2 = await fetcher2.getConfig();
+
+		expect(config2.apotekUserKey).toEqual(config2.vclaimUserKey);
 	});
 });
