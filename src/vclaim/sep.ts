@@ -2,10 +2,6 @@ import { VClaimBaseApi } from './base.js';
 
 // TODO: make generic request and response data type as possible
 export class SEP extends VClaimBaseApi {
-	private get name() {
-		return this.constructor.name + ' -> ';
-	}
-
 	/**
 	 * Buat SEP
 	 */

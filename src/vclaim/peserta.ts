@@ -1,10 +1,6 @@
 import { VClaimBaseApi } from './base.js';
 
 export class Peserta extends VClaimBaseApi {
-	private get name() {
-		return this.constructor.name + ' -> ';
-	}
-
 	/**
 	 * Pencarian data peserta berdasarkan nomor kartu
 	 */

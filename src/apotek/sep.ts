@@ -1,10 +1,6 @@
 import { ApotekBaseApi } from './base.js';
 
 export class SEP extends ApotekBaseApi {
-	private get name() {
-		return this.constructor.name + ' -> ';
-	}
-
 	/**
 	 * Data kunjungan berdasarkan nomor SEP
 	 */

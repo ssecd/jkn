@@ -1,10 +1,6 @@
 import { ApotekBaseApi } from './base.js';
 
 export class Resep extends ApotekBaseApi {
-	private get name() {
-		return this.constructor.name + ' -> ';
-	}
-
 	/**
 	 * Simpan data resep
 	 */

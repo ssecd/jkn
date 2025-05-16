@@ -23,6 +23,10 @@ export abstract class BaseApi<T extends Type = Type> {
 		}
 		return config;
 	}
+
+	protected get name() {
+		return this.constructor.name + ' -> ';
+	}
 }
 
 type CacheKey = `${Type}${string}`;

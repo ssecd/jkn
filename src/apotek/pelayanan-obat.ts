@@ -1,10 +1,6 @@
 import { ApotekBaseApi } from './base.js';
 
 export class PelayananObat extends ApotekBaseApi {
-	private get name() {
-		return this.constructor.name + ' -> ';
-	}
-
 	/**
 	 * Hapus pelayanan obat
 	 */

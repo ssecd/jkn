@@ -2,10 +2,6 @@ import { VClaimBaseApi } from './base.js';
 
 // TODO: make generic request and response data type as possible
 export class Rujukan extends VClaimBaseApi {
-	private get name() {
-		return this.constructor.name + ' -> ';
-	}
-
 	/**
 	 * Pencarian data rujukan berdasarkan nomor rujukan
 	 */

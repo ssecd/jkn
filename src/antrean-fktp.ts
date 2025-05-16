@@ -2,9 +2,6 @@ import { BaseApi } from './base.js';
 
 export class AntreanFKTP extends BaseApi<'pcare'> {
 	protected type = 'pcare' as const;
-	private get name() {
-		return this.constructor.name + ' -> ';
-	}
 
 	/**
 	 * Melihat referensi poli berdasarkan tanggal pelayanan

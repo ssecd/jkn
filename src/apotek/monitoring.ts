@@ -1,10 +1,6 @@
 import { ApotekBaseApi } from './base.js';
 
 export class Monitoring extends ApotekBaseApi {
-	private get name() {
-		return this.constructor.name + ' -> ';
-	}
-
 	/**
 	 * Data klaim resep
 	 */
