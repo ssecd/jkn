@@ -165,7 +165,7 @@ jkn.onResponse = (info, result) => {
 Konfigurasi mengikuti interface berikut:
 
 ````ts
-export interface Config {
+interface Config {
 	/**
 	 * Kode PPK yang diberikan BPJS.
 	 *
