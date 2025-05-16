@@ -236,20 +236,14 @@ export class Fetcher {
 	};
 
 	constructor(private userConfig?: Partial<Config> | (() => MaybePromise<Partial<Config>>)) {
-		if (!this.config.aplicaresUserKey) {
-			this.config.aplicaresUserKey = this.config.vclaimUserKey;
-		}
-
-		if (!this.config.apotekUserKey) {
-			this.config.apotekUserKey = this.config.vclaimUserKey;
-		}
-
-		if (!this.config.icareUserKey) {
-			this.config.icareUserKey = this.config.vclaimUserKey;
-		}
-
-		if (!this.config.rekamMedisUserKey) {
-			this.config.rekamMedisUserKey = this.config.vclaimUserKey;
+		for (const key of [
+			'aplicaresUserKey',
+			'apotekUserKey',
+			'icareUserKey',
+			'rekamMedisUserKey'
+		] satisfies (keyof Config)[]) {
+			if (this.config[key]) continue;
+			this.config[key] = this.config.vclaimUserKey;
 		}
 	}
 
