@@ -165,7 +165,7 @@ jkn.onResponse = (info, result) => {
 Konfigurasi mengikuti interface berikut:
 
 ````ts
-interface Config {
+export interface Config {
 	/**
 	 * Kode PPK yang diberikan BPJS.
 	 *
@@ -192,11 +192,11 @@ interface Config {
 	consSecret: string;
 
 	/**
-	 * User key Aplicares dari BPJS
+	 * User key Aplicares dari BPJS atau gunakan user key vclaim
 	 *
-	 * @default process.env.JKN_APLICARES_USER_KEY
+	 * @default process.env.JKN_VCLAIM_USER_KEY || process.env.JKN_APLICARES_USER_KEY
 	 */
-	aplicaresUserKey: string;
+	aplicaresUserKey?: string;
 
 	/**
 	 * User key VClaim dari BPJS
@@ -213,11 +213,11 @@ interface Config {
 	antreanUserKey: string;
 
 	/**
-	 * User key Apotek dari BPJS
+	 * User key Apotek dari BPJS atau gunakan user key vclaim
 	 *
-	 * @default process.env.JKN_APOTEK_USER_KEY
+	 * @default process.env.JKN_VCLAIM_USER_KEY || process.env.JKN_APOTEK_USER_KEY
 	 */
-	apotekUserKey: string;
+	apotekUserKey?: string;
 
 	/**
 	 * User key PCare dari BPJS
@@ -232,16 +232,16 @@ interface Config {
 	 * Umumnya user key i-Care ini nilai sama dengan user key VClaim
 	 * untuk FKRTL dan PCare untuk FKTP
 	 *
-	 * @default process.env.JKN_ICARE_USER_KEY
+	 * @default process.env.JKN_VCLAIM_USER_KEY || process.env.JKN_ICARE_USER_KEY
 	 */
-	icareUserKey: string;
+	icareUserKey?: string;
 
 	/**
-	 * User key eRekam Medis dari BPJS
+	 * User key eRekam Medis dari BPJS atau gunakan user key vclaim
 	 *
-	 * @default process.env.JKN_REKAM_MEDIS_USER_KEY
+	 * @default process.env.JKN_VCLAIM_USER_KEY || process.env.JKN_REKAM_MEDIS_USER_KEY
 	 */
-	rekamMedisUserKey: string;
+	rekamMedisUserKey?: string;
 
 	/**
 	 * Berupa mode "development" dan "production". Secara default akan
@@ -251,7 +251,7 @@ interface Config {
 	 *
 	 * @default process.env.NODE_ENV || "development"
 	 */
-	mode: 'development' | 'production';
+	mode: Mode;
 
 	/**
 	 * Secara default bernilai `false` sehingga setiap terjadi kesalahan
