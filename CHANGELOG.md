@@ -1,5 +1,15 @@
 # @ssecd/jkn
 
+## 0.8.0
+
+### Minor Changes
+
+- e0f27a1: Add lifecycle events
+
+### Patch Changes
+
+- e35bb64: Make several user keys optional
+
 ## 0.7.3
 
 ### Patch Changes
