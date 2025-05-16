@@ -34,11 +34,11 @@ export interface Config {
 	consSecret: string;
 
 	/**
-	 * User key Aplicares dari BPJS
+	 * User key Aplicares dari BPJS atau gunakan user key vclaim
 	 *
-	 * @default process.env.JKN_APLICARES_USER_KEY
+	 * @default process.env.JKN_VCLAIM_USER_KEY || process.env.JKN_APLICARES_USER_KEY
 	 */
-	aplicaresUserKey: string;
+	aplicaresUserKey?: string;
 
 	/**
 	 * User key VClaim dari BPJS
@@ -55,11 +55,11 @@ export interface Config {
 	antreanUserKey: string;
 
 	/**
-	 * User key Apotek dari BPJS
+	 * User key Apotek dari BPJS atau gunakan user key vclaim
 	 *
-	 * @default process.env.JKN_APOTEK_USER_KEY
+	 * @default process.env.JKN_VCLAIM_USER_KEY || process.env.JKN_APOTEK_USER_KEY
 	 */
-	apotekUserKey: string;
+	apotekUserKey?: string;
 
 	/**
 	 * User key PCare dari BPJS
@@ -74,16 +74,16 @@ export interface Config {
 	 * Umumnya user key i-Care ini nilai sama dengan user key VClaim
 	 * untuk FKRTL dan PCare untuk FKTP
 	 *
-	 * @default process.env.JKN_ICARE_USER_KEY
+	 * @default process.env.JKN_VCLAIM_USER_KEY || process.env.JKN_ICARE_USER_KEY
 	 */
-	icareUserKey: string;
+	icareUserKey?: string;
 
 	/**
-	 * User key eRekam Medis dari BPJS
+	 * User key eRekam Medis dari BPJS atau gunakan user key vclaim
 	 *
-	 * @default process.env.JKN_REKAM_MEDIS_USER_KEY
+	 * @default process.env.JKN_VCLAIM_USER_KEY || process.env.JKN_REKAM_MEDIS_USER_KEY
 	 */
-	rekamMedisUserKey: string;
+	rekamMedisUserKey?: string;
 
 	/**
 	 * Berupa mode "development" dan "production". Secara default akan
@@ -224,13 +224,13 @@ export class Fetcher {
 		ppkCode: process.env.JKN_PPK_CODE ?? '',
 		consId: process.env.JKN_CONS_ID ?? '',
 		consSecret: process.env.JKN_CONS_SECRET ?? '',
-		aplicaresUserKey: process.env.JKN_APLICARES_USER_KEY ?? '',
+		aplicaresUserKey: process.env.JKN_APLICARES_USER_KEY,
 		vclaimUserKey: process.env.JKN_VCLAIM_USER_KEY ?? '',
 		antreanUserKey: process.env.JKN_ANTREAN_USER_KEY ?? '',
-		apotekUserKey: process.env.JKN_APOTEK_USER_KEY ?? '',
+		apotekUserKey: process.env.JKN_APOTEK_USER_KEY,
 		pcareUserKey: process.env.JKN_PCARE_USER_KEY ?? '',
-		icareUserKey: process.env.JKN_ICARE_USER_KEY ?? '',
-		rekamMedisUserKey: process.env.JKN_REKAM_MEDIS_USER_KEY ?? '',
+		icareUserKey: process.env.JKN_ICARE_USER_KEY,
+		rekamMedisUserKey: process.env.JKN_REKAM_MEDIS_USER_KEY,
 		throw: false,
 		baseUrls: defaultBaseUrls
 	};
@@ -238,7 +238,7 @@ export class Fetcher {
 	constructor(private userConfig?: Partial<Config> | (() => MaybePromise<Partial<Config>>)) {}
 
 	private async applyConfig() {
-		if (!this.userConfig || this.configured) return;
+		if (this.configured) return;
 
 		if (typeof this.userConfig === 'object') {
 			this.config = this.mergeConfig(this.config, this.userConfig);
@@ -249,6 +249,17 @@ export class Fetcher {
 
 		if (!this.config.consId || !this.config.consSecret) {
 			throw new Error(`cons id and secret are not defined`);
+		}
+
+		// fallback to vclaimUserKey
+		for (const key of [
+			'aplicaresUserKey',
+			'apotekUserKey',
+			'icareUserKey',
+			'rekamMedisUserKey'
+		] satisfies (keyof Config)[]) {
+			if (this.config[key]) continue;
+			this.config[key] = this.config.vclaimUserKey;
 		}
 
 		this.configured = true;
