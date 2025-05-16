@@ -149,6 +149,7 @@ export class SEP extends VClaimBaseApi {
 				tglSep: string;
 			};
 		}>({
+			name: this.name + 'Insert',
 			path: `/SEP/1.1/insert`,
 			method: 'POST',
 			data: { request: { t_sep: data } }
@@ -265,6 +266,7 @@ export class SEP extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Update',
 			path: `/SEP/1.1/Update`,
 			method: 'PUT',
 			data: { request: { t_sep: data } }
@@ -296,6 +298,7 @@ export class SEP extends VClaimBaseApi {
 		nomor: string;
 	}) {
 		return this.send<SEPDetail>({
+			name: this.name + 'Hapus',
 			path: `/SEP/${params.nomor}`,
 			method: 'GET'
 		});
@@ -309,6 +312,7 @@ export class SEP extends VClaimBaseApi {
 		nomorRujukan: string;
 	}) {
 		return this.send<SEPDetail>({
+			name: this.name + 'Cari',
 			path: `/Rujukan/lastsep/norujukan/${params.nomorRujukan}`,
 			method: 'GET'
 		});
@@ -550,6 +554,7 @@ export class SEP extends VClaimBaseApi {
 				tujuanKunj: string;
 			};
 		}>({
+			name: this.name + 'Insert V2',
 			path: `/SEP/2.0/insert`,
 			method: 'POST',
 			data: { request: { t_sep: data } }
@@ -677,6 +682,7 @@ export class SEP extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Update V2',
 			path: `/SEP/2.0/update`,
 			method: 'PUT',
 			data: { request: { t_sep: data } }
@@ -696,6 +702,7 @@ export class SEP extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Hapus V2',
 			path: `/SEP/2.0/delete`,
 			method: 'DELETE',
 			skipDecrypt: true,
@@ -723,6 +730,7 @@ export class SEP extends VClaimBaseApi {
 				tglSep: string;
 			}[];
 		}>({
+			name: this.name + 'Suplesi Jasa Raharja',
 			path: `/sep/JasaRaharja/Suplesi/${params.nomorKartu}/tglPelayanan/${params.tanggalPelayanan}`,
 			method: 'GET'
 		});
@@ -747,6 +755,7 @@ export class SEP extends VClaimBaseApi {
 				noSEPSuplesi: string;
 			}[];
 		}>({
+			name: this.name + 'Data Induk Kecelakaan',
 			path: `/sep/KllInduk/List/${params.nomorKartu}`,
 			method: 'GET'
 		});
@@ -777,6 +786,7 @@ export class SEP extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Pengajuan Penjamin',
 			path: `/Sep/pengajuanSEP`,
 			method: 'POST',
 			data: { request: { t_sep: data } }
@@ -814,6 +824,7 @@ export class SEP extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Approval Pengajuan',
 			path: `/Sep/aprovalSEP`,
 			method: 'POST',
 			data: { request: { t_sep: data } }
@@ -841,6 +852,7 @@ export class SEP extends VClaimBaseApi {
 				status: string;
 			}[];
 		}>({
+			name: this.name + 'List Approval',
 			path: `/Sep/persetujuanSEP/list/bulan/${bulan}/tahun/${params.tahun}`,
 			method: 'GET'
 		});
@@ -865,6 +877,7 @@ export class SEP extends VClaimBaseApi {
 	}) {
 		// TODO: clarify response type because in doc is invalid
 		return this.send<unknown>({
+			name: this.name + 'Update Tanggal Pulang',
 			path: `/Sep/updtglplg`,
 			method: 'PUT',
 			data: { request: { t_sep: data } }
@@ -903,6 +916,7 @@ export class SEP extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<null>({
+			name: this.name + 'Update Tanggal Pulang V2',
 			path: `/SEP/2.0/updtglplg`,
 			method: 'PUT',
 			data: { request: { t_sep: data } }
@@ -944,6 +958,7 @@ export class SEP extends VClaimBaseApi {
 				user: string;
 			}[];
 		}>({
+			name: this.name + 'List Update Tanggal Pulang',
 			path: `/Sep/updtglplg/list/bulan/${bulan}/tahun/${params.tahun}/${filter}`,
 			method: 'GET'
 		});
@@ -969,6 +984,7 @@ export class SEP extends VClaimBaseApi {
 				tktPelayanan: string;
 			};
 		}>({
+			name: this.name + 'INACBG',
 			path: `/sep/cbg/${params.nomor}`,
 			method: 'GET',
 			skipDecrypt: true
@@ -1011,6 +1027,7 @@ export class SEP extends VClaimBaseApi {
 				nmdiag: string;
 			}[];
 		}>({
+			name: this.name + 'List Internal',
 			path: `/SEP/Internal/${params.nomor}`,
 			method: 'GET'
 		});
@@ -1038,6 +1055,7 @@ export class SEP extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<string>({
+			name: this.name + 'Hapus Internal',
 			path: `/SEP/Internal/delete`,
 			method: 'DELETE',
 			data: { request: { t_sep: data } }
@@ -1061,6 +1079,7 @@ export class SEP extends VClaimBaseApi {
 			/** keterangan status */
 			status: string;
 		}>({
+			name: this.name + 'Status Fingerprint',
 			path: `/SEP/FingerPrint/Peserta/${params.nomorKartu}/TglPelayanan/${params.tanggal}`,
 			method: 'GET'
 		});
@@ -1079,6 +1098,7 @@ export class SEP extends VClaimBaseApi {
 				noSEP: string;
 			}[];
 		}>({
+			name: this.name + 'List Fingerprint',
 			path: `/SEP/FingerPrint/List/Peserta/TglPelayanan/${params.tanggal}`,
 			method: 'GET'
 		});
@@ -1101,6 +1121,7 @@ export class SEP extends VClaimBaseApi {
 			}[];
 		}>({
 			// TODO: solve error endpoint not found
+			name: this.name + 'List Random Question',
 			path: `/SEP/FingerPrint/randomquestion/faskesterdaftar/nokapst/${params.nomorKartu}/tglsep/${params.tanggal}`,
 			method: 'GET'
 		});
@@ -1136,6 +1157,7 @@ export class SEP extends VClaimBaseApi {
 		user: string;
 	}) {
 		return this.send<'False' | 'True'>({
+			name: this.name + 'Post Random Question',
 			path: `/SEP/FingerPrint/randomanswer`,
 			method: 'POST',
 			data: { request: { t_sep: data } }

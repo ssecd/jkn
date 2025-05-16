@@ -131,6 +131,35 @@ function persistSep(sep: VClaimResponse<'sep', 'insertV2'>) {
 }
 ```
 
+## Events
+
+- `onRequest`
+
+```ts
+onRequest: ((info: SendOption & { type: Type }) => MaybePromise<void>) | undefined = undefined;
+```
+
+- `onResponse`
+
+```ts
+onResponse: (<T extends Type = Type>(info: SendOption & { duration: number; type: T; }, result: SendResponse<unknown, unknown>[T]) => MaybePromise<void>) | undefined = undefined;
+```
+
+- `onError`
+
+```ts
+onError: ((error: unknown) => MaybePromise<void>) | undefined = undefined;
+```
+
+Contoh penggunaan event:
+
+```ts
+jkn.onResponse = (info, result) => {
+	console.log('>', Math.round(info.duration) + 'ms', info.type, info.name);
+	// > 279ms vclaim Peserta -> NIK
+};
+```
+
 ## Konfigurasi
 
 Konfigurasi mengikuti interface berikut:

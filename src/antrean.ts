@@ -15,6 +15,7 @@ export class Antrean extends BaseApi<'antrean'> {
 				kdpoli: string;
 			}[]
 		>({
+			name: 'Referensi Poli',
 			path: '/ref/poli',
 			method: 'GET'
 		});
@@ -30,6 +31,7 @@ export class Antrean extends BaseApi<'antrean'> {
 				kodedokter: number;
 			}[]
 		>({
+			name: 'Referensi Dokter',
 			path: '/ref/dokter',
 			method: 'GET'
 		});
@@ -60,6 +62,7 @@ export class Antrean extends BaseApi<'antrean'> {
 				kodedokter: number;
 			}[]
 		>({
+			name: 'Referensi Jadwal Dokter',
 			path: `/jadwaldokter/kodepoli/${params.poli}/tanggal/${params.tanggal}`,
 			method: 'GET'
 		});
@@ -77,6 +80,7 @@ export class Antrean extends BaseApi<'antrean'> {
 				namapoli: string;
 			}[]
 		>({
+			name: 'Referensi Poli Fingerprint',
 			path: '/ref/poli/fp',
 			method: 'GET'
 		});
@@ -98,6 +102,7 @@ export class Antrean extends BaseApi<'antrean'> {
 			tgllahir: string;
 			daftarfp: number;
 		}>({
+			name: 'Referensi Pasien Fingerprint',
 			path: `/ref/pasien/fp/identitas/${params.jenis}/noidentitas/${params.nomor}`,
 			method: 'GET'
 		});
@@ -142,6 +147,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		}[];
 	}) {
 		return this.send({
+			name: 'Update Jadwal Dokter',
 			path: `/jadwaldokter/updatejadwaldokter`,
 			method: 'POST',
 			data
@@ -226,6 +232,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		keterangan: string;
 	}) {
 		return this.send({
+			name: 'Tambah Antrean',
 			path: `/antrean/add`,
 			method: 'POST',
 			data
@@ -247,6 +254,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		keterangan: string;
 	}) {
 		return this.send({
+			name: 'Tambah Antrean Farmasi',
 			path: `/antrean/farmasi/add`,
 			method: 'POST',
 			data
@@ -302,6 +310,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		jenisresep?: 'Tidak ada' | 'Racikan' | 'Non racikan';
 	}) {
 		return this.send({
+			name: 'Update Waktu Antrean',
 			path: `/antrean/updatewaktu`,
 			method: 'POST',
 			data
@@ -321,6 +330,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		keterangan: string;
 	}) {
 		return this.send({
+			name: 'Batal Antrean',
 			path: `/antrean/batal`,
 			method: 'POST',
 			data
@@ -350,6 +360,7 @@ export class Antrean extends BaseApi<'antrean'> {
 				kodebooking: string;
 			}[]
 		>({
+			name: 'List Waktu TaskId',
 			path: `/antrean/getlisttask`,
 			method: 'POST',
 			data: { kodebooking: params.kodeBooking }
@@ -379,6 +390,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		waktu: string;
 	}) {
 		return this.send<{ list: AntreanDashboard[] }>({
+			name: 'Dashboard Per-Tanggal',
 			path: `/dashboard/waktutunggu/tanggal/${params.tanggal}/waktu/${params.waktu}`,
 			method: 'GET',
 			skipDecrypt: true
@@ -413,6 +425,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	}) {
 		const bulan = String(params.bulan).padStart(2, '0');
 		return this.send<{ list: AntreanDashboard[] }>({
+			name: 'Dashboard Per-Bulan',
 			path: `/dashboard/waktutunggu/bulan/${bulan}/tahun/${params.tahun}/waktu/${params.waktu}`,
 			method: 'GET',
 			skipDecrypt: true
@@ -426,6 +439,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 */
 	async perTanggal(tanggal: string) {
 		return this.send<AntreanDetail[]>({
+			name: 'Antrean Per-Tanggal',
 			path: `/antrean/pendaftaran/tanggal/${tanggal}`,
 			method: 'GET'
 		});
@@ -438,6 +452,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 */
 	async perKodeBooking(kodeBooking: string) {
 		return this.send<AntreanDetail[]>({
+			name: 'Antrean Per-KodeBooking',
 			path: `/antrean/pendaftaran/kodebooking/${kodeBooking}`,
 			method: 'GET'
 		});
@@ -448,6 +463,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 */
 	async belumDilayani() {
 		return this.send<AntreanDetail[]>({
+			name: 'Antrean Belum Dilayani',
 			path: `/antrean/pendaftaran/aktif`,
 			method: 'GET'
 		});
@@ -470,6 +486,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		jam: string;
 	}) {
 		return this.send<AntreanDetail[]>({
+			name: 'Antrean Belum Dilayani Per-(Poli, Dokter, Hari, dan Jam Praktik)',
 			path: `/antrean/pendaftaran/kodepoli/${params.poli}/kodedokter/${params.dokter}/hari/${params.hari}/jampraktek/${params.jam}`,
 			method: 'GET'
 		});

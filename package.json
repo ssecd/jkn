@@ -14,8 +14,7 @@
 	},
 	"type": "module",
 	"scripts": {
-		"vitest": "node --env-file=.env ./node_modules/vitest/vitest.mjs",
-		"test": "vitest",
+		"test": "node --env-file=.env ./node_modules/vitest/vitest.mjs",
 		"build": "tsc && dts-buddy dist/index.d.ts -m @ssecd/jkn:src/index.js",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",

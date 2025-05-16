@@ -9,6 +9,7 @@ export class Referensi extends VClaimBaseApi {
 		keyword: string;
 	}) {
 		return this.send<{ diagnosa: ReferensiResult[] }>({
+			name: this.name + 'Diagnosa',
 			path: `/referensi/diagnosa/${params.keyword}`,
 			method: 'GET'
 		});
@@ -22,6 +23,7 @@ export class Referensi extends VClaimBaseApi {
 		keyword: string;
 	}) {
 		return this.send<{ poli: ReferensiResult[] }>({
+			name: this.name + 'Poli',
 			path: `/referensi/poli/${params.keyword}`,
 			method: 'GET'
 		});
@@ -38,6 +40,7 @@ export class Referensi extends VClaimBaseApi {
 		jenis: number;
 	}) {
 		return this.send<{ faskes: ReferensiResult[] }>({
+			name: this.name + 'Fasilitas Kesehatan',
 			path: `/referensi/faskes/${params.keyword}/${params.jenis}`,
 			method: 'GET'
 		});
@@ -57,6 +60,7 @@ export class Referensi extends VClaimBaseApi {
 		kode: string;
 	}) {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'DPJP',
 			path: `/referensi/dokter/pelayanan/${params.jenis}/tglPelayanan/${params.tanggal}/Spesialis/${params.kode}`,
 			method: 'GET'
 		});
@@ -67,6 +71,7 @@ export class Referensi extends VClaimBaseApi {
 	 */
 	async provinsi() {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'Provinsi',
 			path: `/referensi/propinsi`,
 			method: 'GET'
 		});
@@ -80,6 +85,7 @@ export class Referensi extends VClaimBaseApi {
 		provinsi: string;
 	}) {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'Kabupaten',
 			path: `/referensi/kabupaten/propinsi/${params.provinsi}`,
 			method: 'GET'
 		});
@@ -93,6 +99,7 @@ export class Referensi extends VClaimBaseApi {
 		kabupaten: string;
 	}) {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'Kecamatan',
 			path: `/referensi/kecamatan/kabupaten/${params.kabupaten}`,
 			method: 'GET'
 		});
@@ -103,6 +110,7 @@ export class Referensi extends VClaimBaseApi {
 	 */
 	async diagnosaPrb() {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'Diagnosa PRB',
 			path: `/referensi/diagnosaprb`,
 			method: 'GET'
 		});
@@ -116,6 +124,7 @@ export class Referensi extends VClaimBaseApi {
 		nama: string;
 	}) {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'Obat Generik PRB',
 			path: `/referensi/obatprb/${params.nama}`,
 			method: 'GET'
 		});
@@ -129,6 +138,7 @@ export class Referensi extends VClaimBaseApi {
 		keyword: string;
 	}) {
 		return this.send<{ procedure: ReferensiResult[] }>({
+			name: this.name + 'Prosedur (Pengajuan Klaim)',
 			path: `/referensi/procedure/${params.keyword}`,
 			method: 'GET'
 		});
@@ -139,6 +149,7 @@ export class Referensi extends VClaimBaseApi {
 	 */
 	async klaimKelasRawat() {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'Kelas Rawat (Pengajuan Klaim)',
 			path: `/referensi/kelasrawat`,
 			method: 'GET'
 		});
@@ -152,6 +163,7 @@ export class Referensi extends VClaimBaseApi {
 		nama: string;
 	}) {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'Dokter (Pengajuan Klaim)',
 			path: `/referensi/dokter/${params.nama}`,
 			method: 'GET'
 		});
@@ -162,6 +174,7 @@ export class Referensi extends VClaimBaseApi {
 	 */
 	async klaimSpesialistik() {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'Spesialistik (Pengajuan Klaim)',
 			path: `/referensi/spesialistik`,
 			method: 'GET'
 		});
@@ -172,6 +185,7 @@ export class Referensi extends VClaimBaseApi {
 	 */
 	async klaimRuangRawat() {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'Ruang Rawat (Pengajuan Klaim)',
 			path: `/referensi/ruangrawat`,
 			method: 'GET'
 		});
@@ -182,6 +196,7 @@ export class Referensi extends VClaimBaseApi {
 	 */
 	async klaimCaraKeluar() {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'Cara Keluar (Pengajuan Klaim)',
 			path: `/referensi/carakeluar`,
 			method: 'GET'
 		});
@@ -192,6 +207,7 @@ export class Referensi extends VClaimBaseApi {
 	 */
 	async klaimPaskaPulang() {
 		return this.send<{ list: ReferensiResult[] }>({
+			name: this.name + 'Paska Pulang (Pengajuan Klaim)',
 			path: `/referensi/pascapulang`,
 			method: 'GET'
 		});

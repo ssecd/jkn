@@ -17,6 +17,7 @@ export class Obat extends ApotekBaseApi {
 		CatKhsObt: string;
 	}) {
 		return this.send<null>({
+			name: this.name + 'Simpan (Non-Racikan)',
 			path: `/obatnonracikan/v3/insert`,
 			method: 'POST',
 			data
@@ -41,6 +42,7 @@ export class Obat extends ApotekBaseApi {
 		CatKhsObt: string;
 	}) {
 		return this.send<null>({
+			name: this.name + 'Simpan (Racikan)',
 			path: `/obatracikan/v3/insert`,
 			method: 'POST',
 			data

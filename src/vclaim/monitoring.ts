@@ -28,6 +28,7 @@ export class Monitoring extends VClaimBaseApi {
 				tglSep: string;
 			}[];
 		}>({
+			name: this.name + 'Data Kunjungan',
 			path: `/Monitoring/Kunjungan/Tanggal/${params.tanggal}/JnsPelayanan/${params.jenis}`,
 			method: 'GET'
 		});
@@ -73,6 +74,7 @@ export class Monitoring extends VClaimBaseApi {
 				tglSep: string;
 			}[];
 		}>({
+			name: this.name + 'Data Klaim',
 			path: `/Monitoring/Klaim/Tanggal/${params.tanggal}/JnsPelayanan/${params.jenis}/Status/${params.status}`,
 			method: 'GET'
 		});
@@ -106,6 +108,7 @@ export class Monitoring extends VClaimBaseApi {
 				tglSep: string;
 			}[];
 		}>({
+			name: this.name + 'Data Histori Pelayanan Peserta',
 			path: `/monitoring/HistoriPelayanan/NoKartu/${params.nomorKartu}/tglMulai/${params.awal}/tglAkhir/${params.akhir}`,
 			method: 'GET'
 		});
@@ -152,6 +155,7 @@ export class Monitoring extends VClaimBaseApi {
 				};
 			}[];
 		}>({
+			name: this.name + 'Data Klaim Jaminan Jasa Raharja',
 			path: `/monitoring/JasaRaharja/JnsPelayanan/${params.jenis}/tglMulai/${params.awal}/tglAkhir/${params.akhir}`,
 			method: 'GET'
 		});

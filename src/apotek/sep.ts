@@ -34,6 +34,7 @@ export class SEP extends ApotekBaseApi {
 			kodedokter: string;
 			namadokter: string | null;
 		}>({
+			name: this.name + 'Cari No. Kunjungan/SEP',
 			path: `/sep/${params.nomorSep}`,
 			method: 'GET'
 		});

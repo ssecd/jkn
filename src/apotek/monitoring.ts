@@ -35,6 +35,7 @@ export class Monitoring extends ApotekBaseApi {
 				}[];
 			};
 		}>({
+			name: this.name + 'Data Klaim',
 			path: `/monitoring/klaim/${params.bulan}/${params.tahun}/${params.jenisObat}/${params.status}`,
 			method: 'GET'
 		});

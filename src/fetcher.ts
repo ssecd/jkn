@@ -124,6 +124,8 @@ export interface Config {
 }
 
 export interface SendOption {
+	/** name of request, it helpful for log or collect stats */
+	name?: string;
 	path: `/${string}`;
 	method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
 	data?: unknown;
@@ -157,14 +159,14 @@ export interface CamelResponse<T, C, E> {
 	} & E;
 }
 
-export type SendResponse<T, M> = {
-	aplicares: LowerResponse<T, number, M>;
-	antrean: LowerResponse<T, number, M>;
-	vclaim: CamelResponse<T, string, M>;
-	apotek: CamelResponse<T, string, M>;
-	pcare: CamelResponse<T, number, M>;
-	icare: CamelResponse<T, number, M>;
-	rekamMedis: LowerResponse<T, string, M>;
+export type SendResponse<Response, ExtraMetadata> = {
+	aplicares: LowerResponse<Response, number, ExtraMetadata>;
+	antrean: LowerResponse<Response, number, ExtraMetadata>;
+	vclaim: CamelResponse<Response, string, ExtraMetadata>;
+	apotek: CamelResponse<Response, string, ExtraMetadata>;
+	pcare: CamelResponse<Response, number, ExtraMetadata>;
+	icare: CamelResponse<Response, number, ExtraMetadata>;
+	rekamMedis: LowerResponse<Response, string, ExtraMetadata>;
 };
 
 const defaultBaseUrls: Record<Type, Record<Mode, string>> = {
@@ -199,6 +201,22 @@ const defaultBaseUrls: Record<Type, Record<Mode, string>> = {
 };
 
 export class Fetcher {
+	// simply using custom event function instead of node:EventEmitter
+	public onRequest: ((info: SendOption & { type: Type }) => MaybePromise<void>) | undefined =
+		undefined;
+
+	public onResponse:
+		| (<T extends Type = Type>(
+				info: SendOption & {
+					/** in milliseconds */ duration: number;
+					type: T;
+				},
+				result: SendResponse<unknown, unknown>[T]
+		  ) => MaybePromise<void>)
+		| undefined = undefined;
+
+	public onError: ((error: unknown) => MaybePromise<void>) | undefined = undefined;
+
 	private configured = false;
 
 	private config: Config = {
@@ -230,7 +248,7 @@ export class Fetcher {
 		}
 
 		if (!this.config.consId || !this.config.consSecret) {
-			throw new Error(`cons id and secret is not defined`);
+			throw new Error(`cons id and secret are not defined`);
 		}
 
 		this.configured = true;
@@ -319,6 +337,8 @@ export class Fetcher {
 				}
 			}
 
+			this.onRequest?.({ ...option, type });
+			const startedAt = performance.now();
 			response = await fetch(url, init).then((r) => r.text());
 			const json: SendResponse<R, M>[T] = JSON.parse(response);
 
@@ -327,8 +347,11 @@ export class Fetcher {
 				json.response = JSON.parse(this.decompress(decrypted));
 			}
 
+			const duration = performance.now() - startedAt;
+			this.onResponse?.({ ...option, duration, type }, json);
 			return json;
 		} catch (error: unknown) {
+			this.onError?.(error);
 			if (this.config.throw) {
 				if (error instanceof Error) {
 					error.message += `. \nResponse: ${response}`;
