@@ -86,4 +86,8 @@ export type ICareResponse<K extends keyof ICare> = JKNResponseType<ICare, K>;
 
 export type ICareParams<K extends keyof ICare> = MethodParameters<ICare[K]>;
 
+export type AplicaresResponse<K extends keyof Aplicares> = JKNResponseType<Aplicares, K>;
+
+export type AplicaresParams<K extends keyof Aplicares> = MethodParameters<Aplicares[K]>;
+
 export type * from './rekam-medis/types.js';
