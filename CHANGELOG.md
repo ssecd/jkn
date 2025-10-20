@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.8.1
+
+### Patch Changes
+
+- 40369d6: Fix missing Applicares types
+
 ## 0.8.0
 
 ### Minor Changes
