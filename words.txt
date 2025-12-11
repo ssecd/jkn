@@ -24,6 +24,7 @@ dinsos
 dpho
 dpjp
 eclaim
+Eksaserbasi
 enkripsi
 estimasidilayani
 faskes
@@ -101,6 +102,7 @@ lastupdate
 LINGGAU
 listobat
 listsep
+MMRC
 namaapoteker
 namabu
 namadokter
@@ -178,6 +180,7 @@ rekap
 riwayatobat
 rownumber
 ruangrawat
+Rumatan
 settingppk
 signa
 Silampari

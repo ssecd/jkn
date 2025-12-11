@@ -5,36 +5,8 @@ export class RencanaKontrol extends VClaimBaseApi {
 	/**
 	 * Insert rencana kontrol
 	 */
-	async insert(data: {
-		/** nomor SEP */
-		noSEP: string;
-
-		/** kode dokter JKN */
-		kodeDokter: string;
-
-		/** kode poli JKN */
-		poliKontrol: string;
-
-		/**
-		 * - Rawat Jalan: diisi tanggal rencana kontrol
-		 * - Rawat Inap: diisi tanggal SPRI
-		 *
-		 * format tanggal YYYY-MM-DD
-		 */
-		tglRencanaKontrol: string;
-
-		/** user pembuat surat kontrol */
-		user: string;
-	}) {
-		return this.send<{
-			noSuratKontrol: string;
-			tglRencanaKontrol: string;
-			namaDokter: string;
-			noKartu: string;
-			nama: string;
-			kelamin: string;
-			tglLahir: string;
-		}>({
+	async insert(data: RencanaKontrolInsert) {
+		return this.send<RencanaKontrolWriteResult>({
 			name: this.name + 'Insert',
 			path: `/RencanaKontrol/insert`,
 			method: 'POST',
@@ -43,43 +15,46 @@ export class RencanaKontrol extends VClaimBaseApi {
 	}
 
 	/**
+	 * Insert rencana kontrol dengan API v2
+	 */
+	async insertV2(data: RencanaKontrolInsertV2) {
+		return this.send<RencanaKontrolWriteResultV2>({
+			name: this.name + 'InsertV2',
+			path: '/RencanaKontrol/v2/Insert',
+			method: 'POST',
+			data: { request: data }
+		});
+	}
+
+	/**
 	 * Update rencana kontrol
 	 */
-	async update(data: {
-		/** nomor surat kontrol yang akan di-update */
-		noSuratKontrol: string;
-
-		/** nomor SEP */
-		noSEP: string;
-
-		/** kode dokter JKN */
-		kodeDokter: string;
-
-		/** kode poli JKN */
-		poliKontrol: string;
-
-		/**
-		 * - Rawat Jalan: diisi tanggal rencana kontrol
-		 * - Rawat Inap: diisi tanggal SPRI
-		 *
-		 * format tanggal YYYY-MM-DD
-		 */
-		tglRencanaKontrol: string;
-
-		/** user pembuat surat kontrol */
-		user: string;
-	}) {
-		return this.send<{
+	async update(
+		data: {
+			/** nomor surat kontrol yang akan di-update */
 			noSuratKontrol: string;
-			tglRencanaKontrol: string;
-			namaDokter: string;
-			noKartu: string;
-			nama: string;
-			kelamin: string;
-			tglLahir: string;
-		}>({
+		} & RencanaKontrolInsert
+	) {
+		return this.send<RencanaKontrolWriteResult>({
 			name: this.name + 'Update',
 			path: `/RencanaKontrol/Update`,
+			method: 'PUT',
+			data: { request: data }
+		});
+	}
+
+	/**
+	 * Update rencana kontrol dengan API v2
+	 */
+	async updateV2(
+		data: {
+			/** nomor surat kontrol yang akan di-update */
+			noSuratKontrol: string;
+		} & RencanaKontrolInsertV2
+	) {
+		return this.send<RencanaKontrolWriteResultV2>({
+			name: this.name + 'UpdateV2',
+			path: '/RencanaKontrol/v2/Update',
 			method: 'PUT',
 			data: { request: data }
 		});
@@ -391,4 +366,87 @@ interface RencanaKontrolListItem {
 
 	/** 'Belum' | 'Sudah' */
 	terbitSEP: 'Belum' | 'Sudah' | string;
+}
+
+interface RencanaKontrolInsert {
+	/** nomor SEP */
+	noSEP: string;
+
+	/** kode dokter JKN */
+	kodeDokter: string;
+
+	/** kode poli JKN */
+	poliKontrol: string;
+
+	/**
+	 * - Rawat Jalan: diisi tanggal rencana kontrol
+	 * - Rawat Inap: diisi tanggal SPRI
+	 *
+	 * format tanggal YYYY-MM-DD
+	 */
+	tglRencanaKontrol: string;
+
+	/** user pembuat surat kontrol */
+	user: string;
+}
+
+interface RencanaKontrolWriteResult {
+	noSuratKontrol: string;
+	tglRencanaKontrol: string;
+	namaDokter: string;
+	noKartu: string;
+	nama: string;
+	kelamin: string;
+	tglLahir: string;
+}
+
+interface RencanaKontrolInsertV2 extends RencanaKontrolInsert {
+	formPRB: RencanaKontrolPRB;
+}
+
+interface RencanaKontrolWriteResultV2 extends RencanaKontrolWriteResult {
+	namaDiagnosa: string;
+	formPRB: RencanaKontrolPRB;
+}
+
+interface RencanaKontrolPRB {
+	kdStatusPRB: '07';
+	data: {
+		HBA1C: null;
+		GDP: 78;
+		GD2JPP: null;
+		eGFR: null;
+		TD_Sistolik: 90;
+		TD_Diastolik: 90;
+		LDL: 20;
+		Rata_TD_Sistolik: null;
+		Rata_TD_Diastolik: null;
+		JantungKoroner: null;
+		Stroke: null;
+		VaskularPerifer: null;
+		Aritmia: null;
+		AtrialFibrilasi: null;
+		NadiIstirahat: null;
+		SesakNapas3Bulan: null;
+		NyeriDada3Bulan: null;
+		SesakNapasAktivitas: null;
+		NyeriDadaAktivitas: null;
+		Terkontrol: null;
+		Gejala2xMinggu: null;
+		BangunMalam: null;
+		KeterbatasanFisik: null;
+		FungsiParu: null;
+		SkorMMRC: null;
+		Eksaserbasi1Tahun: null;
+		MampuAktivitas: null;
+		Epileptik6Bulan: null;
+		EfekSampingOAB: null;
+		HamilMenyusui: null;
+		Remisi: null;
+		TerapiRumatan: null;
+		Usia: null;
+		AsamUrat: 0.1;
+		RemisiSLE: null;
+		Hamil: null;
+	};
 }
