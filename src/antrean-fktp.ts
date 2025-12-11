@@ -7,7 +7,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 	 * Melihat referensi poli berdasarkan tanggal pelayanan
 	 */
 	async refPoli(params: {
-		/** tanggal pelayanan */
+		/** tanggal pelayanan format YYYY-MM-DD */
 		tanggal: string;
 	}) {
 		return this.send<{
@@ -28,7 +28,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 	 * Melihat data dokter berdasarkan tanggal pelayanan dan poli
 	 */
 	async refDokter(params: {
-		/** tanggal pelayanan */
+		/** tanggal pelayanan format YYYY-MM-DD */
 		tanggal: string;
 
 		/** kode poli dari referensi poli */
@@ -43,7 +43,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 			}[];
 		}>({
 			name: this.name + 'Referensi Dokter',
-			path: `/ref/dokter/kodepoli/${params.kodePoli}/tanggal/${params.tanggal}`,
+			path: `/ref/dokter/kodepoli/${encodeURIComponent(params.kodePoli)}/tanggal/${params.tanggal}`,
 			method: 'GET'
 		});
 	}

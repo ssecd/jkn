@@ -109,7 +109,7 @@ export class Monitoring extends VClaimBaseApi {
 			}[];
 		}>({
 			name: this.name + 'Data Histori Pelayanan Peserta',
-			path: `/monitoring/HistoriPelayanan/NoKartu/${params.nomorKartu}/tglMulai/${params.awal}/tglAkhir/${params.akhir}`,
+			path: `/monitoring/HistoriPelayanan/NoKartu/${encodeURIComponent(params.nomorKartu)}/tglMulai/${params.awal}/tglAkhir/${params.akhir}`,
 			method: 'GET'
 		});
 	}

@@ -187,7 +187,7 @@ export class PRB extends VClaimBaseApi {
 			};
 		}>({
 			name: this.name + 'Cari by Nomor SRB',
-			path: `/prb/${params.nomorSrb}/nosep/${params.nomorSep}`,
+			path: `/prb/${encodeURIComponent(params.nomorSrb)}/nosep/${encodeURIComponent(params.nomorSep)}`,
 			method: 'GET'
 		});
 	}

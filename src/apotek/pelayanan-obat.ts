@@ -54,7 +54,7 @@ export class PelayananObat extends ApotekBaseApi {
 			};
 		}>({
 			name: this.name + 'List/Daftar',
-			path: `/pelayanan/obat/daftar/${params.nomorSep}`,
+			path: `/pelayanan/obat/daftar/${encodeURIComponent(params.nomorSep)}`,
 			method: 'GET'
 		});
 	}
@@ -88,7 +88,7 @@ export class PelayananObat extends ApotekBaseApi {
 			};
 		}>({
 			name: this.name + 'Riwayat',
-			path: `/riwayatobat/${params.awal}/${params.akhir}/${params.nomorKartu}`,
+			path: `/riwayatobat/${params.awal}/${params.akhir}/${encodeURIComponent(params.nomorKartu)}`,
 			method: 'GET'
 		});
 	}

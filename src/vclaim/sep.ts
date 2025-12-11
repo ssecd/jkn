@@ -304,7 +304,7 @@ export class SEP extends VClaimBaseApi {
 	}) {
 		return this.send<SEPDetail>({
 			name: this.name + 'Hapus',
-			path: `/SEP/${params.nomor}`,
+			path: `/SEP/${encodeURIComponent(params.nomor)}`,
 			method: 'GET'
 		});
 	}
@@ -318,7 +318,7 @@ export class SEP extends VClaimBaseApi {
 	}) {
 		return this.send<SEPDetail>({
 			name: this.name + 'Cari',
-			path: `/Rujukan/lastsep/norujukan/${params.nomorRujukan}`,
+			path: `/Rujukan/lastsep/norujukan/${encodeURIComponent(params.nomorRujukan)}`,
 			method: 'GET'
 		});
 	}
@@ -736,7 +736,7 @@ export class SEP extends VClaimBaseApi {
 			}[];
 		}>({
 			name: this.name + 'Suplesi Jasa Raharja',
-			path: `/sep/JasaRaharja/Suplesi/${params.nomorKartu}/tglPelayanan/${params.tanggalPelayanan}`,
+			path: `/sep/JasaRaharja/Suplesi/${encodeURIComponent(params.nomorKartu)}/tglPelayanan/${params.tanggalPelayanan}`,
 			method: 'GET'
 		});
 	}
@@ -761,7 +761,7 @@ export class SEP extends VClaimBaseApi {
 			}[];
 		}>({
 			name: this.name + 'Data Induk Kecelakaan',
-			path: `/sep/KllInduk/List/${params.nomorKartu}`,
+			path: `/sep/KllInduk/List/${encodeURIComponent(params.nomorKartu)}`,
 			method: 'GET'
 		});
 	}
@@ -947,7 +947,7 @@ export class SEP extends VClaimBaseApi {
 		filter?: string;
 	}) {
 		const bulan = String(params.bulan || 0).padStart(2, '0');
-		const filter = params.filter || '';
+		const filter = encodeURIComponent(params.filter || '');
 		return this.send<{
 			list: {
 				noSep: string;
@@ -992,7 +992,7 @@ export class SEP extends VClaimBaseApi {
 			};
 		}>({
 			name: this.name + 'INACBG',
-			path: `/sep/cbg/${params.nomor}`,
+			path: `/sep/cbg/${encodeURIComponent(params.nomor)}`,
 			method: 'GET',
 			skipDecrypt: true
 		});
@@ -1035,7 +1035,7 @@ export class SEP extends VClaimBaseApi {
 			}[];
 		}>({
 			name: this.name + 'List Internal',
-			path: `/SEP/Internal/${params.nomor}`,
+			path: `/SEP/Internal/${encodeURIComponent(params.nomor)}`,
 			method: 'GET'
 		});
 	}
@@ -1087,7 +1087,7 @@ export class SEP extends VClaimBaseApi {
 			status: string;
 		}>({
 			name: this.name + 'Status Fingerprint',
-			path: `/SEP/FingerPrint/Peserta/${params.nomorKartu}/TglPelayanan/${params.tanggal}`,
+			path: `/SEP/FingerPrint/Peserta/${encodeURIComponent(params.nomorKartu)}/TglPelayanan/${params.tanggal}`,
 			method: 'GET'
 		});
 	}
@@ -1128,7 +1128,7 @@ export class SEP extends VClaimBaseApi {
 			}[];
 		}>({
 			name: this.name + 'List Random Question',
-			path: `/SEP/FingerPrint/randomquestion/faskesterdaftar/nokapst/${params.nomorKartu}/tglsep/${params.tanggal}`,
+			path: `/SEP/FingerPrint/randomquestion/faskesterdaftar/nokapst/${encodeURIComponent(params.nomorKartu)}/tglsep/${params.tanggal}`,
 			method: 'GET'
 		});
 	}
