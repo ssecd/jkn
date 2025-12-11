@@ -253,6 +253,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 					tglRujukan: string;
 				};
 			};
+			formPRB: RencanaKontrolPRB;
 		}>({
 			name: this.name + 'Cari Surat Kontrol',
 			path: `/RencanaKontrol/noSuratKontrol/${encodeURIComponent(params.nomor)}`,
@@ -297,7 +298,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		/** jenis filter (1 = tanggal entri) (2 = tanggal rencana kontrol) */
 		filter: number;
 	}) {
-		return this.send<{ list: RencanaKontrolListItem[] }>({
+		return this.send<{ list: Omit<RencanaKontrolListItem, 'terbitSEP'>[] }>({
 			name: this.name + 'Data Berdasarkan Tanggal',
 			path: `/RencanaKontrol/ListRencanaKontrol/tglAwal/${params.awal}/tglAkhir/${params.akhir}/filter/${params.filter}`,
 			method: 'GET'
@@ -377,9 +378,7 @@ interface RencanaKontrolListItem {
 	namaDokter: string;
 	noKartu: string;
 	nama: string;
-
-	/** 'Belum' | 'Sudah' */
-	terbitSEP: 'Belum' | 'Sudah' | string;
+	terbitSEP: 'Belum' | 'Sudah';
 }
 
 interface RencanaKontrolInsert {
@@ -440,7 +439,7 @@ interface RencanaKontrolPRB {
 	 *
 	 * Lihat {@link RencanaKontrol.listPenyakitPRB}
 	 */
-	kdStatusPRB: string;
+	kdStatusPRB: string | null;
 	data: {
 		/** 0.1 s/d 15 atau null */
 		HBA1C: number | null;
