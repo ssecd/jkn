@@ -208,7 +208,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 			};
 		}>({
 			name: this.name + 'Cari SEP',
-			path: `/RencanaKontrol/nosep/${params.nomor}`,
+			path: `/RencanaKontrol/nosep/${encodeURIComponent(params.nomor)}`,
 			method: 'GET'
 		});
 	}
@@ -266,7 +266,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 			};
 		}>({
 			name: this.name + 'Cari Surat Kontrol',
-			path: `/RencanaKontrol/noSuratKontrol/${params.nomor}`,
+			path: `/RencanaKontrol/noSuratKontrol/${encodeURIComponent(params.nomor)}`,
 			method: 'GET'
 		});
 	}
@@ -290,7 +290,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		const bulan = String(params.bulan || 0).padStart(2, '0');
 		return this.send<{ list: RencanaKontrolListItem[] }>({
 			name: this.name + 'Data Berdasarkan No. Kartu',
-			path: `/RencanaKontrol/ListRencanaKontrol/Bulan/${bulan}/Tahun/${params.tahun}/Nokartu/${params.nomorKartu}/filter/${params.filter}`,
+			path: `/RencanaKontrol/ListRencanaKontrol/Bulan/${bulan}/Tahun/${params.tahun}/Nokartu/${encodeURIComponent(params.nomorKartu)}/filter/${params.filter}`,
 			method: 'GET'
 		});
 	}
@@ -338,7 +338,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 			}[];
 		}>({
 			name: this.name + 'Data Poli/Spesialistik',
-			path: `/RencanaKontrol/ListSpesialistik/JnsKontrol/${params.jenis}/nomor/${params.nomor}/TglRencanaKontrol/${params.tanggal}`,
+			path: `/RencanaKontrol/ListSpesialistik/JnsKontrol/${params.jenis}/nomor/${encodeURIComponent(params.nomor)}/TglRencanaKontrol/${params.tanggal}`,
 			method: 'GET'
 		});
 	}
@@ -365,7 +365,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 			}[];
 		}>({
 			name: this.name + 'Data Dokter',
-			path: `/RencanaKontrol/JadwalPraktekDokter/JnsKontrol/${params.jenis}/KdPoli/${params.kodePoli}/TglRencanaKontrol/${params.tanggal}`,
+			path: `/RencanaKontrol/JadwalPraktekDokter/JnsKontrol/${params.jenis}/KdPoli/${encodeURIComponent(params.kodePoli)}/TglRencanaKontrol/${params.tanggal}`,
 			method: 'GET'
 		});
 	}
