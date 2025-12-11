@@ -414,7 +414,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * @param params parameter berupa bulan, tahun, dan jenis waktu
 	 */
 	async dashboardPerBulan(params: {
-		/** 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 */
+		/** 1 sampai 12 */
 		bulan: number;
 
 		/** contoh 2023 */
@@ -451,6 +451,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	 * @param kodeBooking kode booking yang didapat dari servis tambah antrean
 	 */
 	async perKodeBooking(kodeBooking: string) {
+		// TODO: encode kodeBooking param
 		return this.send<AntreanDetail[]>({
 			name: 'Antrean Per-KodeBooking',
 			path: `/antrean/pendaftaran/kodebooking/${kodeBooking}`,
@@ -479,7 +480,7 @@ export class Antrean extends BaseApi<'antrean'> {
 		/** kode dokter diambil dari referensi dokter */
 		dokter: string;
 
-		/** hari mulai dari 1 sampai 12 */
+		/** hari mulai dari 1 sampai 7 */
 		hari: number;
 
 		/** jam praktik */

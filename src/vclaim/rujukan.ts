@@ -562,7 +562,7 @@ interface DataRujukan {
 			dinsos: string | null;
 			noSKTM: string | null;
 			prolanisPRB: string | null;
-			eSEP: string | null;
+			eSEP: 'True' | 'False' | null;
 		};
 		jenisPeserta: {
 			keterangan: string;
