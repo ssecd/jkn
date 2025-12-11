@@ -215,10 +215,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		/** nomor surat kontrol */
 		nomor: string;
 	}) {
-		return this.send<
-			Omit<SuratKontrolDetail, 'jnsKontrol' | 'sep'> &
-				({ jnsKontrol: '1' } | { jnsKontrol: '2'; sep: SuratKontrolDetail['sep'] })
-		>({
+		return this.send<SuratKontrolDetail>({
 			name: this.name + 'Cari Surat Kontrol',
 			path: `/RencanaKontrol/noSuratKontrol/${encodeURIComponent(params.nomor)}`,
 			method: 'GET'
@@ -339,7 +336,7 @@ interface SuratKontrolDetail {
 	kodeDokterPembuat: string | null;
 	namaDokterPembuat: string | null;
 	namaJnsKontrol: string;
-	sep: {
+	sep?: {
 		noSep: string;
 		tglSep: string;
 		jnsPelayanan: string;
