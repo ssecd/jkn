@@ -2,6 +2,20 @@ import { VClaimBaseApi } from './base.js';
 
 // TODO: make generic request and response data type as possible
 export class RencanaKontrol extends VClaimBaseApi {
+	get listPenyakitPRB(): { kode: string; nama: string }[] {
+		return [
+			['01', 'Diabetes Mellitus'],
+			['02', 'Hipertensi'],
+			['03', 'Asma'],
+			['04', 'Penyakit Jantung'],
+			['05', 'PPOK'],
+			['06', 'Skizofrenia'],
+			['07', 'Stroke'],
+			['08', 'Epilepsi'],
+			['09', 'SLE']
+		].map(([kode, nama]) => ({ kode, nama }));
+	}
+
 	/**
 	 * Insert rencana kontrol
 	 */
@@ -410,43 +424,128 @@ interface RencanaKontrolWriteResultV2 extends RencanaKontrolWriteResult {
 }
 
 interface RencanaKontrolPRB {
-	kdStatusPRB: '07';
+	/** Kode Penyakit PRB
+	 *
+	 * - 01 = Diabetes Mellitus
+	 * - 02 = Hipertensi
+	 * - 03 = Asma
+	 * - 04 = Penyakit Jantung
+	 * - 05 = PPOK
+	 * - 06 = Skizofrenia
+	 * - 07 = Stroke
+	 * - 08 = Epilepsi
+	 * - 09 = SLE
+	 *
+	 * Lihat {@link RencanaKontrol.listPenyakitPRB}
+	 */
+	kdStatusPRB: string;
 	data: {
-		HBA1C: null;
-		GDP: 78;
-		GD2JPP: null;
-		eGFR: null;
-		TD_Sistolik: 90;
-		TD_Diastolik: 90;
-		LDL: 20;
-		Rata_TD_Sistolik: null;
-		Rata_TD_Diastolik: null;
-		JantungKoroner: null;
-		Stroke: null;
-		VaskularPerifer: null;
-		Aritmia: null;
-		AtrialFibrilasi: null;
-		NadiIstirahat: null;
-		SesakNapas3Bulan: null;
-		NyeriDada3Bulan: null;
-		SesakNapasAktivitas: null;
-		NyeriDadaAktivitas: null;
-		Terkontrol: null;
-		Gejala2xMinggu: null;
-		BangunMalam: null;
-		KeterbatasanFisik: null;
-		FungsiParu: null;
-		SkorMMRC: null;
-		Eksaserbasi1Tahun: null;
-		MampuAktivitas: null;
-		Epileptik6Bulan: null;
-		EfekSampingOAB: null;
-		HamilMenyusui: null;
-		Remisi: null;
-		TerapiRumatan: null;
-		Usia: null;
-		AsamUrat: 0.1;
-		RemisiSLE: null;
-		Hamil: null;
+		/** 0.1 s/d 15 atau null */
+		HBA1C: number | null;
+
+		/** 10 s/d 500 atau null */
+		GDP: number | null;
+
+		/** 10 s/d 500 atau null */
+		GD2JPP: number | null;
+
+		/** 5 s/d 150 atau null */
+		eGFR: number | null;
+
+		/** 20 s/d 200 atau null */
+		TD_Sistolik: number | null;
+
+		/** 20 s/d 200 atau null */
+		TD_Diastolik: number | null;
+
+		/** 20 s/d 500 atau null */
+		LDL: number | null;
+
+		/** 20 s/d 200 atau null */
+		Rata_TD_Sistolik: number | null;
+
+		/** 20 s/d 200 atau null */
+		Rata_TD_Diastolik: number | null;
+
+		/** 0 atau 1 atau null */
+		JantungKoroner: number | null;
+
+		/** 0 atau 1 atau null */
+		Stroke: number | null;
+
+		/** 0 atau 1 atau null */
+		VaskularPerifer: number | null;
+
+		/** 0 atau 1 atau null */
+		Aritmia: number | null;
+
+		/** 0 atau 1 atau null */
+		AtrialFibrilasi: number | null;
+
+		/** 20 s/d 200 atau null */
+		NadiIstirahat: number | null;
+
+		/** 0 atau 1 atau null */
+		SesakNapas3Bulan: number | null;
+
+		/** 0 atau 1 atau null */
+		NyeriDada3Bulan: number | null;
+
+		/** 0 atau 1 atau null */
+		SesakNapasAktivitas: number | null;
+
+		/** 0 atau 1 atau null */
+		NyeriDadaAktivitas: number | null;
+
+		/** 0 atau 1 atau null */
+		Terkontrol: number | null;
+
+		/** 0 atau 1 atau null */
+		Gejala2xMinggu: number | null;
+
+		/** 0 atau 1 atau null */
+		BangunMalam: number | null;
+
+		/** 0 atau 1 atau null */
+		KeterbatasanFisik: number | null;
+
+		/** 0 s/d 100 atau null */
+		FungsiParu: number | null;
+
+		/** 0 s/d 40 atau null */
+		SkorMMRC: number | null;
+
+		/** 0 atau 1 atau null */
+		Eksaserbasi1Tahun: number | null;
+
+		/** 0 atau 1 atau null */
+		MampuAktivitas: number | null;
+
+		/** 0 atau 1 atau null */
+		Epileptik6Bulan: number | null;
+
+		/** 0 atau 1 atau null */
+		EfekSampingOAB: number | null;
+
+		/** 0 atau 1 atau null */
+		HamilMenyusui: number | null;
+
+		/** 0 s/d 100 atau null */
+		Remisi: number | null;
+
+		/** 0 atau 1 atau null */
+		TerapiRumatan: number | null;
+
+		/** 1 s/d 100 atau null */
+		Usia: number | null;
+
+		/** 0.1 s/d 20 atau null */
+		AsamUrat: number | null;
+
+		/** 0 s/d 100 atau null */
+		RemisiSLE: number | null;
+
+		/** 0 atau 1 atau null */
+		Hamil: number | null;
 	};
 }

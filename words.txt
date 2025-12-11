@@ -166,6 +166,7 @@ pesertasep
 pisat
 POLIRSP
 ppkpelsep
+PPOK
 Praktek
 prolanis
 propinsi
