@@ -415,7 +415,9 @@ interface RencanaKontrolWriteResult {
 }
 
 interface RencanaKontrolInsertV2 extends RencanaKontrolInsert {
-	formPRB: RencanaKontrolPRB;
+	formPRB: Omit<RencanaKontrolPRB, 'data'> & {
+		data: Partial<RencanaKontrolPRB['data']>;
+	};
 }
 
 interface RencanaKontrolWriteResultV2 extends RencanaKontrolWriteResult {
