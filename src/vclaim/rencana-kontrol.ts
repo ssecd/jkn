@@ -206,16 +206,19 @@ export class RencanaKontrol extends VClaimBaseApi {
 	 * Melihat detail surat kontrol berdasarkan nomor surat kontrol
 	 *
 	 * Catatan:
-	 * Ketika pembuatan SPRI atau jenis kontrol 1 tidak ada referensi nomor SEP asalnya,
+	 * Ketika pembuatan SPRI atau jenis kontrol = 1 tidak ada referensi nomor SEP asalnya,
 	 * jadi field response SEP kosong atau null. Sedangkan jika pembuatan surat kontrol
-	 * atau jenis kontrol 2, akan ter-isi field response SEP karena terdapat referensi
+	 * atau jenis kontrol = 2, akan ter-isi field response SEP karena terdapat referensi
 	 * nomor SEP asal ketika pembuatan surat kontrol tersebut.
 	 */
 	async cari(params: {
 		/** nomor surat kontrol */
 		nomor: string;
 	}) {
-		return this.send<SuratKontrolDetail>({
+		return this.send<
+			Omit<SuratKontrolDetail, 'jnsKontrol' | 'sep'> &
+				({ jnsKontrol: '1'; sep: null } | { jnsKontrol: '2'; sep: SuratKontrolDetail['sep'] })
+		>({
 			name: this.name + 'Cari Surat Kontrol',
 			path: `/RencanaKontrol/noSuratKontrol/${encodeURIComponent(params.nomor)}`,
 			method: 'GET'
@@ -336,7 +339,7 @@ interface SuratKontrolDetail {
 	kodeDokterPembuat: string | null;
 	namaDokterPembuat: string | null;
 	namaJnsKontrol: string;
-	sep?: {
+	sep: {
 		noSep: string;
 		tglSep: string;
 		jnsPelayanan: string;
