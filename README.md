@@ -9,7 +9,7 @@ JKN (BPJS) Bridging API untuk NodeJS
 - ✅ Antrean
 - ✅ Apotek
 - ✅ i-Care
-- ✅ Rekam Medis
+- ✅ Rekam Medis _(Experimental types)_
 - 🧩 PCare _([partial](https://github.com/ssecd/jkn/pull/26))_
 
 ## Instalasi
@@ -17,7 +17,15 @@ JKN (BPJS) Bridging API untuk NodeJS
 Instalasi paket dapat dilakukan dengan perintah berikut:
 
 ```bash
+# Node
 npm install @ssecd/jkn
+
+# Bun
+bun install @ssecd/jkn
+
+# Deno
+import JKN from "npm:@ssecd/jkn"
+
 ```
 
 Untuk dukungan _type_ pada API Rekam Medis, perlu menambahkan development dependensi `@types/fhir` dengan perintah:
