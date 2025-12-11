@@ -51,6 +51,7 @@ interface DataPeserta {
 		dinsos: string | null;
 		noSKTM: string | null;
 		prolanisPRB: string | null;
+		eSEP: 'True' | 'False' | null;
 	};
 	jenisPeserta: {
 		keterangan: string;

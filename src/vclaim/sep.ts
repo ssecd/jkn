@@ -4,6 +4,8 @@ import { VClaimBaseApi } from './base.js';
 export class SEP extends VClaimBaseApi {
 	/**
 	 * Buat SEP
+	 *
+	 * @deprecated Gunakan {@link insertV2}
 	 */
 	async insert(data: {
 		/** nomor kartu JKN/BPJS */
@@ -159,6 +161,7 @@ export class SEP extends VClaimBaseApi {
 	/**
 	 * Update SEP
 	 *
+	 * @deprecated Gunakan {@link updateV2}
 	 * @returns nomor SEP
 	 */
 	async update(data: {
@@ -275,6 +278,8 @@ export class SEP extends VClaimBaseApi {
 
 	/**
 	 * Hapus SEP
+	 *
+	 * @deprecated Gunakan {@link deleteV2}
 	 */
 	async delete(data: {
 		/** nomor SEP yang akan dihapus */
@@ -860,6 +865,8 @@ export class SEP extends VClaimBaseApi {
 
 	/**
 	 * Update tanggal pulang SEP
+	 *
+	 * @deprecated Gunakan {@link updateTanggalPulangV2}
 	 */
 	async updateTanggalPulang(data: {
 		/** nomor SEP */
@@ -1120,7 +1127,6 @@ export class SEP extends VClaimBaseApi {
 				nama: string;
 			}[];
 		}>({
-			// TODO: solve error endpoint not found
 			name: this.name + 'List Random Question',
 			path: `/SEP/FingerPrint/randomquestion/faskesterdaftar/nokapst/${params.nomorKartu}/tglsep/${params.tanggal}`,
 			method: 'GET'
@@ -1230,5 +1236,5 @@ interface SEPDetail {
 		kode: string;
 		nama: string;
 	};
-	eSEP: string;
+	eSEP: 'True' | 'False' | null;
 }

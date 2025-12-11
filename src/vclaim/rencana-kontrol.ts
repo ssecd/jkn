@@ -388,5 +388,7 @@ interface RencanaKontrolListItem {
 	namaDokter: string;
 	noKartu: string;
 	nama: string;
+
+	/** 'Belum' | 'Sudah' */
 	terbitSEP: 'Belum' | 'Sudah' | string;
 }
