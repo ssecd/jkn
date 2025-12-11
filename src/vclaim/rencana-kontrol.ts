@@ -215,46 +215,10 @@ export class RencanaKontrol extends VClaimBaseApi {
 		/** nomor surat kontrol */
 		nomor: string;
 	}) {
-		return this.send<{
-			noSuratKontrol: string;
-			tglRencanaKontrol: string;
-			tglTerbit: string;
-			jnsKontrol: string;
-			poliTujuan: string;
-			namaPoliTujuan: string;
-			kodeDokter: string;
-			namaDokter: string;
-			flagKontrol: 'True' | 'False' | string;
-			kodeDokterPembuat: string | null;
-			namaDokterPembuat: string | null;
-			namaJnsKontrol: string;
-			sep: {
-				noSep: string;
-				tglSep: string;
-				jnsPelayanan: string;
-				poli: string;
-				diagnosa: string;
-				peserta: {
-					noKartu: string;
-					nama: string;
-					tglLahir: string;
-					kelamin: string;
-					hakKelas: string;
-				};
-				provUmum: {
-					kdProvider: string;
-					nmProvider: string;
-				};
-				provPerujuk: {
-					kdProviderPerujuk: string;
-					nmProviderPerujuk: string;
-					asalRujukan: '1' | '2';
-					noRujukan: string;
-					tglRujukan: string;
-				};
-			};
-			formPRB: RencanaKontrolPRB;
-		}>({
+		return this.send<
+			Omit<SuratKontrolDetail, 'jnsKontrol' | 'sep'> &
+				({ jnsKontrol: '1' } | { jnsKontrol: '2'; sep: SuratKontrolDetail['sep'] })
+		>({
 			name: this.name + 'Cari Surat Kontrol',
 			path: `/RencanaKontrol/noSuratKontrol/${encodeURIComponent(params.nomor)}`,
 			method: 'GET'
@@ -361,10 +325,53 @@ export class RencanaKontrol extends VClaimBaseApi {
 	}
 }
 
+interface SuratKontrolDetail {
+	noSuratKontrol: string;
+	tglRencanaKontrol: string;
+	tglTerbit: string;
+	/** 1 = SPRI/Rawat Inap | 2 = Surat Kontrol/Rawat Jalan */
+	jnsKontrol: '1' | '2';
+	poliTujuan: string;
+	namaPoliTujuan: string;
+	kodeDokter: string;
+	namaDokter: string;
+	flagKontrol: 'True' | 'False' | string;
+	kodeDokterPembuat: string | null;
+	namaDokterPembuat: string | null;
+	namaJnsKontrol: string;
+	sep: {
+		noSep: string;
+		tglSep: string;
+		jnsPelayanan: string;
+		poli: string;
+		diagnosa: string;
+		peserta: {
+			noKartu: string;
+			nama: string;
+			tglLahir: string;
+			kelamin: string;
+			hakKelas: string;
+		};
+		provUmum: {
+			kdProvider: string;
+			nmProvider: string;
+		};
+		provPerujuk: {
+			kdProviderPerujuk: string;
+			nmProviderPerujuk: string;
+			asalRujukan: '1' | '2';
+			noRujukan: string;
+			tglRujukan: string;
+		};
+	};
+	formPRB: RencanaKontrolPRB;
+}
+
 interface RencanaKontrolListItem {
 	noSuratKontrol: string;
 	jnsPelayanan: string;
-	jnsKontrol: string;
+	/** 1 = SPRI/Rawat Inap | 2 = Surat Kontrol/Rawat Jalan */
+	jnsKontrol: '1' | '2';
 	namaJnsKontrol: string;
 	tglRencanaKontrol: string;
 	tglTerbitKontrol: string;
