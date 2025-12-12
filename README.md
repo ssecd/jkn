@@ -14,7 +14,7 @@ JKN (BPJS) Bridging API untuk NodeJS
 
 ## Demo
 
-<video src="https://github.com/user-attachments/assets/02809ccd-30ea-48a8-bbb3-1e0df687175a" />
+<video src="https://github.com/user-attachments/assets/02809ccd-30ea-48a8-bbb3-1e0df687175a"></video>
 
 > 🎥 [Demo](https://github.com/ssecd/jkn#demo)
 
