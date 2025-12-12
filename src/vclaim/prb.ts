@@ -233,4 +233,25 @@ export class PRB extends VClaimBaseApi {
 			method: 'GET'
 		});
 	}
+
+	/**
+	 * Menyediakan data rekap klaim yang diajukan oleh Faskes 2, di mana
+	 * dalam klaim tersebut terdapat peserta dengan flagging Potensi PRB.
+	 */
+	async rekapPotensi(params: { tahun: number; bulan: number }) {
+		return this.send<{
+			list: {
+				NamaPeserta: string;
+				NomorKartu: string;
+				NOSEP: string;
+				TanggalPelayanan: string;
+				DiagnosaPotensiPRB: string;
+				KategoriPenyakitPRB: string;
+			}[];
+		}>({
+			name: this.name + 'Rekap Potensi PRB',
+			path: `/prbpotensi/tahun/${params.tahun}/bulan/${params.bulan}`,
+			method: 'GET'
+		});
+	}
 }

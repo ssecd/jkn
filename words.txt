@@ -73,6 +73,7 @@ katarak
 kddokter
 kdjenispeserta
 KDJNSOBAT
+KDOBAT
 KDOBT
 kdpenunjang
 kdpoli
@@ -168,6 +169,7 @@ POLIRSP
 ppkpelsep
 PPOK
 Praktek
+prbpotensi
 prolanis
 propinsi
 Psikososial
@@ -178,6 +180,7 @@ randomquestion
 REFASALSJP
 rekammedis
 rekap
+rekappeserta
 riwayatobat
 rownumber
 ruangrawat
@@ -226,6 +229,7 @@ totalbiayasetuju
 totalitems
 tujuanrujuk
 updatejadwaldokter
+updatestok
 updatewaktu
 updtglplg
 vclaim

@@ -48,4 +48,17 @@ export class Obat extends ApotekBaseApi {
 			data
 		});
 	}
+
+	/**
+	 * Update data stok obat dari sistem informasi apotek ke
+	 * aplikasi Apotek Online
+	 */
+	async updateStok(data: { KDOBAT: string; STOK: number }) {
+		return this.send<null>({
+			name: this.name + 'Update Stok Obat',
+			path: '/UpdateStokObat/updatestok',
+			method: 'POST',
+			data
+		});
+	}
 }
