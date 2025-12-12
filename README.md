@@ -1,6 +1,6 @@
-JKN (BPJS) Bridging API untuk NodeJS
+# JKN
 
-https://github.com/user-attachments/assets/02809ccd-30ea-48a8-bbb3-1e0df687175a
+JKN (BPJS) Bridging API untuk NodeJS
 
 ## Fitur
 
@@ -11,6 +11,10 @@ https://github.com/user-attachments/assets/02809ccd-30ea-48a8-bbb3-1e0df687175a
 - ✅ i-Care
 - ✅ Rekam Medis _(Experimental types)_
 - 🧩 PCare _([partial](https://github.com/ssecd/jkn/pull/26))_
+
+## Demo
+
+https://github.com/user-attachments/assets/02809ccd-30ea-48a8-bbb3-1e0df687175a
 
 ## Instalasi
 
