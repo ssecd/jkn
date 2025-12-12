@@ -1,8 +1,6 @@
 JKN (BPJS) Bridging API untuk NodeJS
 
-<video autoplay loop muted playsinline>
-  <source src="./assets/demo.webm" type="video/webm">
-</video>
+https://github.com/user-attachments/assets/02809ccd-30ea-48a8-bbb3-1e0df687175a
 
 ## Fitur
 
