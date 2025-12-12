@@ -1,6 +1,45 @@
 import { VClaimBaseApi } from './base.js';
 
-// TODO: make generic request and response data type as possible
+const formPRBFieldsMap: Record<keyof RencanaKontrolPRB['data'], [string[], number, number]> = {
+	// key: [codes[], min, max]
+	HBA1C: [['01'], 0.1, 15],
+	GDP: [['01', '07'], 10, 500],
+	GD2JPP: [['01'], 10, 500],
+	eGFR: [['01', '02'], 5, 150],
+	TD_Sistolik: [['01', '07'], 20, 200],
+	TD_Diastolik: [['01', '07'], 20, 200],
+	LDL: [['01', '07'], 20, 500],
+	Rata_TD_Sistolik: [['02', '04'], 20, 200],
+	Rata_TD_Diastolik: [['02', '04'], 20, 200],
+	JantungKoroner: [['02'], 0, 1],
+	Stroke: [['02'], 0, 1],
+	VaskularPerifer: [['02'], 0, 1],
+	Aritmia: [['02', '04'], 0, 1],
+	AtrialFibrilasi: [['02'], 0, 1],
+	NadiIstirahat: [['04'], 20, 200],
+	SesakNapas3Bulan: [['04'], 0, 1],
+	NyeriDada3Bulan: [['04'], 0, 1],
+	SesakNapasAktivitas: [['04'], 0, 1],
+	NyeriDadaAktivitas: [['04'], 0, 1],
+	Terkontrol: [['03'], 0, 1],
+	Gejala2xMinggu: [['03'], 0, 1],
+	BangunMalam: [['03'], 0, 1],
+	KeterbatasanFisik: [['03'], 0, 1],
+	FungsiParu: [['03'], 0, 100],
+	SkorMMRC: [['05'], 0, 40],
+	Eksaserbasi1Tahun: [['05'], 0, 1],
+	MampuAktivitas: [['05'], 0, 1],
+	Epileptik6Bulan: [['08'], 0, 1],
+	EfekSampingOAB: [['08'], 0, 1],
+	HamilMenyusui: [['08'], 0, 1],
+	Remisi: [['06'], 0, 100],
+	TerapiRumatan: [['06'], 0, 1],
+	Usia: [['06'], 1, 100],
+	AsamUrat: [['07'], 0.1, 20],
+	RemisiSLE: [['09'], 0, 100],
+	Hamil: [['09'], 0, 1]
+} as const;
+
 export class RencanaKontrol extends VClaimBaseApi {
 	get listPenyakitPRB(): { kode: string; nama: string }[] {
 		return [
@@ -14,6 +53,39 @@ export class RencanaKontrol extends VClaimBaseApi {
 			['08', 'Epilepsi'],
 			['09', 'SLE']
 		].map(([kode, nama]) => ({ kode, nama }));
+	}
+
+	/**
+	 * Mengambil semua form fields penyakit PRB yang dapat dimanfaatkan
+	 * untuk membentuk form input penyakit PRB dengan melakukan filter
+	 * berdasarkan `kode` dari {@link listPenyakitPRB}.
+	 */
+	get allFieldsPenyakitPRB() {
+		return Object.entries(formPRBFieldsMap).map(
+			([namaField, [listKode, nilaiMinimum, nilaiMaksimum]]) => ({
+				namaField,
+				listKode,
+				nilaiMinimum,
+				nilaiMaksimum
+			})
+		);
+	}
+
+	/**
+	 * Mengambil semua form fields penyakit PRB berdasarkan kode
+	 * penyakit PRB. Berguna untuk membentuk form input di sisi
+	 * client atau UI secara dinamis berdasarkan Penyakit PRB.
+	 *
+	 * @param kode Kode penyakit PRB. Lihat {@link listPenyakitPRB}
+	 */
+	getFieldsPenyakitPRB(kode: string) {
+		return Object.entries(formPRBFieldsMap)
+			.filter(([, [codes]]) => codes.includes(kode))
+			.map(([namaField, [, nilaiMinimum, nilaiMaksimum]]) => ({
+				namaField,
+				nilaiMinimum,
+				nilaiMaksimum
+			}));
 	}
 
 	/**
