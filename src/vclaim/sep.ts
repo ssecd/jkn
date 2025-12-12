@@ -532,7 +532,7 @@ export class SEP extends VClaimBaseApi {
 				flagProcedure: string;
 				informasi: {
 					dinsos: string | null;
-					eSEP: string;
+					eSEP: 'True' | 'False' | null;
 					noSKTM: string | null;
 					prolanisPRB: string | null;
 				};
