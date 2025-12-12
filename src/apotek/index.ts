@@ -2,6 +2,7 @@ import { CachedApi } from '../base.js';
 import { Monitoring } from './monitoring.js';
 import { Obat } from './obat.js';
 import { PelayananObat } from './pelayanan-obat.js';
+import { PRB } from './prb.js';
 import { Referensi } from './referensi.js';
 import { Resep } from './resep.js';
 import { SEP } from './sep.js';
@@ -40,5 +41,9 @@ export class Apotek {
 
 	get monitoring() {
 		return this.cache.get('apotek_monitoring', Monitoring);
+	}
+
+	get prb() {
+		return this.cache.get('apotek_prb', PRB);
 	}
 }
