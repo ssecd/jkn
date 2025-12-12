@@ -28,8 +28,7 @@ npm install @ssecd/jkn
 bun install @ssecd/jkn
 
 # Deno
-import JKN from "npm:@ssecd/jkn"
-
+deno install npm:@ssecd/jkn
 ```
 
 Untuk dukungan _type_ pada API Rekam Medis, perlu menambahkan development dependensi `@types/fhir` dengan perintah:
@@ -38,7 +37,7 @@ Untuk dukungan _type_ pada API Rekam Medis, perlu menambahkan development depend
 npm install --save-dev @types/fhir
 ```
 
-Instalasi juga dapat dilakukan menggunakan `PNPM` atau `YARN`
+> Instalasi paket NodeJS juga dapat dilakukan menggunakan `PNPM` atau `YARN`
 
 ## Penggunaan
 
