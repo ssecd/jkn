@@ -1,6 +1,8 @@
 JKN (BPJS) Bridging API untuk NodeJS
 
-<img width="512" alt="Mudahnya JKN API dari SSEC" src="./assets/demo.gif">
+<video autoplay loop muted playsinline>
+  <source src="./assets/demo.webm" type="video/webm">
+</video>
 
 ## Fitur
 
