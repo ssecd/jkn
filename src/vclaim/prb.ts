@@ -239,6 +239,7 @@ export class PRB extends VClaimBaseApi {
 	 * dalam klaim tersebut terdapat peserta dengan flagging Potensi PRB.
 	 */
 	async rekapPotensi(params: { tahun: number; bulan: number }) {
+		// TODO: Response returning empty string
 		return this.send<{
 			list: {
 				NamaPeserta: string;

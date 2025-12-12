@@ -5,7 +5,8 @@ import { generateDateRanges } from '../utils';
 describe('VClaim - PRB', { timeout: 25_000 }, () => {
 	it.concurrent('cariByTanggal() - not 200 no data', async () => {
 		const results: string[] = [];
-		for (const [awal, akhir] of generateDateRanges(2023)) {
+		// max 31 days
+		for (const [awal, akhir] of generateDateRanges(2023, 40)) {
 			const result = await jkn.vclaim.prb.cariByTanggal({
 				awal,
 				akhir
@@ -13,5 +14,13 @@ describe('VClaim - PRB', { timeout: 25_000 }, () => {
 			results.push(result.metaData.code);
 		}
 		expect(results).not.toContain('200');
+	});
+
+	it.concurrent('rekapPotensi() - should return data', async () => {
+		const result = await jkn.vclaim.prb.rekapPotensi({
+			tahun: 2025,
+			bulan: 11
+		});
+		expect(result.metaData.code).toBe('200');
 	});
 });
