@@ -1,6 +1,6 @@
 import { VClaimBaseApi } from './base.js';
 
-const formPRBFieldsMap: Record<keyof RencanaKontrolPRB['data'], [string[], number, number]> = {
+const formPRBFieldsMap = {
 	// key: [codes[], min, max]
 	HBA1C: [['01'], 0.1, 15],
 	GDP: [['01', '07'], 10, 500],
@@ -61,7 +61,8 @@ export class RencanaKontrol extends VClaimBaseApi {
 	 * berdasarkan `kode` dari {@link listPenyakitPRB}.
 	 */
 	get allFieldsPenyakitPRB() {
-		return Object.entries(formPRBFieldsMap).map(
+		const fieldsMap = formPRBFieldsMap as unknown as Record<string, [string[], number, number]>;
+		return Object.entries(fieldsMap).map(
 			([namaField, [listKode, nilaiMinimum, nilaiMaksimum]]) => ({
 				namaField,
 				listKode,
@@ -79,7 +80,8 @@ export class RencanaKontrol extends VClaimBaseApi {
 	 * @param kode Kode penyakit PRB. Lihat {@link listPenyakitPRB}
 	 */
 	getFieldsPenyakitPRB(kode: string) {
-		return Object.entries(formPRBFieldsMap)
+		const fieldsMap = formPRBFieldsMap as unknown as Record<string, [string[], number, number]>;
+		return Object.entries(fieldsMap)
 			.filter(([, [codes]]) => codes.includes(kode))
 			.map(([namaField, [, nilaiMinimum, nilaiMaksimum]]) => ({
 				namaField,
@@ -519,113 +521,5 @@ interface RencanaKontrolPRB {
 	 * Lihat {@link RencanaKontrol.listPenyakitPRB}
 	 */
 	kdStatusPRB: string | null;
-	data: {
-		/** 0.1 s/d 15 atau null */
-		HBA1C: number | null;
-
-		/** 10 s/d 500 atau null */
-		GDP: number | null;
-
-		/** 10 s/d 500 atau null */
-		GD2JPP: number | null;
-
-		/** 5 s/d 150 atau null */
-		eGFR: number | null;
-
-		/** 20 s/d 200 atau null */
-		TD_Sistolik: number | null;
-
-		/** 20 s/d 200 atau null */
-		TD_Diastolik: number | null;
-
-		/** 20 s/d 500 atau null */
-		LDL: number | null;
-
-		/** 20 s/d 200 atau null */
-		Rata_TD_Sistolik: number | null;
-
-		/** 20 s/d 200 atau null */
-		Rata_TD_Diastolik: number | null;
-
-		/** 0 atau 1 atau null */
-		JantungKoroner: number | null;
-
-		/** 0 atau 1 atau null */
-		Stroke: number | null;
-
-		/** 0 atau 1 atau null */
-		VaskularPerifer: number | null;
-
-		/** 0 atau 1 atau null */
-		Aritmia: number | null;
-
-		/** 0 atau 1 atau null */
-		AtrialFibrilasi: number | null;
-
-		/** 20 s/d 200 atau null */
-		NadiIstirahat: number | null;
-
-		/** 0 atau 1 atau null */
-		SesakNapas3Bulan: number | null;
-
-		/** 0 atau 1 atau null */
-		NyeriDada3Bulan: number | null;
-
-		/** 0 atau 1 atau null */
-		SesakNapasAktivitas: number | null;
-
-		/** 0 atau 1 atau null */
-		NyeriDadaAktivitas: number | null;
-
-		/** 0 atau 1 atau null */
-		Terkontrol: number | null;
-
-		/** 0 atau 1 atau null */
-		Gejala2xMinggu: number | null;
-
-		/** 0 atau 1 atau null */
-		BangunMalam: number | null;
-
-		/** 0 atau 1 atau null */
-		KeterbatasanFisik: number | null;
-
-		/** 0 s/d 100 atau null */
-		FungsiParu: number | null;
-
-		/** 0 s/d 40 atau null */
-		SkorMMRC: number | null;
-
-		/** 0 atau 1 atau null */
-		Eksaserbasi1Tahun: number | null;
-
-		/** 0 atau 1 atau null */
-		MampuAktivitas: number | null;
-
-		/** 0 atau 1 atau null */
-		Epileptik6Bulan: number | null;
-
-		/** 0 atau 1 atau null */
-		EfekSampingOAB: number | null;
-
-		/** 0 atau 1 atau null */
-		HamilMenyusui: number | null;
-
-		/** 0 s/d 100 atau null */
-		Remisi: number | null;
-
-		/** 0 atau 1 atau null */
-		TerapiRumatan: number | null;
-
-		/** 1 s/d 100 atau null */
-		Usia: number | null;
-
-		/** 0.1 s/d 20 atau null */
-		AsamUrat: number | null;
-
-		/** 0 s/d 100 atau null */
-		RemisiSLE: number | null;
-
-		/** 0 atau 1 atau null */
-		Hamil: number | null;
-	};
+	data: Record<keyof typeof formPRBFieldsMap, number | null>;
 }
