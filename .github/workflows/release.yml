@@ -31,7 +31,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       # skip test for now, we can always run it locally
       # - name: Test
