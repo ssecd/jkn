@@ -351,8 +351,9 @@ export class Fetcher {
 			this.onRequest?.({ ...option, type });
 			const startedAt = performance.now();
 			response = await fetch(url, init).then((r) => r.text());
-			const json: SendResponse<R, M>[T] = JSON.parse(response);
+			if (!response) throw new Error(`the response body is empty`);
 
+			const json: SendResponse<R, M>[T] = JSON.parse(response);
 			if (json.response && !option.skipDecrypt) {
 				const decrypted = this.decrypt(String(json.response), headers['X-timestamp']);
 				json.response = JSON.parse(this.decompress(decrypted));

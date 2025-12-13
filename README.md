@@ -105,7 +105,7 @@ console.log(result);
 		faskes: [
 			{
 				kode: "0089S002",
-				nama: "Klinik Utama Mata Silampari Sriwijaya Eye Centre"
+				nama: "Silampari Sriwijaya Eye Centre"
 			}
 		]
 	};
