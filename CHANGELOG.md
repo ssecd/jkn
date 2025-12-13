@@ -1,5 +1,16 @@
 # @ssecd/jkn
 
+## 0.9.0
+
+### Minor Changes
+
+- b150df1: Implement Surkon V2 API
+
+### Patch Changes
+
+- edfe9f8: Encode string params
+- 796df49: Improve types and comments
+
 ## 0.8.1
 
 ### Patch Changes
