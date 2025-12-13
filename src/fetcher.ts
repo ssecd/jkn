@@ -126,7 +126,7 @@ export interface Config {
 export interface SendOption {
 	/** name of request, it helpful for log or collect stats */
 	name?: string;
-	path: `/${string}`;
+	path: `/${string}` | [`/${string}`, Record<string, string | number>];
 	method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
 	data?: unknown;
 	skipDecrypt?: boolean;
@@ -314,19 +314,37 @@ export class Fetcher {
 		return lz.decompressFromEncodedURIComponent(text);
 	}
 
+	private normalizePath(path: SendOption['path']) {
+		const [pathname, params] = typeof path == 'string' ? [path] : path;
+		if (!pathname.startsWith('/')) throw new Error(`Path must start with "/"`);
+		if (!params) return pathname;
+
+		return pathname.replace(/:([A-Za-z0-9_]+)/g, (_, key) => {
+			if (!(key in params)) throw new Error(`Missing params: ${key}`);
+
+			const value = String(params[key]);
+			try {
+				// In case the value is already encoded by the user
+				return encodeURIComponent(decodeURIComponent(value));
+			} catch {
+				return encodeURIComponent(value);
+			}
+		});
+	}
+
 	async send<T extends Type, R, M>(
 		type: T,
 		option: SendOption
 	): Promise<SendResponse<R | undefined, M | undefined>[T]> {
 		await this.applyConfig();
-		if (!option.path.startsWith('/')) throw new Error(`Path must be starts with "/"`);
+
+		const path = this.normalizePath(option.path);
+		const baseUrl = this.config.baseUrls[type];
+		if (!baseUrl) throw new Error(`Invalid base URL for type "${type}"`);
 
 		let result = '';
 		try {
-			const baseUrl = this.config.baseUrls[type];
-			if (!baseUrl) throw new Error(`base url of type "${type}" is invalid`);
-
-			const url = new URL(baseUrl[this.config.mode] + option.path);
+			const url = new URL(baseUrl[this.config.mode] + path);
 			const init: RequestInit = { method: option.method ?? 'GET' };
 			const headers = { ...this.getDefaultHeaders(type), ...(option.headers ?? {}) };
 
