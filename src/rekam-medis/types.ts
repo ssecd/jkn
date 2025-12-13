@@ -27,11 +27,10 @@ export interface Encounter extends fhir4.Encounter {
 		| undefined;
 }
 
-export interface MedicationRequest
-	extends Omit<
-		fhir4.MedicationRequest,
-		'identifier' | 'intent' | 'dosageInstruction' | 'requester'
-	> {
+export interface MedicationRequest extends Omit<
+	fhir4.MedicationRequest,
+	'identifier' | 'intent' | 'dosageInstruction' | 'requester'
+> {
 	identifier?: fhir4.Identifier;
 	intent: fhir4.MedicationRequest['intent'] | 'final';
 	dosageInstruction?: (Omit<fhir4.Dosage, 'timing'> & {
@@ -68,8 +67,10 @@ interface Observation extends Omit<fhir4.Observation, 'performer' | 'code'> {
 	conclusion?: string;
 }
 
-export interface DiagnosticReport
-	extends Omit<fhir4.DiagnosticReport, 'category' | 'result' | 'code'> {
+export interface DiagnosticReport extends Omit<
+	fhir4.DiagnosticReport,
+	'category' | 'result' | 'code'
+> {
 	subject: fhir4.Reference & { noSep: string };
 	category?: {
 		coding: fhir4.Coding;
@@ -87,13 +88,12 @@ export interface Device extends fhir4.Device {
 	model: string;
 }
 
-export interface MRBundle
-	extends fhir4.Bundle<
-		| Composition
-		| Patient
-		| Encounter
-		| Practitioner
-		| Organization
-		| Condition
-		| Array<MedicationRequest | DiagnosticReport | Procedure | Device>
-	> {}
+export interface MRBundle extends fhir4.Bundle<
+	| Composition
+	| Patient
+	| Encounter
+	| Practitioner
+	| Organization
+	| Condition
+	| Array<MedicationRequest | DiagnosticReport | Procedure | Device>
+> {}
