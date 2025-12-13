@@ -405,34 +405,12 @@ export class Fetcher {
  */
 function parseHtml(html?: string) {
 	if (!html) return '[empty]';
-	if (!/<!doctype\s+html|<html\b|<head\b|<body\b/i.test(html)) return html;
-	return (
-		String(html)
-			// remove head completely (title, meta, style, etc.)
-			.replace(/<head\b[^>]*>[\s\S]*?<\/head>/gi, '')
-
-			// remove scripts & styles just in case
-			.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
-			.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
-
-			// block-level breaks
-			.replace(/<br\s*\/?>/gi, '\n')
-			.replace(/<\/(p|div|li|h[1-6])>/gi, '\n')
-
-			// remove all remaining tags
-			.replace(/<[^>]+>/g, '')
-
-			// decode basic entities
-			.replace(/&nbsp;/gi, ' ')
-			.replace(/&amp;/gi, '&')
-
-			// whitespace normalization
-			.replace(/\r\n?/g, '\n') // normalize newlines
-			.replace(/[ \t]+/g, ' ') // collapse spaces
-			.replace(/\n\s+/g, '\n') // trim line starts
-			.replace(/\s+\n/g, '\n') // trim line ends
-			.replace(/\n{2,}/g, '\n') // collapse blank lines
-			.replace(/\n+/g, ' | ') // replace newlines with |
-			.trim()
-	);
+	return html
+		.replace(/<head\b[^>]*>[\s\S]*?<\/head>/gi, '')
+		.replace(/<script[\s\S]*?<\/script>/gi, '')
+		.replace(/<style[\s\S]*?<\/style>/gi, '')
+		.replace(/<[^>]*>/g, '')
+		.trim()
+		.replace(/\r?\n+/g, ' - ') // newlines to dash
+		.replace(/\s+/g, ' '); // normalize whitespace
 }
