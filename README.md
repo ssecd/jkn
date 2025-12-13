@@ -1,6 +1,6 @@
-JKN (BPJS) Bridging API untuk NodeJS
+# JKN
 
-<img width="512" alt="Mudahnya JKN API dari SSEC" src="./assets/demo.gif">
+JKN (BPJS) Bridging API untuk NodeJS
 
 ## Fitur
 
@@ -9,15 +9,26 @@ JKN (BPJS) Bridging API untuk NodeJS
 - ✅ Antrean
 - ✅ Apotek
 - ✅ i-Care
-- ✅ Rekam Medis
+- ✅ Rekam Medis _(Experimental types)_
 - 🧩 PCare _([partial](https://github.com/ssecd/jkn/pull/26))_
+
+## Demo
+
+https://github.com/user-attachments/assets/02809ccd-30ea-48a8-bbb3-1e0df687175a
 
 ## Instalasi
 
 Instalasi paket dapat dilakukan dengan perintah berikut:
 
 ```bash
+# Node
 npm install @ssecd/jkn
+
+# Bun
+bun install @ssecd/jkn
+
+# Deno
+deno install npm:@ssecd/jkn
 ```
 
 Untuk dukungan _type_ pada API Rekam Medis, perlu menambahkan development dependensi `@types/fhir` dengan perintah:
@@ -26,7 +37,7 @@ Untuk dukungan _type_ pada API Rekam Medis, perlu menambahkan development depend
 npm install --save-dev @types/fhir
 ```
 
-Instalasi juga dapat dilakukan menggunakan `PNPM` atau `YARN`
+> Instalasi paket NodeJS juga dapat dilakukan menggunakan `PNPM` atau `YARN`
 
 ## Penggunaan
 
@@ -94,7 +105,7 @@ console.log(result);
 		faskes: [
 			{
 				kode: "0089S002",
-				nama: "Klinik Utama Mata Silampari Sriwijaya Eye Centre"
+				nama: "Silampari Sriwijaya Eye Centre"
 			}
 		]
 	};
@@ -148,7 +159,7 @@ onResponse: (<T extends Type = Type>(info: SendOption & { duration: number; type
 - `onError`
 
 ```ts
-onError: ((error: unknown) => MaybePromise<void>) | undefined = undefined;
+onError: ((error: Error) => MaybePromise<void>) | undefined = undefined;
 ```
 
 Contoh penggunaan event:

@@ -215,7 +215,7 @@ export class Fetcher {
 		  ) => MaybePromise<void>)
 		| undefined = undefined;
 
-	public onError: ((error: unknown) => MaybePromise<void>) | undefined = undefined;
+	public onError: ((error: Error) => MaybePromise<void>) | undefined = undefined;
 
 	private configured = false;
 
@@ -319,9 +319,9 @@ export class Fetcher {
 		option: SendOption
 	): Promise<SendResponse<R | undefined, M | undefined>[T]> {
 		await this.applyConfig();
-		if (!option.path.startsWith('/')) throw new Error(`path must be starts with "/"`);
+		if (!option.path.startsWith('/')) throw new Error(`Path must be starts with "/"`);
 
-		let response = '';
+		let result = '';
 		try {
 			const baseUrl = this.config.baseUrls[type];
 			if (!baseUrl) throw new Error(`base url of type "${type}" is invalid`);
@@ -332,7 +332,7 @@ export class Fetcher {
 
 			init.headers = headers;
 			if (option.data) {
-				if (option.method === 'GET') throw new Error(`can not pass data with "GET" method`);
+				if (option.method === 'GET') throw new Error(`Can not pass data with "GET" method`);
 				init.body = JSON.stringify(option.data);
 
 				// default fetch content type in request header is json
@@ -350,9 +350,11 @@ export class Fetcher {
 
 			this.onRequest?.({ ...option, type });
 			const startedAt = performance.now();
-			response = await fetch(url, init).then((r) => r.text());
-			const json: SendResponse<R, M>[T] = JSON.parse(response);
+			const response = await fetch(url, init);
+			result = await response.text();
+			if (!result) throw new Error(`The response body is empty (${response.status})`);
 
+			const json: SendResponse<R, M>[T] = JSON.parse(result);
 			if (json.response && !option.skipDecrypt) {
 				const decrypted = this.decrypt(String(json.response), headers['X-timestamp']);
 				json.response = JSON.parse(this.decompress(decrypted));
@@ -362,23 +364,22 @@ export class Fetcher {
 			this.onResponse?.({ ...option, duration, type }, json);
 			return json;
 		} catch (error: unknown) {
-			this.onError?.(error);
-			if (this.config.throw) {
-				if (error instanceof Error) {
-					error.message += `. \nResponse: ${response}`;
-				}
-				throw error;
-			}
-			let message =
+			const customError = new Error(
 				error instanceof SyntaxError
-					? 'Received response from the JKN API appears to be in an unexpected format'
-					: 'An error occurred while requesting information from the JKN API';
-			if (error instanceof Error) message += `. ` + error.message;
-			message += '. ' + response;
-			console.error(error);
+					? `The response is not JSON (${parseHtml(result)})`
+					: error instanceof Error
+						? error.message
+						: JSON.stringify(error),
+				{ cause: error }
+			);
+
+			this.onError?.(customError);
+			if (this.config.throw) throw customError;
+			console.error(customError);
 
 			// TODO: find better way to infer generic response type
 			const code = type === 'icare' ? 500 : '500';
+			const message = `An error occurred: "${customError.message}"`;
 			return {
 				metadata: { code: +code, message },
 				metaData: { code, message },
@@ -396,4 +397,20 @@ export class Fetcher {
 		await this.applyConfig();
 		return this.config;
 	}
+}
+
+/**
+ * A simple HTML parser so ugly HTML error messages
+ * don't hurt your eyes anymore.
+ */
+function parseHtml(html?: string) {
+	if (!html) return '[empty]';
+	return html
+		.replace(/<head\b[^>]*>[\s\S]*?<\/head>/gi, '')
+		.replace(/<script[\s\S]*?<\/script>/gi, '')
+		.replace(/<style[\s\S]*?<\/style>/gi, '')
+		.replace(/<[^>]*>/g, '')
+		.trim()
+		.replace(/\r?\n+/g, ' - ') // newlines to dash
+		.replace(/\s+/g, ' '); // normalize whitespace
 }

@@ -24,6 +24,7 @@ dinsos
 dpho
 dpjp
 eclaim
+Eksaserbasi
 enkripsi
 estimasidilayani
 faskes
@@ -72,6 +73,7 @@ katarak
 kddokter
 kdjenispeserta
 KDJNSOBAT
+KDOBAT
 KDOBT
 kdpenunjang
 kdpoli
@@ -101,6 +103,7 @@ lastupdate
 LINGGAU
 listobat
 listsep
+MMRC
 namaapoteker
 namabu
 namadokter
@@ -164,7 +167,9 @@ pesertasep
 pisat
 POLIRSP
 ppkpelsep
+PPOK
 Praktek
+prbpotensi
 prolanis
 propinsi
 Psikososial
@@ -175,9 +180,11 @@ randomquestion
 REFASALSJP
 rekammedis
 rekap
+rekappeserta
 riwayatobat
 rownumber
 ruangrawat
+Rumatan
 settingppk
 signa
 Silampari
@@ -222,6 +229,7 @@ totalbiayasetuju
 totalitems
 tujuanrujuk
 updatejadwaldokter
+updatestok
 updatewaktu
 updtglplg
 vclaim

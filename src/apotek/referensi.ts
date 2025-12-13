@@ -16,6 +16,8 @@ export class Referensi extends ApotekBaseApi {
 				restriksi: string;
 				generik: string;
 				aktif: string | null;
+				sedia: string;
+				stok: string;
 			}[];
 		}>({
 			name: this.name + 'DPHO',

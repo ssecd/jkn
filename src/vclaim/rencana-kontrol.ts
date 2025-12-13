@@ -1,40 +1,100 @@
 import { VClaimBaseApi } from './base.js';
 
-// TODO: make generic request and response data type as possible
+const formPRBFieldsMap = {
+	// key: [codes[], min, max]
+	HBA1C: [['01'], 0.1, 15],
+	GDP: [['01', '07'], 10, 500],
+	GD2JPP: [['01'], 10, 500],
+	eGFR: [['01', '02'], 5, 150],
+	TD_Sistolik: [['01', '07'], 20, 200],
+	TD_Diastolik: [['01', '07'], 20, 200],
+	LDL: [['01', '07'], 20, 500],
+	Rata_TD_Sistolik: [['02', '04'], 20, 200],
+	Rata_TD_Diastolik: [['02', '04'], 20, 200],
+	JantungKoroner: [['02'], 0, 1],
+	Stroke: [['02'], 0, 1],
+	VaskularPerifer: [['02'], 0, 1],
+	Aritmia: [['02', '04'], 0, 1],
+	AtrialFibrilasi: [['02'], 0, 1],
+	NadiIstirahat: [['04'], 20, 200],
+	SesakNapas3Bulan: [['04'], 0, 1],
+	NyeriDada3Bulan: [['04'], 0, 1],
+	SesakNapasAktivitas: [['04'], 0, 1],
+	NyeriDadaAktivitas: [['04'], 0, 1],
+	Terkontrol: [['03'], 0, 1],
+	Gejala2xMinggu: [['03'], 0, 1],
+	BangunMalam: [['03'], 0, 1],
+	KeterbatasanFisik: [['03'], 0, 1],
+	FungsiParu: [['03'], 0, 100],
+	SkorMMRC: [['05'], 0, 40],
+	Eksaserbasi1Tahun: [['05'], 0, 1],
+	MampuAktivitas: [['05'], 0, 1],
+	Epileptik6Bulan: [['08'], 0, 1],
+	EfekSampingOAB: [['08'], 0, 1],
+	HamilMenyusui: [['08'], 0, 1],
+	Remisi: [['06'], 0, 100],
+	TerapiRumatan: [['06'], 0, 1],
+	Usia: [['06'], 1, 100],
+	AsamUrat: [['07'], 0.1, 20],
+	RemisiSLE: [['09'], 0, 100],
+	Hamil: [['09'], 0, 1]
+} as const;
+
 export class RencanaKontrol extends VClaimBaseApi {
+	get listPenyakitPRB(): { kode: string; nama: string }[] {
+		return [
+			['01', 'Diabetes Mellitus'],
+			['02', 'Hipertensi'],
+			['03', 'Asma'],
+			['04', 'Penyakit Jantung'],
+			['05', 'PPOK'],
+			['06', 'Skizofrenia'],
+			['07', 'Stroke'],
+			['08', 'Epilepsi'],
+			['09', 'SLE']
+		].map(([kode, nama]) => ({ kode, nama }));
+	}
+
+	/**
+	 * Mengambil semua form fields penyakit PRB yang dapat dimanfaatkan
+	 * untuk membentuk form input penyakit PRB dengan melakukan filter
+	 * berdasarkan `kode` dari {@link listPenyakitPRB}.
+	 */
+	get allFieldsPenyakitPRB() {
+		const fieldsMap = formPRBFieldsMap as unknown as Record<string, [string[], number, number]>;
+		return Object.entries(fieldsMap).map(
+			([namaField, [listKode, nilaiMinimum, nilaiMaksimum]]) => ({
+				namaField,
+				listKode,
+				nilaiMinimum,
+				nilaiMaksimum
+			})
+		);
+	}
+
+	/**
+	 * Mengambil semua form fields penyakit PRB berdasarkan kode
+	 * penyakit PRB. Berguna untuk membentuk form input di sisi
+	 * client atau UI secara dinamis berdasarkan Penyakit PRB.
+	 *
+	 * @param kode Kode penyakit PRB. Lihat {@link listPenyakitPRB}
+	 */
+	getFieldsPenyakitPRB(kode: string) {
+		const fieldsMap = formPRBFieldsMap as unknown as Record<string, [string[], number, number]>;
+		return Object.entries(fieldsMap)
+			.filter(([, [codes]]) => codes.includes(kode))
+			.map(([namaField, [, nilaiMinimum, nilaiMaksimum]]) => ({
+				namaField,
+				nilaiMinimum,
+				nilaiMaksimum
+			}));
+	}
+
 	/**
 	 * Insert rencana kontrol
 	 */
-	async insert(data: {
-		/** nomor SEP */
-		noSEP: string;
-
-		/** kode dokter JKN */
-		kodeDokter: string;
-
-		/** kode poli JKN */
-		poliKontrol: string;
-
-		/**
-		 * - Rawat Jalan: diisi tanggal rencana kontrol
-		 * - Rawat Inap: diisi tanggal SPRI
-		 *
-		 * format tanggal YYYY-MM-DD
-		 */
-		tglRencanaKontrol: string;
-
-		/** user pembuat surat kontrol */
-		user: string;
-	}) {
-		return this.send<{
-			noSuratKontrol: string;
-			tglRencanaKontrol: string;
-			namaDokter: string;
-			noKartu: string;
-			nama: string;
-			kelamin: string;
-			tglLahir: string;
-		}>({
+	async insert(data: RencanaKontrolInsert) {
+		return this.send<RencanaKontrolWriteResult>({
 			name: this.name + 'Insert',
 			path: `/RencanaKontrol/insert`,
 			method: 'POST',
@@ -43,43 +103,46 @@ export class RencanaKontrol extends VClaimBaseApi {
 	}
 
 	/**
+	 * Insert rencana kontrol dengan API v2
+	 */
+	async insertV2(data: RencanaKontrolInsertV2) {
+		return this.send<RencanaKontrolWriteResultV2>({
+			name: this.name + 'InsertV2',
+			path: '/RencanaKontrol/v2/Insert',
+			method: 'POST',
+			data: { request: data }
+		});
+	}
+
+	/**
 	 * Update rencana kontrol
 	 */
-	async update(data: {
-		/** nomor surat kontrol yang akan di-update */
-		noSuratKontrol: string;
-
-		/** nomor SEP */
-		noSEP: string;
-
-		/** kode dokter JKN */
-		kodeDokter: string;
-
-		/** kode poli JKN */
-		poliKontrol: string;
-
-		/**
-		 * - Rawat Jalan: diisi tanggal rencana kontrol
-		 * - Rawat Inap: diisi tanggal SPRI
-		 *
-		 * format tanggal YYYY-MM-DD
-		 */
-		tglRencanaKontrol: string;
-
-		/** user pembuat surat kontrol */
-		user: string;
-	}) {
-		return this.send<{
+	async update(
+		data: {
+			/** nomor surat kontrol yang akan di-update */
 			noSuratKontrol: string;
-			tglRencanaKontrol: string;
-			namaDokter: string;
-			noKartu: string;
-			nama: string;
-			kelamin: string;
-			tglLahir: string;
-		}>({
+		} & RencanaKontrolInsert
+	) {
+		return this.send<RencanaKontrolWriteResult>({
 			name: this.name + 'Update',
 			path: `/RencanaKontrol/Update`,
+			method: 'PUT',
+			data: { request: data }
+		});
+	}
+
+	/**
+	 * Update rencana kontrol dengan API v2
+	 */
+	async updateV2(
+		data: {
+			/** nomor surat kontrol yang akan di-update */
+			noSuratKontrol: string;
+		} & RencanaKontrolInsertV2
+	) {
+		return this.send<RencanaKontrolWriteResultV2>({
+			name: this.name + 'UpdateV2',
+			path: '/RencanaKontrol/v2/Update',
 			method: 'PUT',
 			data: { request: data }
 		});
@@ -217,54 +280,19 @@ export class RencanaKontrol extends VClaimBaseApi {
 	 * Melihat detail surat kontrol berdasarkan nomor surat kontrol
 	 *
 	 * Catatan:
-	 * Ketika pembuatan SPRI atau jenis kontrol 1 tidak ada referensi nomor SEP asalnya,
+	 * Ketika pembuatan SPRI atau jenis kontrol = 1 tidak ada referensi nomor SEP asalnya,
 	 * jadi field response SEP kosong atau null. Sedangkan jika pembuatan surat kontrol
-	 * atau jenis kontrol 2, akan ter-isi field response SEP karena terdapat referensi
+	 * atau jenis kontrol = 2, akan ter-isi field response SEP karena terdapat referensi
 	 * nomor SEP asal ketika pembuatan surat kontrol tersebut.
 	 */
 	async cari(params: {
 		/** nomor surat kontrol */
 		nomor: string;
 	}) {
-		return this.send<{
-			noSuratKontrol: string;
-			tglRencanaKontrol: string;
-			tglTerbit: string;
-			jnsKontrol: string;
-			poliTujuan: string;
-			namaPoliTujuan: string;
-			kodeDokter: string;
-			namaDokter: string;
-			flagKontrol: 'True' | 'False' | string;
-			kodeDokterPembuat: string | null;
-			namaDokterPembuat: string | null;
-			namaJnsKontrol: string;
-			sep: {
-				noSep: string;
-				tglSep: string;
-				jnsPelayanan: string;
-				poli: string;
-				diagnosa: string;
-				peserta: {
-					noKartu: string;
-					nama: string;
-					tglLahir: string;
-					kelamin: string;
-					hakKelas: string;
-				};
-				provUmum: {
-					kdProvider: string;
-					nmProvider: string;
-				};
-				provPerujuk: {
-					kdProviderPerujuk: string;
-					nmProviderPerujuk: string;
-					asalRujukan: '1' | '2';
-					noRujukan: string;
-					tglRujukan: string;
-				};
-			};
-		}>({
+		return this.send<
+			Omit<SuratKontrolDetail, 'jnsKontrol' | 'sep'> &
+				({ jnsKontrol: '1'; sep: null } | { jnsKontrol: '2'; sep: SuratKontrolDetail['sep'] })
+		>({
 			name: this.name + 'Cari Surat Kontrol',
 			path: `/RencanaKontrol/noSuratKontrol/${encodeURIComponent(params.nomor)}`,
 			method: 'GET'
@@ -308,7 +336,7 @@ export class RencanaKontrol extends VClaimBaseApi {
 		/** jenis filter (1 = tanggal entri) (2 = tanggal rencana kontrol) */
 		filter: number;
 	}) {
-		return this.send<{ list: RencanaKontrolListItem[] }>({
+		return this.send<{ list: Omit<RencanaKontrolListItem, 'terbitSEP'>[] }>({
 			name: this.name + 'Data Berdasarkan Tanggal',
 			path: `/RencanaKontrol/ListRencanaKontrol/tglAwal/${params.awal}/tglAkhir/${params.akhir}/filter/${params.filter}`,
 			method: 'GET'
@@ -371,10 +399,53 @@ export class RencanaKontrol extends VClaimBaseApi {
 	}
 }
 
+interface SuratKontrolDetail {
+	noSuratKontrol: string;
+	tglRencanaKontrol: string;
+	tglTerbit: string;
+	/** 1 = SPRI/Rawat Inap | 2 = Surat Kontrol/Rawat Jalan */
+	jnsKontrol: '1' | '2';
+	poliTujuan: string;
+	namaPoliTujuan: string;
+	kodeDokter: string;
+	namaDokter: string;
+	flagKontrol: 'True' | 'False' | string;
+	kodeDokterPembuat: string | null;
+	namaDokterPembuat: string | null;
+	namaJnsKontrol: string;
+	sep: {
+		noSep: string;
+		tglSep: string;
+		jnsPelayanan: string;
+		poli: string;
+		diagnosa: string;
+		peserta: {
+			noKartu: string;
+			nama: string;
+			tglLahir: string;
+			kelamin: string;
+			hakKelas: string;
+		};
+		provUmum: {
+			kdProvider: string;
+			nmProvider: string;
+		};
+		provPerujuk: {
+			kdProviderPerujuk: string;
+			nmProviderPerujuk: string;
+			asalRujukan: '1' | '2';
+			noRujukan: string;
+			tglRujukan: string;
+		};
+	};
+	formPRB: RencanaKontrolPRB;
+}
+
 interface RencanaKontrolListItem {
 	noSuratKontrol: string;
 	jnsPelayanan: string;
-	jnsKontrol: string;
+	/** 1 = SPRI/Rawat Inap | 2 = Surat Kontrol/Rawat Jalan */
+	jnsKontrol: '1' | '2';
 	namaJnsKontrol: string;
 	tglRencanaKontrol: string;
 	tglTerbitKontrol: string;
@@ -388,7 +459,67 @@ interface RencanaKontrolListItem {
 	namaDokter: string;
 	noKartu: string;
 	nama: string;
+	terbitSEP: 'Belum' | 'Sudah';
+}
 
-	/** 'Belum' | 'Sudah' */
-	terbitSEP: 'Belum' | 'Sudah' | string;
+interface RencanaKontrolInsert {
+	/** nomor SEP */
+	noSEP: string;
+
+	/** kode dokter JKN */
+	kodeDokter: string;
+
+	/** kode poli JKN */
+	poliKontrol: string;
+
+	/**
+	 * - Rawat Jalan: diisi tanggal rencana kontrol
+	 * - Rawat Inap: diisi tanggal SPRI
+	 *
+	 * format tanggal YYYY-MM-DD
+	 */
+	tglRencanaKontrol: string;
+
+	/** user pembuat surat kontrol */
+	user: string;
+}
+
+interface RencanaKontrolWriteResult {
+	noSuratKontrol: string;
+	tglRencanaKontrol: string;
+	namaDokter: string;
+	noKartu: string;
+	nama: string;
+	kelamin: string;
+	tglLahir: string;
+}
+
+interface RencanaKontrolInsertV2 extends RencanaKontrolInsert {
+	formPRB: Omit<RencanaKontrolPRB, 'data'> & {
+		data: Partial<RencanaKontrolPRB['data']>;
+	};
+}
+
+interface RencanaKontrolWriteResultV2 extends RencanaKontrolWriteResult {
+	namaDiagnosa: string;
+	formPRB: RencanaKontrolPRB;
+}
+
+interface RencanaKontrolPRB {
+	/** Kode Penyakit PRB
+	 *
+	 * - 01 = Diabetes Mellitus
+	 * - 02 = Hipertensi
+	 * - 03 = Asma
+	 * - 04 = Penyakit Jantung
+	 * - 05 = PPOK
+	 * - 06 = Skizofrenia
+	 * - 07 = Stroke
+	 * - 08 = Epilepsi
+	 * - 09 = SLE
+	 *
+	 * Lihat {@link RencanaKontrol.listPenyakitPRB}
+	 */
+	kdStatusPRB: string | null;
+	data: Record<keyof typeof formPRBFieldsMap, number | null>;
 }
