@@ -159,7 +159,7 @@ onResponse: (<T extends Type = Type>(info: SendOption & { duration: number; type
 - `onError`
 
 ```ts
-onError: ((error: unknown) => MaybePromise<void>) | undefined = undefined;
+onError: ((error: Error) => MaybePromise<void>) | undefined = undefined;
 ```
 
 Contoh penggunaan event:

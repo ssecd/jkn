@@ -215,7 +215,7 @@ export class Fetcher {
 		  ) => MaybePromise<void>)
 		| undefined = undefined;
 
-	public onError: ((error: unknown) => MaybePromise<void>) | undefined = undefined;
+	public onError: ((error: Error) => MaybePromise<void>) | undefined = undefined;
 
 	private configured = false;
 
@@ -319,9 +319,9 @@ export class Fetcher {
 		option: SendOption
 	): Promise<SendResponse<R | undefined, M | undefined>[T]> {
 		await this.applyConfig();
-		if (!option.path.startsWith('/')) throw new Error(`path must be starts with "/"`);
+		if (!option.path.startsWith('/')) throw new Error(`Path must be starts with "/"`);
 
-		let response = '';
+		let result = '';
 		try {
 			const baseUrl = this.config.baseUrls[type];
 			if (!baseUrl) throw new Error(`base url of type "${type}" is invalid`);
@@ -332,7 +332,7 @@ export class Fetcher {
 
 			init.headers = headers;
 			if (option.data) {
-				if (option.method === 'GET') throw new Error(`can not pass data with "GET" method`);
+				if (option.method === 'GET') throw new Error(`Can not pass data with "GET" method`);
 				init.body = JSON.stringify(option.data);
 
 				// default fetch content type in request header is json
@@ -350,10 +350,11 @@ export class Fetcher {
 
 			this.onRequest?.({ ...option, type });
 			const startedAt = performance.now();
-			response = await fetch(url, init).then((r) => r.text());
-			if (!response) throw new Error(`the response body is empty`);
+			const response = await fetch(url, init);
+			result = await response.text();
+			if (!result) throw new Error(`The response body is empty (${response.status})`);
 
-			const json: SendResponse<R, M>[T] = JSON.parse(response);
+			const json: SendResponse<R, M>[T] = JSON.parse(result);
 			if (json.response && !option.skipDecrypt) {
 				const decrypted = this.decrypt(String(json.response), headers['X-timestamp']);
 				json.response = JSON.parse(this.decompress(decrypted));
@@ -363,23 +364,22 @@ export class Fetcher {
 			this.onResponse?.({ ...option, duration, type }, json);
 			return json;
 		} catch (error: unknown) {
-			this.onError?.(error);
-			if (this.config.throw) {
-				if (error instanceof Error) {
-					error.message += `. \nResponse: ${response}`;
-				}
-				throw error;
-			}
-			let message =
+			const customError = new Error(
 				error instanceof SyntaxError
-					? 'Received response from the JKN API appears to be in an unexpected format'
-					: 'An error occurred while requesting information from the JKN API';
-			if (error instanceof Error) message += `. ` + error.message;
-			message += '. ' + response;
-			console.error(error);
+					? `The response is not JSON (${parseHtml(result)})`
+					: error instanceof Error
+						? error.message
+						: JSON.stringify(error),
+				{ cause: error }
+			);
+
+			this.onError?.(customError);
+			if (this.config.throw) throw customError;
+			console.error(customError);
 
 			// TODO: find better way to infer generic response type
 			const code = type === 'icare' ? 500 : '500';
+			const message = `An error occurred: "${customError.message}"`;
 			return {
 				metadata: { code: +code, message },
 				metaData: { code, message },
@@ -397,4 +397,42 @@ export class Fetcher {
 		await this.applyConfig();
 		return this.config;
 	}
+}
+
+/**
+ * A simple HTML parser so ugly HTML error messages
+ * don't hurt your eyes anymore.
+ */
+function parseHtml(html?: string) {
+	if (!html) return '[empty]';
+	if (!/<!doctype\s+html|<html\b|<head\b|<body\b/i.test(html)) return html;
+	return (
+		String(html)
+			// remove head completely (title, meta, style, etc.)
+			.replace(/<head\b[^>]*>[\s\S]*?<\/head>/gi, '')
+
+			// remove scripts & styles just in case
+			.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
+			.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
+
+			// block-level breaks
+			.replace(/<br\s*\/?>/gi, '\n')
+			.replace(/<\/(p|div|li|h[1-6])>/gi, '\n')
+
+			// remove all remaining tags
+			.replace(/<[^>]+>/g, '')
+
+			// decode basic entities
+			.replace(/&nbsp;/gi, ' ')
+			.replace(/&amp;/gi, '&')
+
+			// whitespace normalization
+			.replace(/\r\n?/g, '\n') // normalize newlines
+			.replace(/[ \t]+/g, ' ') // collapse spaces
+			.replace(/\n\s+/g, '\n') // trim line starts
+			.replace(/\s+\n/g, '\n') // trim line ends
+			.replace(/\n{2,}/g, '\n') // collapse blank lines
+			.replace(/\n+/g, ' | ') // replace newlines with |
+			.trim()
+	);
 }
