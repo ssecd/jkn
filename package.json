@@ -50,7 +50,7 @@
 		"@changesets/cli": "^2.29.8",
 		"@eslint/eslintrc": "^3.3.3",
 		"@eslint/js": "^9.39.2",
-		"@types/node": "^22.15.17",
+		"@types/node": "^22.19.2",
 		"@typescript-eslint/eslint-plugin": "^8.49.0",
 		"@typescript-eslint/parser": "^8.49.0",
 		"dts-buddy": "^0.6.2",
@@ -58,7 +58,7 @@
 		"eslint-config-prettier": "^10.1.8",
 		"globals": "^16.5.0",
 		"prettier": "^3.7.4",
-		"typescript": "^5.7.3",
+		"typescript": "^5.8.3",
 		"vitest": "^4.0.15"
 	},
 	"dependencies": {
