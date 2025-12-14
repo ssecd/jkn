@@ -54,7 +54,7 @@ export class PelayananObat extends ApotekBaseApi {
 			};
 		}>({
 			name: this.name + 'List/Daftar',
-			path: ['/pelayanan/obat/daftar/:params.nomorSep', params],
+			path: ['/pelayanan/obat/daftar/:nomorSep', params],
 			method: 'GET'
 		});
 	}

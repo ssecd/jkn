@@ -40,7 +40,7 @@ export class Referensi extends ApotekBaseApi {
 			}[];
 		}>({
 			name: this.name + 'Poli',
-			path: ['/referensi/poli/:params.keyword', params],
+			path: ['/referensi/poli/:keyword', params],
 			method: 'GET'
 		});
 	}
