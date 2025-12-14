@@ -2,6 +2,10 @@ import { VClaimBaseApi } from './base.js';
 
 // TODO: make generic request and response data type as possible
 export class Rujukan extends VClaimBaseApi {
+	private validateSumber(params: { sumber: number }) {
+		if (![1, 2].includes(params.sumber)) throw new Error('Nilai sumber faskes harus 1 atau 2');
+	}
+
 	/**
 	 * Pencarian data rujukan berdasarkan nomor rujukan
 	 */
@@ -17,14 +21,14 @@ export class Rujukan extends VClaimBaseApi {
 		 * 2 = Faskes tingkat 2 atau Rumah Sakit dan Klinik Utama */
 		sumber: number;
 	}) {
-		const nomor = encodeURIComponent(params.nomor);
+		this.validateSumber(params);
 		const paths: Record<number, `/${string}`> = {
-			1: `/Rujukan/${nomor}`,
-			2: `/Rujukan/RS/${nomor}`
+			1: `/Rujukan/:nomor`,
+			2: `/Rujukan/RS/:nomor`
 		};
 		return this.send<{ rujukan: DataRujukan }>({
 			name: this.name + `Berdasarkan Nomor (${params.sumber})`,
-			path: paths[params.sumber],
+			path: [paths[params.sumber], params],
 			method: 'GET'
 		});
 	}
@@ -44,14 +48,14 @@ export class Rujukan extends VClaimBaseApi {
 		 * 2 = Faskes tingkat 2 atau Rumah Sakit dan Klinik Utama */
 		sumber: number;
 	}) {
-		const nomor = encodeURIComponent(params.nomor);
+		this.validateSumber(params);
 		const paths: Record<number, `/${string}`> = {
-			1: `/Rujukan/Peserta/${nomor}`,
-			2: `/Rujukan/RS/Peserta/${nomor}`
+			1: `/Rujukan/Peserta/:nomor`,
+			2: `/Rujukan/RS/Peserta/:nomor`
 		};
 		return this.send<{ rujukan: DataRujukan }>({
 			name: this.name + `Berdasarkan No. Kartu (${params.sumber})`,
-			path: paths[params.sumber],
+			path: [paths[params.sumber], params],
 			method: 'GET'
 		});
 	}
@@ -71,14 +75,14 @@ export class Rujukan extends VClaimBaseApi {
 		 * 2 = Faskes tingkat 2 atau Rumah Sakit dan Klinik Utama */
 		sumber: number;
 	}) {
-		const nomor = encodeURIComponent(params.nomor);
+		this.validateSumber(params);
 		const paths: Record<number, `/${string}`> = {
-			1: `/Rujukan/List/Peserta/${nomor}`,
-			2: `/Rujukan/RS/List/Peserta/${nomor}`
+			1: `/Rujukan/List/Peserta/:nomor`,
+			2: `/Rujukan/RS/List/Peserta/:nomor`
 		};
 		return this.send<{ rujukan: DataRujukan[] }>({
 			name: this.name + `Berdasarkan No. Kartu (${params.sumber}) Multi`,
-			path: paths[params.sumber],
+			path: [paths[params.sumber], params],
 			method: 'GET'
 		});
 	}
@@ -431,7 +435,7 @@ export class Rujukan extends VClaimBaseApi {
 			}[];
 		}>({
 			name: this.name + 'List Spesialistik Rujukan',
-			path: `/Rujukan/ListSpesialistik/PPKRujukan/${encodeURIComponent(params.kodePpk)}/TglRujukan/${params.tanggal}`,
+			path: ['/Rujukan/ListSpesialistik/PPKRujukan/:kodePpk/TglRujukan/:tanggal', params],
 			method: 'GET'
 		});
 	}
@@ -450,7 +454,7 @@ export class Rujukan extends VClaimBaseApi {
 			}[];
 		}>({
 			name: this.name + 'List Sarana',
-			path: `/Rujukan/ListSarana/PPKRujukan/${encodeURIComponent(params.kodePpk)}`,
+			path: ['/Rujukan/ListSarana/PPKRujukan/:kodePpk', params],
 			method: 'GET'
 		});
 	}
@@ -515,7 +519,7 @@ export class Rujukan extends VClaimBaseApi {
 				namaPoliRujukan: string;
 			};
 		}>({
-			path: `/Rujukan/Keluar/${encodeURIComponent(params.nomor)}`,
+			path: ['/Rujukan/Keluar/:nomor', params],
 			method: 'GET'
 		});
 	}
@@ -533,7 +537,7 @@ export class Rujukan extends VClaimBaseApi {
 	}) {
 		return this.send<{ jumlahSEP: string }>({
 			name: this.name + 'List Rujukan Keluar Faskes Berdasarkan No. Rujukan',
-			path: `/Rujukan/JumlahSEP/${params.jenis}/${encodeURIComponent(params.nomor)}`,
+			path: ['/Rujukan/JumlahSEP/:jenis/:nomor', params],
 			method: 'GET'
 		});
 	}

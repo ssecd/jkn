@@ -31,11 +31,14 @@ export class Aplicares extends BaseApi<'aplicares'> {
 	 * tempat tidur untuk pasien laki-laki, perempuan, dan laki–laki atau
 	 * perempuan.
 	 */
-	async update(data: AplicaresBedData) {
-		const { ppkCode } = await this.requiredConfig('ppkCode');
+	async update(data: AplicaresBedData, kodePpk?: string) {
+		if (!kodePpk) {
+			const config = await this.requiredConfig('ppkCode');
+			kodePpk = config.ppkCode;
+		}
 		return this.send({
 			name: 'Update Ketersediaan Tempat Tidur',
-			path: `/rest/bed/update/${encodeURIComponent(ppkCode)}`,
+			path: ['/rest/bed/update/:kodePpk', { kodePpk }],
 			method: 'POST',
 			skipContentTypeHack: true,
 			headers: { 'Content-Type': 'application/json' },
@@ -51,11 +54,14 @@ export class Aplicares extends BaseApi<'aplicares'> {
 	 * tempat tidur untuk pasien laki-laki, perempuan, dan laki–laki atau
 	 * perempuan.
 	 */
-	async create(data: AplicaresBedData) {
-		const { ppkCode } = await this.requiredConfig('ppkCode');
+	async create(data: AplicaresBedData, kodePpk?: string) {
+		if (!kodePpk) {
+			const config = await this.requiredConfig('ppkCode');
+			kodePpk = config.ppkCode;
+		}
 		return this.send<undefined>({
 			name: 'Ruangan Baru',
-			path: `/rest/bed/create/${encodeURIComponent(ppkCode)}`,
+			path: ['/rest/bed/create/:kodePpk', { kodePpk }],
 			method: 'POST',
 			skipContentTypeHack: true,
 			headers: { 'Content-Type': 'application/json' },
@@ -76,8 +82,13 @@ export class Aplicares extends BaseApi<'aplicares'> {
 
 		/** paging limit */
 		limit: number;
+
+		kodePpk?: string;
 	}) {
-		const { ppkCode } = await this.requiredConfig('ppkCode');
+		if (!params.kodePpk) {
+			const config = await this.requiredConfig('ppkCode');
+			params.kodePpk = config.ppkCode;
+		}
 		return this.send<
 			{
 				list: (AplicaresBedData & {
@@ -89,7 +100,7 @@ export class Aplicares extends BaseApi<'aplicares'> {
 			{ totalitems: number }
 		>({
 			name: 'Ketersediaan Kamar Faskes',
-			path: `/rest/bed/read/${encodeURIComponent(ppkCode)}/${params.start}/${params.limit}`,
+			path: ['/rest/bed/read/:kodePpk/:start/:limit', params],
 			method: 'GET',
 			skipDecrypt: true
 		});
@@ -98,17 +109,23 @@ export class Aplicares extends BaseApi<'aplicares'> {
 	/**
 	 * Hapus Ruangan
 	 */
-	async delete(data: {
-		/** kode kelas ruang rawat sesuai dengan mapping BPJS Kesehatan */
-		kodekelas: string;
+	async delete(
+		data: {
+			/** kode kelas ruang rawat sesuai dengan mapping BPJS Kesehatan */
+			kodekelas: string;
 
-		/** kode ruangan faskes */
-		koderuang: string;
-	}) {
-		const { ppkCode } = await this.requiredConfig('ppkCode');
+			/** kode ruangan faskes */
+			koderuang: string;
+		},
+		kodePpk?: string
+	) {
+		if (!kodePpk) {
+			const config = await this.requiredConfig('ppkCode');
+			kodePpk = config.ppkCode;
+		}
 		return this.send<undefined>({
 			name: 'Hapus Ruangan',
-			path: `/rest/bed/delete/${encodeURIComponent(ppkCode)}`,
+			path: ['/rest/bed/delete/:kodePpk', { kodePpk }],
 			method: 'POST',
 			skipContentTypeHack: true,
 			headers: { 'Content-Type': 'application/json' },

@@ -10,7 +10,7 @@ export class Referensi extends VClaimBaseApi {
 	}) {
 		return this.send<{ diagnosa: ReferensiResult[] }>({
 			name: this.name + 'Diagnosa',
-			path: `/referensi/diagnosa/${encodeURIComponent(params.keyword)}`,
+			path: ['/referensi/diagnosa/:keyword', params],
 			method: 'GET'
 		});
 	}
@@ -24,7 +24,7 @@ export class Referensi extends VClaimBaseApi {
 	}) {
 		return this.send<{ poli: ReferensiResult[] }>({
 			name: this.name + 'Poli',
-			path: `/referensi/poli/${encodeURIComponent(params.keyword)}`,
+			path: ['/referensi/poli/:keyword', params],
 			method: 'GET'
 		});
 	}
@@ -41,7 +41,7 @@ export class Referensi extends VClaimBaseApi {
 	}) {
 		return this.send<{ faskes: ReferensiResult[] }>({
 			name: this.name + 'Fasilitas Kesehatan',
-			path: `/referensi/faskes/${encodeURIComponent(params.keyword)}/${params.jenis}`,
+			path: ['/referensi/faskes/:keyword/:jenis', params],
 			method: 'GET'
 		});
 	}
@@ -61,7 +61,7 @@ export class Referensi extends VClaimBaseApi {
 	}) {
 		return this.send<{ list: ReferensiResult[] }>({
 			name: this.name + 'DPJP',
-			path: `/referensi/dokter/pelayanan/${params.jenis}/tglPelayanan/${params.tanggal}/Spesialis/${encodeURIComponent(params.kode)}`,
+			path: ['/referensi/dokter/pelayanan/:jenis/tglPelayanan/:tanggal/Spesialis/:kode', params],
 			method: 'GET'
 		});
 	}
@@ -86,7 +86,7 @@ export class Referensi extends VClaimBaseApi {
 	}) {
 		return this.send<{ list: ReferensiResult[] }>({
 			name: this.name + 'Kabupaten',
-			path: `/referensi/kabupaten/propinsi/${encodeURIComponent(params.provinsi)}`,
+			path: ['/referensi/kabupaten/propinsi/:provinsi', params],
 			method: 'GET'
 		});
 	}
@@ -100,7 +100,7 @@ export class Referensi extends VClaimBaseApi {
 	}) {
 		return this.send<{ list: ReferensiResult[] }>({
 			name: this.name + 'Kecamatan',
-			path: `/referensi/kecamatan/kabupaten/${encodeURIComponent(params.kabupaten)}`,
+			path: ['/referensi/kecamatan/kabupaten/:kabupaten', params],
 			method: 'GET'
 		});
 	}
@@ -125,7 +125,7 @@ export class Referensi extends VClaimBaseApi {
 	}) {
 		return this.send<{ list: ReferensiResult[] }>({
 			name: this.name + 'Obat Generik PRB',
-			path: `/referensi/obatprb/${encodeURIComponent(params.nama)}`,
+			path: ['/referensi/obatprb/:nama', params],
 			method: 'GET'
 		});
 	}
@@ -139,7 +139,7 @@ export class Referensi extends VClaimBaseApi {
 	}) {
 		return this.send<{ procedure: ReferensiResult[] }>({
 			name: this.name + 'Prosedur (Pengajuan Klaim)',
-			path: `/referensi/procedure/${encodeURIComponent(params.keyword)}`,
+			path: ['/referensi/procedure/:keyword', params],
 			method: 'GET'
 		});
 	}
@@ -164,7 +164,7 @@ export class Referensi extends VClaimBaseApi {
 	}) {
 		return this.send<{ list: ReferensiResult[] }>({
 			name: this.name + 'Dokter (Pengajuan Klaim)',
-			path: `/referensi/dokter/${encodeURIComponent(params.nama)}`,
+			path: ['/referensi/dokter/:nama', params],
 			method: 'GET'
 		});
 	}
