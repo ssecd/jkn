@@ -40,7 +40,7 @@ export class Referensi extends ApotekBaseApi {
 			}[];
 		}>({
 			name: this.name + 'Poli',
-			path: `/referensi/poli/${encodeURIComponent(params.keyword)}`,
+			path: ['/referensi/poli/:keyword', params],
 			method: 'GET'
 		});
 	}
@@ -66,7 +66,7 @@ export class Referensi extends ApotekBaseApi {
 			}[];
 		}>({
 			name: this.name + 'Fasilitas Kesehatan',
-			path: `/referensi/ppk/${params.jenis}/${encodeURIComponent(params.nama)}`,
+			path: ['/referensi/ppk/:jenis/:nama', params],
 			method: 'GET'
 		});
 	}
@@ -94,7 +94,7 @@ export class Referensi extends ApotekBaseApi {
 			checkstock: 'True' | 'False';
 		}>({
 			name: this.name + 'Setting',
-			path: `/referensi/settingppk/read/${encodeURIComponent(params.kodeApotek)}`,
+			path: ['/referensi/settingppk/read/:kodeApotek', params],
 			method: 'GET'
 		});
 	}
@@ -118,7 +118,7 @@ export class Referensi extends ApotekBaseApi {
 	/**
 	 * Pencarian data obat
 	 */
-	async obat(param: {
+	async obat(params: {
 		/** kode jenis obat */
 		jenis: string;
 
@@ -128,7 +128,6 @@ export class Referensi extends ApotekBaseApi {
 		/** filter nama obat */
 		filter?: string;
 	}) {
-		const filter = encodeURIComponent(param.filter ?? '');
 		return this.send<{
 			list: {
 				kode: string;
@@ -137,7 +136,7 @@ export class Referensi extends ApotekBaseApi {
 			}[];
 		}>({
 			name: this.name + 'Cari Obat',
-			path: `/referensi/obat/${encodeURIComponent(param.jenis)}/${param.tanggal}/${filter}`,
+			path: ['/referensi/obat/:jenis/:tanggal/:filter?', params],
 			method: 'GET'
 		});
 	}
