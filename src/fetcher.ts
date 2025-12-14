@@ -415,6 +415,7 @@ function parseHtml(html?: string) {
 		.replace(/\s+/g, ' '); // normalize whitespace
 }
 
+/** @internal */
 export function normalizePath(path: SendOption['path']) {
 	const [pathname, params] = typeof path == 'string' ? [path] : path;
 
