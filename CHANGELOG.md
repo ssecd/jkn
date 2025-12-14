@@ -1,5 +1,12 @@
 # @ssecd/jkn
 
+## 0.9.1
+
+### Patch Changes
+
+- b5e0984: Improve path handling
+- 0dfa695: Bump dependencies
+
 ## 0.9.0
 
 ### Minor Changes
