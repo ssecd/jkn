@@ -43,7 +43,7 @@ export class AntreanFKTP extends BaseApi<'pcare'> {
 			}[];
 		}>({
 			name: this.name + 'Referensi Dokter',
-			path: `/ref/dokter/kodepoli/${encodeURIComponent(params.kodePoli)}/tanggal/${params.tanggal}`,
+			path: ['/ref/dokter/kodepoli/:kodePoli/tanggal/:tanggal', params],
 			method: 'GET'
 		});
 	}

@@ -63,7 +63,7 @@ export class Antrean extends BaseApi<'antrean'> {
 			}[]
 		>({
 			name: 'Referensi Jadwal Dokter',
-			path: `/jadwaldokter/kodepoli/${encodeURIComponent(params.poli)}/tanggal/${params.tanggal}`,
+			path: ['/jadwaldokter/kodepoli/:poli/tanggal/:tanggal', params],
 			method: 'GET'
 		});
 	}
@@ -103,7 +103,7 @@ export class Antrean extends BaseApi<'antrean'> {
 			daftarfp: number;
 		}>({
 			name: 'Referensi Pasien Fingerprint',
-			path: `/ref/pasien/fp/identitas/${encodeURIComponent(params.jenis)}/noidentitas/${params.nomor}`,
+			path: ['/ref/pasien/fp/identitas/:jenis/noidentitas/:nomor', params],
 			method: 'GET'
 		});
 	}
@@ -453,7 +453,7 @@ export class Antrean extends BaseApi<'antrean'> {
 	async perKodeBooking(kodeBooking: string) {
 		return this.send<AntreanDetail[]>({
 			name: 'Antrean Per-KodeBooking',
-			path: `/antrean/pendaftaran/kodebooking/${encodeURIComponent(kodeBooking)}`,
+			path: ['/antrean/pendaftaran/kodebooking/:kodeBooking', { kodeBooking }],
 			method: 'GET'
 		});
 	}
@@ -487,7 +487,10 @@ export class Antrean extends BaseApi<'antrean'> {
 	}) {
 		return this.send<AntreanDetail[]>({
 			name: 'Antrean Belum Dilayani Per-(Poli, Dokter, Hari, dan Jam Praktik)',
-			path: `/antrean/pendaftaran/kodepoli/${encodeURIComponent(params.poli)}/kodedokter/${encodeURIComponent(params.dokter)}/hari/${params.hari}/jampraktek/${params.jam}`,
+			path: [
+				'/antrean/pendaftaran/kodepoli/:poli/kodedokter/:dokter/hari/:hari/jampraktek/:jam',
+				params
+			],
 			method: 'GET'
 		});
 	}

@@ -187,7 +187,7 @@ export class PRB extends VClaimBaseApi {
 			};
 		}>({
 			name: this.name + 'Cari by Nomor SRB',
-			path: `/prb/${encodeURIComponent(params.nomorSrb)}/nosep/${encodeURIComponent(params.nomorSep)}`,
+			path: ['/prb/:nomorSrb/nosep/:nomorSep', params],
 			method: 'GET'
 		});
 	}
@@ -229,7 +229,7 @@ export class PRB extends VClaimBaseApi {
 			};
 		}>({
 			name: this.name + 'Cari by Tanggal SRB',
-			path: `/prb/tglMulai/${params.awal}/tglAkhir/${params.akhir}`,
+			path: ['/prb/tglMulai/:awal/tglAkhir/:akhir', params],
 			method: 'GET'
 		});
 	}
@@ -251,7 +251,7 @@ export class PRB extends VClaimBaseApi {
 			}[];
 		}>({
 			name: this.name + 'Rekap Potensi PRB',
-			path: `/prbpotensi/tahun/${params.tahun}/bulan/${params.bulan}`,
+			path: [`/prbpotensi/tahun/:tahun/bulan/:bulan`, params],
 			method: 'GET'
 		});
 	}

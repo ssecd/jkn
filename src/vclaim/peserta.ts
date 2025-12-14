@@ -13,7 +13,7 @@ export class Peserta extends VClaimBaseApi {
 	}) {
 		return this.send<{ peserta: DataPeserta }>({
 			name: this.name + 'No. Kartu BPJS',
-			path: `/Peserta/nokartu/${encodeURIComponent(params.nomor)}/tglSEP/${params.tanggal}`,
+			path: ['/Peserta/nokartu/:nomor/tglSEP/:tanggal', params],
 			method: 'GET'
 		});
 	}
@@ -30,7 +30,7 @@ export class Peserta extends VClaimBaseApi {
 	}) {
 		return this.send<{ peserta: DataPeserta }>({
 			name: this.name + 'NIK',
-			path: `/Peserta/nik/${encodeURIComponent(params.nomor)}/tglSEP/${params.tanggal}`,
+			path: ['/Peserta/nik/:nomor/tglSEP/:tanggal', params],
 			method: 'GET'
 		});
 	}
