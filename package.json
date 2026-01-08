@@ -1,7 +1,7 @@
 {
 	"name": "@ssecd/jkn",
 	"displayName": "JKN",
-	"version": "0.9.1",
+	"version": "0.9.2",
 	"description": "JKN (BPJS) Bridging API untuk NodeJS",
 	"repository": {
 		"type": "git",

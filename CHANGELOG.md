@@ -1,5 +1,11 @@
 # @ssecd/jkn
 
+## 0.9.2
+
+### Patch Changes
+
+- c86f312: Update Medical Record API
+
 ## 0.9.1
 
 ### Patch Changes
