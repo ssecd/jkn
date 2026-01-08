@@ -5,7 +5,7 @@
 
 export interface Composition extends Omit<fhir4.Composition, 'section'> {
 	section: {
-		[key: string]: fhir4.CompositionSection;
+		[key: string]: Omit<fhir4.CompositionSection, 'entry'> & { entry: string };
 	};
 }
 
@@ -54,7 +54,10 @@ export interface Condition extends Omit<fhir4.Condition, 'clinicalStatus' | 'ver
 	verificationStatus: string;
 }
 
-interface Observation extends Omit<fhir4.Observation, 'performer' | 'code'> {
+interface Observation extends Omit<
+	fhir4.Observation,
+	'performer' | 'code' | 'interpretation' | 'referenceRange' | 'valueQuantity'
+> {
 	performer?: fhir4.Reference;
 	code?: { coding: fhir4.Coding; text: string };
 	image: {
@@ -65,6 +68,9 @@ interface Observation extends Omit<fhir4.Observation, 'performer' | 'code'> {
 		};
 	}[];
 	conclusion?: string;
+	interpretation: Omit<fhir4.CodeableConcept, 'coding'> & { coding: fhir4.Coding };
+	referenceRange: fhir4.ObservationReferenceRange;
+	valueQuantity: Omit<fhir4.Quantity, 'value'> & { value: string };
 }
 
 export interface DiagnosticReport extends Omit<
