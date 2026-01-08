@@ -9,7 +9,7 @@ JKN (BPJS) Bridging API untuk NodeJS
 - ✅ Antrean
 - ✅ Apotek
 - ✅ i-Care
-- ✅ Rekam Medis _(Experimental types)_
+- ✅ Rekam Medis
 - 🧩 PCare _([partial](https://github.com/ssecd/jkn/pull/26))_
 
 ## Demo
