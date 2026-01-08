@@ -196,7 +196,7 @@ const defaultBaseUrls: Record<Type, Record<Mode, string>> = {
 	},
 	rekamMedis: {
 		development: 'https://apijkn-dev.bpjs-kesehatan.go.id/erekammedis_dev',
-		production: 'https://apijkn.bpjs-kesehatan.go.id/erekammedis'
+		production: 'https://apijkn.bpjs-kesehatan.go.id/medicalrecord'
 	}
 };
 

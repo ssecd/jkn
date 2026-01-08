@@ -9,6 +9,7 @@ on:
       - closed
 
 permissions:
+  id-token: write
   contents: write
   pull-requests: write
 
@@ -18,8 +19,9 @@ jobs:
   release:
     # prevents from running on forks
     if: >
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+      (github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true))
+      && github.repository == 'ssecd/jkn'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -34,7 +36,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: 24.x
           cache: pnpm
 
       - name: Install dependencies
@@ -54,4 +56,3 @@ jobs:
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
