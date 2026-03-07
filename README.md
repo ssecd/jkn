@@ -22,13 +22,13 @@ Instalasi paket dapat dilakukan dengan perintah berikut:
 
 ```bash
 # Node
-npm install @ssecd/jkn
+npm install jkn
 
 # Bun
-bun install @ssecd/jkn
+bun install jkn
 
 # Deno
-deno install npm:@ssecd/jkn
+deno install npm:jkn
 ```
 
 Untuk dukungan _type_ pada API Rekam Medis, perlu menambahkan development dependensi `@types/fhir` dengan perintah:
@@ -46,7 +46,7 @@ Penggunaan paket ini sangatlah sederhana, cukup menginisialisasi global instansi
 ```ts
 // file: jkn.ts atau jkn.js
 
-import JKN from '@ssecd/jkn';
+import JKN from 'jkn';
 
 const jkn = new JKN();
 
@@ -58,7 +58,7 @@ Secara default konfigurasi seperti cons id atau cons secret akan dibaca melalui 
 ```ts
 // file: jkn.ts atau jkn.js
 
-import JKN from '@ssecd/jkn';
+import JKN from 'jkn';
 
 const jkn = new JKN({
 	consId: '<cons id dari bpjs>'
@@ -73,7 +73,7 @@ Selain menggunakan objek, konfigurasi juga dapat diatur menggunakan fungsi, misa
 ```ts
 // file: jkn.ts atau jkn.js
 
-import JKN from '@ssecd/jkn';
+import JKN from 'jkn';
 
 const jkn = new JKN(async () => {
 	const result = await sql`select * from config`;
@@ -124,7 +124,7 @@ Setiap parameter dan response objek memiliki type TypeScript dan komentar dokume
 Pada kasus tertentu, type dari request atau response diperlukan di luar pemanggilan API method misalnya saat ingin mendefinisikan variable request pada global scope variable atau bahkan pada module berbeda dengan tetap mempertahankan keakuratan type atau menjadikan response sebagai parameter fungsi yang menyimpan response tersebut ke database, hal tersebut dapat dilakukan seperti berikut:
 
 ```ts
-import type { AntreanParams, VClaimResponse } from '@ssecd/jkn';
+import type { AntreanParams, VClaimResponse } from 'jkn';
 import jkn from './path/to/jkn.js';
 
 const jadwal: AntreanParams<'refJadwalDokter'>[0] = {
