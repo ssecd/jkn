@@ -69,6 +69,14 @@ export interface Config {
 	pcareUserKey: string;
 
 	/**
+	 * User dan Password PCare dari BPJS
+	 * contoh: username:password
+	 *
+	 * @default process.env.JKN_PCARE_USER_PASS
+	 */
+	pcareUserPass: string;
+
+	/**
 	 * User key i-Care dari BPJS
 	 *
 	 * Umumnya user key i-Care ini nilai sama dengan user key VClaim
@@ -229,6 +237,7 @@ export class Fetcher {
 		antreanUserKey: process.env.JKN_ANTREAN_USER_KEY ?? '',
 		apotekUserKey: process.env.JKN_APOTEK_USER_KEY,
 		pcareUserKey: process.env.JKN_PCARE_USER_KEY ?? '',
+		pcareUserPass: process.env.JKN_PCARE_USER_PASS ?? '',
 		icareUserKey: process.env.JKN_ICARE_USER_KEY,
 		rekamMedisUserKey: process.env.JKN_REKAM_MEDIS_USER_KEY,
 		throw: false,
@@ -287,15 +296,17 @@ export class Fetcher {
 		const userKey = this.userKeyMap[type];
 		if (!userKey) throw new Error(`failed to get user key of type "${type}"`);
 
-		const { consId, consSecret } = this.config;
+		const { consId, consSecret, pcareUserPass } = this.config;
 		const timestamp = Math.round(Date.now() / 1000);
 		const message = `${consId}&${timestamp}`;
 		const signature = createHmac('SHA256', consSecret).update(message).digest('base64');
+		const pcareAuth = `Basic ${Buffer.from(`${pcareUserPass}:095`).toString('base64')}`;
 		return {
 			'X-cons-id': consId,
 			'X-timestamp': String(timestamp),
 			'X-signature': encodeURI(signature),
-			user_key: userKey
+			user_key: userKey,
+			'X-Authorization': pcareAuth
 		};
 	}
 
@@ -328,7 +339,10 @@ export class Fetcher {
 		try {
 			const url = new URL(baseUrl[this.config.mode] + path);
 			const init: RequestInit = { method: option.method ?? 'GET' };
-			const headers = { ...this.getDefaultHeaders(type), ...(option.headers ?? {}) };
+			const headers = {
+				...this.getDefaultHeaders(type),
+				...(option.headers ?? {})
+			};
 
 			init.headers = headers;
 			if (option.data) {
@@ -417,7 +431,7 @@ function parseHtml(html?: string) {
 
 /** @internal */
 export function normalizePath(path: SendOption['path']) {
-	const [pathname, params] = typeof path == 'string' ? [path] : path;
+	const [pathname, params] = typeof path === 'string' ? [path] : path;
 
 	if (!pathname.startsWith('/')) throw new Error(`Path must start with "/"`);
 	if (!params) return pathname;

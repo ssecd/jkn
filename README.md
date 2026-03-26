@@ -236,6 +236,13 @@ interface Config {
 	 * @default process.env.JKN_PCARE_USER_KEY
 	 */
 	pcareUserKey: string;
+	
+	/**
+	 * Username dan Password  PCare dari BPJS
+	 *
+	 * @default process.env.JKN_PCARE_USER_PASS
+	 */
+	pcareUserPass: string;
 
 	/**
 	 * User key i-Care dari BPJS

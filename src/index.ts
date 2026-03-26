@@ -34,7 +34,7 @@ export default class JKN extends Fetcher {
 	}
 
 	get pcare(): PCare {
-		return this.cache.get('pcare', PCare);
+		return PCare.getInstance(this.cache);
 	}
 
 	get antreanFktp(): AntreanFKTP {
