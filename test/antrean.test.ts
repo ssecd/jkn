@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vite-plus/test';
 import jkn from './jkn';
 
 describe('Antrean', { timeout: 25_000 }, () => {

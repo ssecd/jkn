@@ -8,8 +8,9 @@
 		"module": "NodeNext",
 		"target": "esnext",
 		"lib": ["esnext"],
+		"types": ["node", "fhir"],
 		"outDir": "dist",
-		"rootDirs": ["."],
+		"rootDir": "src",
 		"declaration": false,
 		"stripInternal": true
 	},

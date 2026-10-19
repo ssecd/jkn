@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vite-plus/test';
 import jkn from './jkn';
 
 describe('Antrean', { timeout: 25_000 }, () => {
@@ -6,7 +6,7 @@ describe('Antrean', { timeout: 25_000 }, () => {
 		const result = await jkn.antreanFktp.refPoli({ tanggal: '2025-02-04' });
 		expect(result.metaData.code).toBe(1);
 		expect(result.response?.list?.length).gte(0);
-		expect(result.response?.[0]?.nmpoli).not.toBeFalsy();
+		expect(result.response?.list?.[0]?.namapoli).not.toBeFalsy();
 	});
 
 	it.concurrent('refDokter()', async () => {
@@ -16,6 +16,6 @@ describe('Antrean', { timeout: 25_000 }, () => {
 		});
 		expect(result.metaData.code).toBe(1);
 		expect(result.response?.list?.length).gte(0);
-		expect(result.response?.[0]?.namadokter).not.toBeFalsy();
+		expect(result.response?.list?.[0]?.namadokter).not.toBeFalsy();
 	});
 });
