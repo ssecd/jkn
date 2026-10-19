@@ -43,7 +43,7 @@ pnpm test        # vp test, needs .env with real BPJS credentials
 ## Conventions
 
 - **Formatter**: Oxfmt (`vp fmt`, `vp fmt --check`) — tabs, single quotes, no trailing commas, 100 char width; configured in `vite.config.ts#fmt`
-- **Linter**: Oxlint + tsgolint (`vp lint`, type-aware with `typeCheck: true`); configured in `vite.config.ts#lint`. Notable: `typescript/no-this-alias` allows `root`/`self`, `typescript/no-empty-object-type: off`
+- **Linter**: Oxlint + tsgolint (`vp lint`, type-aware with `typeCheck: true`); configured in `vite.config.ts#lint`. Purely categories-based: `correctness: 'error'`, `rules` only carries `vite-plus/prefer-vite-plus-imports`. Oxlint honors `.gitignore` natively (no `ignorePatterns` needed); no ESLint/typescript-eslint compat overrides are used
 - **One-shot check**: `pnpm lint` (`vp check`) runs fmt check + lint + typecheck together; CI runs `pnpm lint` before build
 - **pnpm settings**: `engineStrict: true` lives in `pnpm-workspace.yaml` (together with catalog/overrides/peerDependencyRules — it's pnpm's per-project settings file, not a monorepo requirement). There is no `.npmrc`; `resolution-mode` was removed because `highest` is already the default
 - **Config**: loaded from `JKN_*` env vars. Can also be passed as object or async function to `new JKN(config)`. `invalidateConfig()` re-reads.
