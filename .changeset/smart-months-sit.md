@@ -1,5 +1,5 @@
 ---
-"@ssecd/jkn": patch
+'@ssecd/jkn': patch
 ---
 
 Migrate to Vite+
