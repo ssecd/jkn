@@ -1,0 +1,14 @@
+{
+	"[typescript][json][jsonc][yaml]": {
+		"editor.defaultFormatter": "oxc.oxc-vscode"
+	},
+	"cSpell.customDictionaries": {
+		"workspace": {
+			"name": "Workspace",
+			"path": "${workspaceRoot}/.vscode/dic",
+			"description": "Words used in this workspace",
+			"addWords": true,
+			"scope": "workspace"
+		}
+	}
+}

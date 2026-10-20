@@ -328,7 +328,7 @@ export class Fetcher {
 		try {
 			const url = new URL(baseUrl[this.config.mode] + path);
 			const init: RequestInit = { method: option.method ?? 'GET' };
-			const headers = { ...this.getDefaultHeaders(type), ...(option.headers ?? {}) };
+			const headers = { ...this.getDefaultHeaders(type), ...option.headers };
 
 			init.headers = headers;
 			if (option.data) {
@@ -348,7 +348,7 @@ export class Fetcher {
 				}
 			}
 
-			this.onRequest?.({ ...option, type });
+			void this.onRequest?.({ ...option, type });
 			const startedAt = performance.now();
 			const response = await fetch(url, init);
 			result = await response.text();
@@ -361,7 +361,7 @@ export class Fetcher {
 			}
 
 			const duration = performance.now() - startedAt;
-			this.onResponse?.({ ...option, duration, type }, json);
+			void this.onResponse?.({ ...option, duration, type }, json);
 			return json;
 		} catch (error: unknown) {
 			const customError = new Error(
@@ -373,7 +373,7 @@ export class Fetcher {
 				{ cause: error }
 			);
 
-			this.onError?.(customError);
+			void this.onError?.(customError);
 			if (this.config.throw) throw customError;
 			console.error(customError);
 

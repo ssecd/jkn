@@ -420,7 +420,7 @@ interface SuratKontrolDetail {
 	namaPoliTujuan: string;
 	kodeDokter: string;
 	namaDokter: string;
-	flagKontrol: 'True' | 'False' | string;
+	flagKontrol: 'True' | 'False';
 	kodeDokterPembuat: string | null;
 	namaDokterPembuat: string | null;
 	namaJnsKontrol: string;
