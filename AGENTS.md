@@ -74,6 +74,7 @@ pnpm exec vp check src/index.ts          # check specific paths
 
 - Uses [Changesets](https://github.com/changesets/changesets)
 - CI runs `pnpm lint` (fmt + lint + typecheck) before build, then publishes via `changeset publish` only on PR merge to `main` on upstream (`ssecd/jkn`)
+- `@changesets/cli` v3 requires `changesets/action@v2` (v1 only works with changesets v2). v2 renames inputs to `publish-script`/`version-script` and ignores the `GITHUB_TOKEN` env var — pass `github-token` instead
 - Pre-release: `pnpm build` then `pnpm release`
 
 ## Dependencies
@@ -88,5 +89,7 @@ pnpm exec vp check src/index.ts          # check specific paths
 - Don't commit `.env` — it's gitignored; use `.env.example` as reference
 - `.env` loading for tests lives in `test/env.ts` (`process.loadEnvFile`), not in the test script — don't remove the `setupFiles` entry in `vite.config.ts`
 - Vite+ requires Node `^22.18.0 || ^24.11.0 || >=26.0.0` (enforced via `engine-strict`)
+- `@types/fhir` must stay on the `0.0.x` line — that line bundles the `fhir`/`fhir2`/`fhir3`/`fhir4`/`fhir5` namespaces. The `1.x` (DSTU2) and `3.x` (STU3) majors are separate FHIR-version lines with no `fhir4`, so bumping to them breaks `src/rekam-medis/types.ts`
+- `pnpm build` prints `TypeScript 7.0 does not yet have a stable API and is experimental` — expected with the native TS 7 port; dts still emits correctly
 - CI skips tests (commented out in `release.yml`). Tests must be run manually before PR
 - When running `vp migrate` in the future, fetch the target CLI fresh (`npx --package=vite-plus@<version> vp migrate`) instead of reusing the local `vp` — pnpm's `dlx` has no `--package` flag

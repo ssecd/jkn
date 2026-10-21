@@ -25,16 +25,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@v5
+        uses: pnpm/action-setup@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: 24.x
           cache: pnpm
@@ -53,9 +53,9 @@ jobs:
         run: pnpm build
 
       - name: Create release PR
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: pnpm release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          publish-script: pnpm release
+          # v2 ignores the GITHUB_TOKEN env var; the token must be passed as an input
+          github-token: ${{ secrets.GITHUB_TOKEN }}
