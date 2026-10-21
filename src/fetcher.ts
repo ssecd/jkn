@@ -377,14 +377,7 @@ export class Fetcher {
 			if (this.config.throw) throw customError;
 			console.error(customError);
 
-			// TODO: find better way to infer generic response type
-			const code = type === 'icare' ? 500 : '500';
-			const message = `An error occurred: "${customError.message}"`;
-			return {
-				metadata: { code: +code, message },
-				metaData: { code, message },
-				response: undefined
-			} as unknown as SendResponse<R, M>[T];
+			return errorResponse(type, `An error occurred: "${customError.message}"`);
 		}
 	}
 
@@ -397,6 +390,31 @@ export class Fetcher {
 		await this.applyConfig();
 		return this.config;
 	}
+}
+
+/**
+ * Build the error result returned by `send()` when `throw: false`, shaped to the
+ * endpoint's entry in `SendResponse`: lowercase `metadata` for aplicares/antrean/
+ * rekamMedis vs camelCase `metaData` for the rest, with a numeric `code` except
+ * for vclaim/apotek/rekamMedis which use a string.
+ *
+ * The single `as` cast bridges `undefined`/`unknown` to the method's unresolved
+ * `R`/`M` generics — per-type shape correctness is enforced by the mapped type.
+ */
+function errorResponse<T extends Type, R, M>(
+	type: T,
+	message: string
+): SendResponse<R | undefined, M | undefined>[T] {
+	const responses: { [K in Type]: SendResponse<undefined, unknown>[K] } = {
+		aplicares: { response: undefined, metadata: { code: 500, message } },
+		antrean: { response: undefined, metadata: { code: 500, message } },
+		vclaim: { response: undefined, metaData: { code: '500', message } },
+		apotek: { response: undefined, metaData: { code: '500', message } },
+		pcare: { response: undefined, metaData: { code: 500, message } },
+		icare: { response: undefined, metaData: { code: 500, message } },
+		rekamMedis: { response: undefined, metadata: { code: '500', message } }
+	};
+	return responses[type] as SendResponse<R | undefined, M | undefined>[T];
 }
 
 /**
