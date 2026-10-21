@@ -8,6 +8,12 @@ pnpm build       # vp pack (tsdown): bundles dist/index.js + dist/index.d.ts
 pnpm lint        # vp check: fmt --check + lint + typecheck
 pnpm format      # vp fmt . (write)
 pnpm test        # vp test, needs .env with real BPJS credentials
+
+# Focused runs (args pass through pnpm to vp → vitest)
+pnpm test test/vclaim/sep.test.ts        # single test file
+pnpm test -t 'cari() - 200 ok'           # by test name pattern
+pnpm exec vp check --fix                 # auto-fix fmt + lint (typecheck still runs)
+pnpm exec vp check src/index.ts          # check specific paths
 ```
 
 ## Codebase
@@ -33,12 +39,15 @@ pnpm test        # vp test, needs .env with real BPJS credentials
 
 - All tests are **integration tests** hitting real BPJS APIs — no mocking
 - **Requires `.env`** with valid BPJS credentials (see `.env.example` for all vars)
+- `.env.example` also carries `TEST_*` fixture values (`TEST_SEP_NUM`, `TEST_RM_NUM`, `TEST_PATIENT_*`, …) — `test/rekam-medis/index.test.ts` reads them and fails without them
 - Run: `pnpm test` (`vp test`)
+- Tests import vitest APIs from **`vite-plus/test`**, not `vitest` (enforced by `vite-plus/prefer-vite-plus-imports`)
 - Config in `vite.config.ts#test`: include `test/**/*.{test,spec}.{js,ts}`, `watch: false`, `setupFiles: ['./test/env.ts']`
 - `test/env.ts` loads `.env` via `process.loadEnvFile()` — Vitest does not load env files itself (replaces the old `node --env-file=.env` wrapper); it runs before `test/jkn.ts` builds its shared `new JKN()`
 - Tests use `test/jkn.ts` (a pre-initialised `new JKN()`) as shared instance
 - Many tests have `{ timeout: 25_000 }` — BPJS APIs can be slow
 - Tests fail without valid credentials — compare failures against a known baseline before blaming a change
+- `Fetcher` defaults to BPJS **development** endpoints unless `NODE_ENV=production` (see `mode` in `src/fetcher.ts`) — so tests hit `*-dev.bpjs-kesehatan.go.id`
 
 ## Conventions
 
