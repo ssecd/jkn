@@ -1,5 +1,14 @@
 # @ssecd/jkn
 
+## 0.9.3
+
+### Patch Changes
+
+- 43ca4d9: Bump deps
+- ecb5f85: Migrate to Vite+
+- 5a63f7d: Bumps actions node version
+- f13656a: Fix duplicate keys in error response
+
 ## 0.9.2
 
 ### Patch Changes
